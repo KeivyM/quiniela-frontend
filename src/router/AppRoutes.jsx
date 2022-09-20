@@ -1,12 +1,17 @@
+import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { AuthContext } from "../context";
 import { Dashboard } from "../pages/Dashboard";
 import { Home } from "../pages/Home";
 import { LoginPage } from "../pages/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage";
 
 export const AppRoutes = () => {
-  const auth = true;
+  // const auth = true;
 
+  const { auth } = useContext(AuthContext);
+
+  // console.log(auth);
   return (
     <>
       <Routes>
@@ -14,6 +19,8 @@ export const AppRoutes = () => {
           <>
             <Route path="/*" element={<Navigate to={`/`} />} />
             <Route path="/" element={<Dashboard />} />
+            <Route path="/home" element={<Navigate to={"/"} />} />
+
             {/* <Route path="/login" element={<Navigate to="/" />} />
             <Route path="/register" element={<Navigate to="/" />} /> */}
           </>

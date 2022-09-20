@@ -1,10 +1,15 @@
-import axios from "axios";
-import { useEffect } from "react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 // import { CarruselMUI } from "../components/CarruselMUI";
-import { CarruselMUIText } from "../components/CarruselMUIText";
+// import { CarruselMUIText } from "../components/CarruselMUIText";
 import { EquiposAcertar } from "../components/EquiposAcertar";
+import { AuthContext } from "../context";
 
 export const Dashboard = () => {
+  const { userAuth, setAuth } = useContext(AuthContext);
+  // console.log(userAuth.username);
+  let navigate = useNavigate();
+
   // const peticion = () => {
   //   axios
   //     .get("https://worldcup.sfg.io/teams/")
@@ -17,6 +22,12 @@ export const Dashboard = () => {
   //   peticion();
   // }, []);
 
+  const Logout = () => {
+    localStorage.removeItem("user_Auth");
+    setAuth(false);
+    navigate("/home");
+  };
+
   return (
     <div style={{ display: "flex" }}>
       <div
@@ -28,7 +39,8 @@ export const Dashboard = () => {
           boxSizing: "border-box",
         }}
       >
-        <h2>Mario Carrera</h2>
+        <button onClick={Logout}>Cerrar sesion</button>
+        <h2>{userAuth.username}</h2>
         <strong>325 pts.</strong>
         <a
           target="_blank"

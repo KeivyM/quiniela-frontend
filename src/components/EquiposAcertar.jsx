@@ -1,44 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import moment from "moment";
 
 export const EquiposAcertar = () => {
   const [data, setData] = useState([]);
-
-  // const array = [
-  //   {
-  //     grupo: "A",
-  //     Jornada: 1,
-  //     hora: "12:00 pm.",
-  //     equipo1: "Catar",
-  //     logo1:
-  //       "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Qatar.svg",
-  //     equipo2: "España",
-  //     logo2:
-  //       "https://upload.wikimedia.org/wikipedia/commons/e/e8/Flag_of_Ecuador.svg",
-  //   },
-  //   {
-  //     grupo: "B",
-  //     Jornada: 1,
-  //     hora: "09:00 am.",
-  //     equipo1: "Inglaterra",
-  //     logo1:
-  //       "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Qatar.svg",
-  //     equipo2: "Irán",
-  //     logo2:
-  //       "https://upload.wikimedia.org/wikipedia/commons/e/e8/Flag_of_Ecuador.svg",
-  //   },
-  //   {
-  //     grupo: "A",
-  //     Jornada: 1,
-  //     hora: "12:00 pm.",
-  //     equipo1: "Senegal",
-  //     logo1:
-  //       "https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Qatar.svg",
-  //     equipo2: "Paises Bajos",
-  //     logo2:
-  //       "https://upload.wikimedia.org/wikipedia/commons/e/e8/Flag_of_Ecuador.svg",
-  //   },
-  // ];
 
   const peticion = () => {
     axios
@@ -66,11 +31,13 @@ export const EquiposAcertar = () => {
       }}
     >
       {data.map((obj, index) => {
-        const date = new Date(obj.matchTime * 1000).toString();
+        // const date = new Date(obj.matchTime * 1000).toString();
+        const dateMoment = moment(obj.matchTime * 1000).format("lll");
+
         return (
           <div key={index}>
             <h3>
-              Grupo {obj.group}. {date}. Jornada eror / 3
+              Grupo {obj.group}. {dateMoment}. Jornada eror / 3
             </h3>
             <button>Guardar</button>
             <div
@@ -102,7 +69,7 @@ export const EquiposAcertar = () => {
                   }}
                 />
                 <span>{obj.homeName}</span>
-                <input type="number" min={0} defaultValue={0} />
+                <input type="number" min={0} defaultValue={0} max={20} />
               </div>
               vs
               <div
@@ -124,7 +91,7 @@ export const EquiposAcertar = () => {
                   }}
                 />
                 <span>{obj.awayName}</span>
-                <input type="number" min={0} defaultValue={0} />
+                <input type="number" min={0} defaultValue={0} max={20} />
               </div>
             </div>
           </div>

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegister } from "../utils/schemas";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context";
 
 export const FormRegister = () => {
+  const { updateData, setUpdateData, setAuth } = useContext(AuthContext);
+  let navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -12,8 +18,19 @@ export const FormRegister = () => {
     resolver: yupResolver(schemaRegister),
   });
 
-  const validar = (value) => {
-    console.log(value);
+  const validar = async (value) => {
+    // console.log(value);
+
+    const res = await axios.post("http://192.168.0.125:3000/users", value);
+    const data = JSON.stringify(res.data);
+    localStorage.setItem("user_Auth", data);
+    setAuth(() => {
+      const data = localStorage.getItem("user_Auth");
+      return !!data;
+    });
+    setUpdateData(updateData);
+    navigate("/");
+    // console.log(res.data);
   };
 
   return (
