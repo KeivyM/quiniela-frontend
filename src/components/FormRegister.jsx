@@ -19,18 +19,24 @@ export const FormRegister = () => {
   });
 
   const validar = async (value) => {
-    // console.log(value);
-
-    const res = await axios.post("http://192.168.0.125:3000/users", value);
-    const data = JSON.stringify(res.data);
-    localStorage.setItem("user_Auth", data);
-    setAuth(() => {
-      const data = localStorage.getItem("user_Auth");
-      return !!data;
-    });
-    setUpdateData(updateData);
-    navigate("/");
-    // console.log(res.data);
+    console.log(value);
+    try {
+      const res = await axios.post("http://localhost:3000/users", value);
+      //aqui va una validacion de errores
+      // console.log(res.data);
+      // return;
+      const data = JSON.stringify(res.data);
+      localStorage.setItem("user_Auth", data);
+      setAuth(() => {
+        const data = localStorage.getItem("user_Auth");
+        return !!data;
+      });
+      setUpdateData(updateData);
+      navigate("/");
+      // console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

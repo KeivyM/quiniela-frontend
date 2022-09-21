@@ -2,12 +2,13 @@ import React from "react";
 import { Calendar } from "../components/Calendar";
 import { Header } from "../components/Header";
 import { Ranking } from "../components/Ranking";
+import fondo from "../fondo2.jpg";
 
 const style = {
   width: "100vw",
   height: "100vh",
-  backgroundImage:
-    'url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80")',
+  backgroundImage: `url(${fondo})`,
+
   color: "white",
   backgroundSize: "cover",
   backgroundPosition: "center",
@@ -19,7 +20,7 @@ const style = {
 export const Home = () => {
   return (
     <div style={style}>
-      <div style={{ width: "60%", background: "#ccc5" }}>
+      <div style={{ width: "100vw", background: "" }}>
         <Header />
         <h1 style={{ margin: 0 }}>Landing Page</h1>
         <div>

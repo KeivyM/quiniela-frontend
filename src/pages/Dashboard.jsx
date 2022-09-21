@@ -1,3 +1,4 @@
+import { Avatar } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 // import { CarruselMUI } from "../components/CarruselMUI";
@@ -40,7 +41,18 @@ export const Dashboard = () => {
         }}
       >
         <button onClick={Logout}>Cerrar sesion</button>
-        <h2>{userAuth.username}</h2>
+        <Avatar
+          sx={{
+            bgcolor: "#ca1",
+            margin: "0 auto",
+            width: "100px",
+            height: "100px",
+            fontSize: "70px",
+          }}
+          alt={userAuth?.name}
+          src="/broken-image.jpg"
+        />
+        <h2>{userAuth?.username}</h2>
         <strong>325 pts.</strong>
         <a
           target="_blank"

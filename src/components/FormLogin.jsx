@@ -19,7 +19,7 @@ export const FormLogin = () => {
 
     const { data } = await axios.get("http://192.168.0.125:3000/users");
     const userValid = data.find(
-      (user) => value.email == user.email && value.password == user.password
+      (user) => value.email === user.email && value.password === user.password
     );
     console.log(userValid);
 
@@ -31,7 +31,7 @@ export const FormLogin = () => {
       const data = localStorage.getItem("user_Auth");
       return !!data;
     });
-    setUpdateData(updateData);
+    setUpdateData(!updateData);
     navigate("/");
     // const passwordValid = data.find((user) => value.email == user.email);
 
