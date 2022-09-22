@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegister } from "../utils/schemas";
@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 
 export const FormRegister = () => {
-  const { updateData, setUpdateData, setAuth, setUserAuth } =
-    useContext(AuthContext);
+  const { setUserAuth } = useContext(AuthContext);
   let navigate = useNavigate();
 
   const {
@@ -36,7 +35,6 @@ export const FormRegister = () => {
       localStorage.setItem("user_Auth", token);
 
       setUserAuth(data.token);
-      setUpdateData(updateData);
       navigate("/");
     } catch (error) {
       console.log(error);

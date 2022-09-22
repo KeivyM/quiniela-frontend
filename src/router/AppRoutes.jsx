@@ -7,11 +7,8 @@ import { LoginPage } from "../pages/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage";
 
 export const AppRoutes = () => {
-  // const auth = true;
+  const { userAuth } = useContext(AuthContext);
 
-  const { auth, userAuth } = useContext(AuthContext);
-
-  // console.log(!!userAuth);
   return (
     <>
       <Routes>
@@ -20,9 +17,6 @@ export const AppRoutes = () => {
             <Route path="/*" element={<Navigate to={`/`} />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="/home" element={<Navigate to={"/"} />} />
-
-            {/* <Route path="/login" element={<Navigate to="/" />} />
-            <Route path="/register" element={<Navigate to="/" />} /> */}
           </>
         ) : (
           <>
