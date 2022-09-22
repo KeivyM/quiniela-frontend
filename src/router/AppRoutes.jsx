@@ -9,13 +9,13 @@ import { RegisterPage } from "../pages/RegisterPage";
 export const AppRoutes = () => {
   // const auth = true;
 
-  const { auth } = useContext(AuthContext);
+  const { auth, userAuth } = useContext(AuthContext);
 
-  // console.log(auth);
+  // console.log(!!userAuth);
   return (
     <>
       <Routes>
-        {auth ? (
+        {!!userAuth ? (
           <>
             <Route path="/*" element={<Navigate to={`/`} />} />
             <Route path="/" element={<Dashboard />} />

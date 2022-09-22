@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 
 export const FormLogin = () => {
-  const { updateData, setUpdateData, setAuth } = useContext(AuthContext);
+  const { setUserAuth } = useContext(AuthContext);
   let navigate = useNavigate();
 
   const {
@@ -15,24 +15,38 @@ export const FormLogin = () => {
   } = useForm();
 
   const validar = async (value) => {
-    console.log(value);
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3000/auth/login",
+        value
+      );
 
-    const { data } = await axios.get("http://192.168.0.125:3000/users");
-    const userValid = data.find(
-      (user) => value.email === user.email && value.password === user.password
-    );
-    console.log(userValid);
+      if (typeof data === "string") throw new Error(data);
 
-    if (!!userValid === false) return console.log("Datos Incorrectos");
+      const TOKEN = JSON.stringify(data.token);
+      localStorage.setItem("user_Auth", TOKEN);
+      setUserAuth(data.token);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
 
-    const usuario = JSON.stringify(userValid);
-    localStorage.setItem("user_Auth", usuario);
-    setAuth(() => {
-      const data = localStorage.getItem("user_Auth");
-      return !!data;
-    });
-    setUpdateData(!updateData);
-    navigate("/");
+    // const userValid = data.find(
+    //   (user) => value.email === user.email && value.password === user.password
+    // );
+    // console.log(userValid);
+
+    // if (!!userValid === false) return console.log("Datos Incorrectos");
+
+    // const usuario = JSON.stringify(userValid);
+    // localStorage.setItem("user_Auth", usuario);
+    // setAuth(() => {
+    //   const data = localStorage.getItem("user_Auth");
+    //   return !!data;
+    // });
+    // setUpdateData(!updateData);
+    // navigate("/");
+
     // const passwordValid = data.find((user) => value.email == user.email);
 
     // console.log(!!userValid != true);

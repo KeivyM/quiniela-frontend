@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 
 export const FormRegister = () => {
-  const { updateData, setUpdateData, setAuth } = useContext(AuthContext);
+  const { updateData, setUpdateData, setAuth, setUserAuth } =
+    useContext(AuthContext);
   let navigate = useNavigate();
 
   const {
@@ -21,19 +22,22 @@ export const FormRegister = () => {
   const validar = async (value) => {
     console.log(value);
     try {
-      const res = await axios.post("http://localhost:3000/users", value);
-      //aqui va una validacion de errores
-      // console.log(res.data);
-      // return;
-      const data = JSON.stringify(res.data);
-      localStorage.setItem("user_Auth", data);
-      setAuth(() => {
-        const data = localStorage.getItem("user_Auth");
-        return !!data;
-      });
+      const { data } = await axios.post(
+        "http://localhost:3000/auth/register",
+        value
+      );
+      console.log(data);
+      if (data.code)
+        throw new Error(
+          JSON.stringify({ code: data.code, keyValue: data.keyValue })
+        );
+
+      const token = JSON.stringify(data.token);
+      localStorage.setItem("user_Auth", token);
+
+      setUserAuth(data.token);
       setUpdateData(updateData);
       navigate("/");
-      // console.log(res.data);
     } catch (error) {
       console.log(error);
     }

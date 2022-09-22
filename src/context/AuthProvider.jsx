@@ -5,9 +5,9 @@ export const AuthProvider = ({ children }) => {
   const [updateData, setUpdateData] = useState(false);
   const [userAuth, setUserAuth] = useState(() => {
     const data = localStorage.getItem("user_Auth");
-    const user = JSON.parse(data);
-    return user;
-  }); // debe tener el objeto de el usuario autenticado
+    const token = JSON.parse(data);
+    return token;
+  }); // debe tener el JWT del usuario autenticado
 
   const [auth, setAuth] = useState(() => {
     const data = localStorage.getItem("user_Auth");
