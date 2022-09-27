@@ -8,19 +8,19 @@ import "./home.css";
 export const Home = () => {
   const [matches, setMatches] = useState([]);
 
-  const jornada1 = matches.filter((match) => match.matchTime < 1669370400);
+  const jornada1 = matches?.filter((match) => match.matchTime < 1669370400);
   // .sort((a, b) => {
   //   if (a < b) return -1;
   //   if (a > b) return 1;
   // });
-  const jornada2 = matches.filter(
+  const jornada2 = matches?.filter(
     (match) => match.matchTime < 1669734000 && match.matchTime >= 1669370400
   );
   // .sort((a, b) => {
   //   if (a < b) return -1;
   //   if (a > b) return 1;
   // });
-  const jornada3 = matches.filter((match) => match.matchTime >= 1669734000);
+  const jornada3 = matches?.filter((match) => match.matchTime >= 1669734000);
   // .sort((a, b) => {
   //   if (a < b) return -1;
   //   if (a > b) return 1;

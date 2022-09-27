@@ -13,7 +13,7 @@ export const Calendar = ({ matches, title }) => {
       <h2>{title}</h2>
       <div>
         <hr />
-        {matches.map((match, index) => {
+        {matches?.map((match, index) => {
           // const jornada2 = 1669370400;
           // const jornada3 = 1669734000;
 
