@@ -1,5 +1,6 @@
-import { useForm } from "../hooks/useForm";
-import { flags } from "../utils/codeFlags";
+// import { useForm } from "../hooks/useForm";
+import { getFlagAway, getFlagHome } from "../utils/codeFlags";
+// import { flags } from "../utils/codeFlags";
 
 export const Match = (data) => {
   // const { searchText, onInputChange } = useForm({});
@@ -9,9 +10,9 @@ export const Match = (data) => {
     jornada,
     homeName,
     awayName,
-    setPredictions,
+    // setPredictions,
     matchId,
-    index,
+    // index,
     funcionAddPredictions,
   } = data;
   // console.log(data.matchId);
@@ -27,19 +28,19 @@ export const Match = (data) => {
   // console.log(e);
   // };
 
-  const getFlagAway = () => {
-    const flag = flags.find(
-      (elemento) => elemento.name === awayName && elemento.abv
-    );
-    return flag?.abv;
-  };
+  // const getFlagAway = () => {
+  //   const flag = flags.find(
+  //     (elemento) => elemento.name === awayName && elemento.abv
+  //   );
+  //   return flag?.abv;
+  // };
 
-  const getFlagHome = () => {
-    const flag = flags.find(
-      (elemento) => elemento.name === homeName && elemento.abv
-    );
-    return flag?.abv;
-  };
+  // const getFlagHome = () => {
+  //   const flag = flags.find(
+  //     (elemento) => elemento.name === homeName && elemento.abv
+  //   );
+  //   return flag?.abv;
+  // };
 
   return (
     <div>
@@ -65,10 +66,9 @@ export const Match = (data) => {
           }}
         >
           <img
-            // src="../assets/Flag_of_Ecuador.svg"
-            // src={images?.[homeName]}
-            // src={Brazil}
-            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagHome()}.png`}
+            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagHome(
+              homeName
+            )}.png`}
             width={60}
             height={30}
             alt="flag"
@@ -99,7 +99,9 @@ export const Match = (data) => {
           }}
         >
           <img
-            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway()}.png`}
+            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
+              awayName
+            )}.png`}
             width={60}
             height={30}
             alt="flag"

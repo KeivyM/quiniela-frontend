@@ -9,11 +9,11 @@ const style = {
   fontSize: "18px",
 };
 
-export const Participant = ({ participant }) => {
+export const Participant = ({ user }) => {
   return (
     <div style={style}>
-      <h3>{participant.name}</h3>
-      <p>{participant.points}</p>
+      <h3>{user.username}</h3>
+      <p>{user?.points || "sin puntos"}</p>
     </div>
   );
 };

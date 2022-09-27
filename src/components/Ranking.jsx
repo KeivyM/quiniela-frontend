@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { AxiosConfig } from "../utils/AxiosConfig";
 import { Participant } from "./Participant";
 
 const style = {
@@ -10,14 +12,18 @@ const style = {
   margin: "0 auto",
 };
 
-const participants = [
-  { name: "Luis", points: 342 },
-  { name: "Marcos", points: 201 },
-  { name: "Dario", points: 86 },
-  { name: "Monica", points: 421 },
-];
-
 export const Ranking = () => {
+  const [users, setUsers] = useState([]);
+
+  const funcion = async () => {
+    const { data } = await AxiosConfig.get("/auth");
+    setUsers(data);
+  };
+
+  useEffect(() => {
+    funcion();
+  }, []);
+
   return (
     <div style={style}>
       <h2>Ranking de Participantes</h2>
@@ -26,8 +32,8 @@ export const Ranking = () => {
         <h4>Puntos</h4>
       </div>
       <hr />
-      {participants.map((participant) => {
-        return <Participant participant={participant} />;
+      {users.map((user, i) => {
+        return <Participant key={i} user={user} />;
       })}
     </div>
   );

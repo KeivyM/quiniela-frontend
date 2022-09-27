@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     // const TOKEN = userAuth;
 
     const { data } = await AxiosConfig.get("auth/check-status");
-    console.log("DATA:", data.token);
+    // console.log("DATA:", data.token);
     // const newToken = JSON.parse(data.token);
     localStorage.setItem("user-Auth", data.token);
     setUserAuth(data.token);

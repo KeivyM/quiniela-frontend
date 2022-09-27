@@ -32,3 +32,17 @@ export const flags = [
   { name: "Qatar", abv: "qa" },
   { name: "Saudi Arabia", abv: "sa" },
 ];
+
+export const getFlagAway = (awayName) => {
+  const flag = flags.find(
+    (elemento) => elemento.name === awayName && elemento.abv
+  );
+  return flag?.abv;
+};
+
+export const getFlagHome = (homeName) => {
+  const flag = flags.find(
+    (elemento) => elemento.name === homeName && elemento.abv
+  );
+  return flag?.abv;
+};

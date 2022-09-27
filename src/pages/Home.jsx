@@ -22,7 +22,7 @@ export const Home = () => {
     <div style={style}>
       <div style={{ width: "100vw", background: "" }}>
         <Header />
-        <h1 style={{ margin: 0 }}>Landing Page</h1>
+        <h1 style={{ margin: 0 }}>FIFA World Cup</h1>
         <div>
           <h2>Lorem </h2>
           <p>
