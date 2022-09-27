@@ -13,22 +13,17 @@ export const Calendar = ({ matches, title }) => {
       <h2>{title}</h2>
       <div>
         <hr />
-        {matches.map((match) => {
-          const jornada2 = 1669370400;
-          const jornada3 = 1669734000;
+        {matches.map((match, index) => {
+          // const jornada2 = 1669370400;
+          // const jornada3 = 1669734000;
 
-          const jornada =
-            match.matchTime < jornada2
-              ? "1"
-              : match.matchTime < jornada3
-              ? "2"
-              : "3";
-          return (
-            <>
-              {/* <h3>Jornada {jornada}</h3> */}
-              <Rival jornada={jornada} {...match} />
-            </>
-          );
+          // const jornada =
+          //   match.matchTime < jornada2
+          //     ? "1"
+          //     : match.matchTime < jornada3
+          //     ? "2"
+          //     : "3";
+          return <Rival key={index} {...match} />;
         })}
       </div>
     </div>

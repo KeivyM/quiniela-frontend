@@ -3,20 +3,7 @@ import { Calendar } from "../components/Calendar";
 import { Header } from "../components/Header";
 import { Ranking } from "../components/Ranking";
 import axios from "axios";
-import fondo from "../fondo2.jpg";
-
-const style = {
-  width: "100vw",
-  height: "100vh",
-  backgroundImage: `url(${fondo})`,
-
-  color: "white",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  margin: 0,
-  position: "fixed",
-  overflow: "auto",
-};
+import "./home.css";
 
 export const Home = () => {
   const [matches, setMatches] = useState([]);
@@ -51,22 +38,22 @@ export const Home = () => {
   useEffect(() => {
     getMatches();
   }, []);
-  return (
-    <div style={style}>
-      <div style={{ width: "100vw", background: "" }}>
-        <Header />
-        <h1 style={{ margin: 0 }}>FIFA World Cup</h1>
-        <div>
-          <h2>Lorem </h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita
-            aperiam corporis quisquam cumque id quasi necessitatibus debitis
-            veritatis totam voluptatem vero, neque harum esse molestias magnam
-            provident
-          </p>
-        </div>
 
-        <hr />
+  return (
+    <div className="home-page">
+      <Header />
+      <div className="div-text-landing-page">
+        <h1>FIFA World Cup</h1>
+        <h2>Lorem </h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita
+          aperiam corporis quisquam cumque id quasi necessitatibus debitis
+          veritatis totam voluptatem vero, neque harum esse molestias magnam
+          provident
+        </p>
+      </div>
+
+      <div className="div-calendar-landing-page">
         <Calendar title="Jornada 1" matches={jornada1} />
         <Calendar title="Jornada 2" matches={jornada2} />
         <Calendar title="Jornada 3" matches={jornada3} />

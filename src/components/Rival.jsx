@@ -10,14 +10,14 @@ const style = {
   fontSize: "18px",
 };
 export const Rival = (data) => {
-  console.log(data.jornada);
+  const { matchTime, homeName, awayName } = data;
+  const dateMoment = moment(matchTime * 1000).format("L");
 
-  const dateMoment = moment(data.matchTime * 1000).format("L");
   return (
     <div style={style}>
       <img
         src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
-          data.homeName
+          homeName
         )}.png`}
         width={60}
         height={30}
@@ -28,12 +28,12 @@ export const Rival = (data) => {
           margin: "0 auto",
         }}
       />
-      <h3>{data.homeName}</h3>
+      <h3>{homeName}</h3>
       <p>{dateMoment}</p>
-      <h3>{data.awayName}</h3>
+      <h3>{awayName}</h3>
       <img
         src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
-          data.awayName
+          awayName
         )}.png`}
         width={60}
         height={30}

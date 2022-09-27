@@ -6,7 +6,6 @@ import logo from "../Qatar2022.png";
 export const Header = () => {
   return (
     <div className="Header">
-      {/* <h1>Logo</h1> */}
       <img src={logo} alt="logo" width={100} />
       <div style={{ display: "flex", gap: "20px" }}>
         <h3>

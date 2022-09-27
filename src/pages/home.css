@@ -1,0 +1,25 @@
+.home-page {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../fondo2.jpg");
+  color: white;
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  position: fixed;
+  overflow: auto;
+}
+
+.div-text-landing-page {
+  background-color: rgb(180, 95, 95);
+  height: 80%;
+}
+
+.div-text-landing-page h1 {
+  color: #fca;
+  font-size: 4rem;
+}
+
+.div-calendar-landing-page {
+  background-color: #fff;
+}

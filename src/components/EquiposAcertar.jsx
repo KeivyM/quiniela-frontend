@@ -56,11 +56,8 @@ export const EquiposAcertar = () => {
       phase: "Fase de Grupos",
       predictions,
     };
-    // console.log(body);
 
     const TOKEN = userAuth;
-    // console.log(`Bearer ${TOKEN}`);
-
     const respuesta = await AxiosConfig.post("quiniela/create", body, {
       headers: { Authorization: `Bearer ${TOKEN}` },
     });
