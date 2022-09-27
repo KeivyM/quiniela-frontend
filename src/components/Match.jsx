@@ -1,46 +1,16 @@
 // import { useForm } from "../hooks/useForm";
 import { getFlagAway, getFlagHome } from "../utils/codeFlags";
-// import { flags } from "../utils/codeFlags";
 
 export const Match = (data) => {
-  // const { searchText, onInputChange } = useForm({});
   const {
     group,
     date,
     jornada,
     homeName,
     awayName,
-    // setPredictions,
     matchId,
-    // index,
     funcionAddPredictions,
   } = data;
-  // console.log(data.matchId);
-
-  // const funcionAddPredictions = (e) => {
-  //   const { name, value } = target;
-  //       setPredictions({
-  //     ...formState,
-  //     [name]: value,
-  //       })
-
-  // (()=> )
-  // console.log(e);
-  // };
-
-  // const getFlagAway = () => {
-  //   const flag = flags.find(
-  //     (elemento) => elemento.name === awayName && elemento.abv
-  //   );
-  //   return flag?.abv;
-  // };
-
-  // const getFlagHome = () => {
-  //   const flag = flags.find(
-  //     (elemento) => elemento.name === homeName && elemento.abv
-  //   );
-  //   return flag?.abv;
-  // };
 
   return (
     <div>

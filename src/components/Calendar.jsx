@@ -1,8 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { Rival } from "./Rival";
-
-// const array = [1, 2, 3, 4, 5, 6];
 const style = {
   background: "#cda9",
   width: "700px",
@@ -11,28 +7,28 @@ const style = {
   margin: "0 auto",
 };
 
-export const Calendar = () => {
-  const [matches, setMatches] = useState([]);
-
-  const getMatches = () => {
-    axios
-      .get(
-        "http://api.isportsapi.com/sport/football/schedule?api_key=7ysUHBwXouU3Bb48&leagueId=1572"
-      )
-      .then((res) => setMatches(res.data.data));
-  };
-
-  useEffect(() => {
-    getMatches();
-  }, []);
-
+export const Calendar = ({ matches, title }) => {
   return (
     <div style={style}>
-      <h2>Jornada 1</h2>
+      <h2>{title}</h2>
       <div>
         <hr />
         {matches.map((match) => {
-          return <Rival {...match} />;
+          const jornada2 = 1669370400;
+          const jornada3 = 1669734000;
+
+          const jornada =
+            match.matchTime < jornada2
+              ? "1"
+              : match.matchTime < jornada3
+              ? "2"
+              : "3";
+          return (
+            <>
+              {/* <h3>Jornada {jornada}</h3> */}
+              <Rival jornada={jornada} {...match} />
+            </>
+          );
         })}
       </div>
     </div>

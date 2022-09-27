@@ -10,7 +10,7 @@ const style = {
   fontSize: "18px",
 };
 export const Rival = (data) => {
-  // console.log(data);
+  console.log(data.jornada);
 
   const dateMoment = moment(data.matchTime * 1000).format("L");
   return (
