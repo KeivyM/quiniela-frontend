@@ -7,7 +7,7 @@ import { EquiposAcertar } from "../components/EquiposAcertar";
 import { AuthContext } from "../context";
 
 export const Dashboard = () => {
-  const { userAuth, setUserAuth } = useContext(AuthContext);
+  const { userAuth, setUserAuth, username } = useContext(AuthContext);
   // console.log(userAuth.username);
   let navigate = useNavigate();
 
@@ -49,10 +49,10 @@ export const Dashboard = () => {
             height: "100px",
             fontSize: "70px",
           }}
-          alt={userAuth?.name || "Nombre"}
+          alt={username}
           src="/broken-image.jpg"
         />
-        <h2>{userAuth?.username || "Nombre"}</h2>
+        <h2>{username}</h2>
         <strong>325 pts.</strong>
         <a
           target="_blank"

@@ -1,11 +1,11 @@
-import axios from "axios";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
+import { AxiosConfig } from "../utils/AxiosConfig";
 
 export const FormLogin = () => {
-  const { setUserAuth } = useContext(AuthContext);
+  const { setUserAuth, setUsername } = useContext(AuthContext);
   let navigate = useNavigate();
 
   const {
@@ -16,15 +16,14 @@ export const FormLogin = () => {
 
   const validar = async (value) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:3000/auth/login",
-        value
-      );
+      const { data } = await AxiosConfig.post("auth/login", value);
 
       if (typeof data === "string") throw new Error(data);
 
       const TOKEN = JSON.stringify(data.token);
       localStorage.setItem("user_Auth", TOKEN);
+
+      setUsername(data._doc.username);
       setUserAuth(data.token);
       navigate("/");
     } catch (error) {

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 
 export const FormRegister = () => {
-  const { setUserAuth } = useContext(AuthContext);
+  const { setUserAuth, setUsername } = useContext(AuthContext);
   let navigate = useNavigate();
 
   const {
@@ -34,6 +34,7 @@ export const FormRegister = () => {
       const token = JSON.stringify(data.token);
       localStorage.setItem("user_Auth", token);
 
+      setUsername(data._doc.username);
       setUserAuth(data.token);
       navigate("/");
     } catch (error) {
