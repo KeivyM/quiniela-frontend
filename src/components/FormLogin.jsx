@@ -15,6 +15,8 @@ import {
   TextField,
 } from "@mui/material";
 import { ModalErrors } from "./ModalErrors";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaLogin } from "../utils/schemas";
 
 export const FormLogin = () => {
   const [values, setValues] = useState({
@@ -30,7 +32,9 @@ export const FormLogin = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm(); //falta el esquema
+  } = useForm({
+    resolver: yupResolver(schemaLogin),
+  });
 
   const validar = async (value) => {
     try {
@@ -93,7 +97,7 @@ export const FormLogin = () => {
         <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
           <TextField
             id="outlined-basic"
-            label="Email"
+            label="Correo"
             type="email"
             name="email"
             {...register("email", { required: true })}
@@ -101,12 +105,12 @@ export const FormLogin = () => {
             value={values.email}
             variant="outlined"
           />
-          {errors.email?.type === "required" && "Email is required"}
+          {errors.email?.message}
         </FormControl>
 
         <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">
-            Password
+            Contraseña
           </InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
@@ -127,27 +131,11 @@ export const FormLogin = () => {
                 </IconButton>
               </InputAdornment>
             }
-            label="Password"
+            label="Contraseña"
           />
-          {errors.password?.type === "required" && "Password is required"}
+          {errors.password?.message}
         </FormControl>
       </Box>
-
-      {/* <input
-        type="email"
-        name="email"
-        placeholder="Correo"
-        // {...register("email", { required: true })}
-      /> */}
-
-      {/* <input
-        type="password"
-        name="password"
-        placeholder="Contraseña"
-        {...register("password", { required: true })}
-      /> */}
-
-      {/* <button type="submit">Ingresar</button> */}
 
       <Button type="submit" variant="contained">
         Ingresar

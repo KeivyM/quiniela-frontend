@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 import {
+  Button,
   FormControl,
   IconButton,
   InputAdornment,
@@ -14,10 +15,10 @@ import {
   TextField,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-
-//FALTA AGREGAR UN CAMPO PARA REVALIDAR CONTRASEÑA
+import { ModalErrors } from "./ModalErrors";
 
 export const FormRegister = () => {
+  const [open, setOpen] = useState([false, { msgTitle: "", msgError: "" }]);
   const { setUserAuth, setUsername } = useContext(AuthContext);
   let navigate = useNavigate();
 
@@ -27,7 +28,9 @@ export const FormRegister = () => {
     username: "",
     email: "",
     password: "",
+    passwordRepeat: "",
     showPassword: false,
+    showPasswordRepeat: false,
   });
 
   const {
@@ -39,27 +42,33 @@ export const FormRegister = () => {
   });
 
   const validar = async (value) => {
-    console.log(value);
-    try {
-      const { data } = await axios.post(
-        "http://localhost:3000/auth/register",
-        value
-      );
-      console.log(data);
-      if (data.code)
-        throw new Error(
-          JSON.stringify({ code: data.code, keyValue: data.keyValue })
-        );
+    delete value.passwordRepeat;
 
-      const token = JSON.stringify(data.token);
-      localStorage.setItem("user_Auth", token);
+    const { data } = await axios.post(
+      "http://localhost:3000/auth/register",
+      value
+    );
 
-      setUsername(data._doc.username);
-      setUserAuth(data.token);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
+    if (data.code) {
+      let nameKey =
+        Object.keys(data.keyPattern)[0] === "username"
+          ? "nombre de usuario"
+          : "correo";
+      return setOpen([
+        true,
+        {
+          msgTitle: "Verifica los datos.",
+          msgError: `Ya existe un usuario con ese ${nameKey}`,
+        },
+      ]);
     }
+
+    const token = JSON.stringify(data.token);
+    localStorage.setItem("user_Auth", token);
+
+    setUsername(data._doc.username);
+    setUserAuth(data.token);
+    navigate("/");
   };
 
   const handleChange = (prop) => (event) => {
@@ -73,20 +82,20 @@ export const FormRegister = () => {
     });
   };
 
+  const handleClickShowPasswordRepeat = () => {
+    setValues({
+      ...values,
+      showPasswordRepeat: !values.showPasswordRepeat,
+    });
+  };
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
   return (
     <form onSubmit={handleSubmit(validar)}>
-      {/* <input
-        type="text"
-        placeholder="Nombre"
-        name="name"
-        {...register("name", { required: true })}
-      />
-      {errors.name?.message} */}
-
+      <ModalErrors open={open} setOpen={setOpen} />
       <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
         <TextField
           id="outlined-basic-name"
@@ -100,14 +109,6 @@ export const FormRegister = () => {
         />
         {errors.name?.message}
       </FormControl>
-
-      {/* <input
-        type="text"
-        placeholder="Apellido"
-        name="lastName"
-        {...register("lastName", { required: true })}
-      />
-      {errors.lastName?.message} */}
 
       <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
         <TextField
@@ -123,14 +124,6 @@ export const FormRegister = () => {
         {errors.lastName?.message}
       </FormControl>
 
-      {/* <input
-        type="text"
-        placeholder="Nombre de Usuario"
-        name="username"
-        {...register("username", { required: true })}
-      />
-      {errors.username?.message} */}
-
       <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
         <TextField
           id="outlined-basic-username"
@@ -144,14 +137,6 @@ export const FormRegister = () => {
         />
         {errors.username?.message}
       </FormControl>
-
-      {/* <input
-        type="email"
-        name="email"
-        placeholder="Correo"
-        {...register("email", { required: true })}
-      />
-      {errors.email?.message} */}
 
       <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
         <TextField
@@ -167,16 +152,10 @@ export const FormRegister = () => {
         {errors.email?.message}
       </FormControl>
 
-      {/* <input
-        type="password"
-        name="password"
-        placeholder="Contraseña"
-        {...register("password", { required: true })}
-      />
-      {errors.password?.message} */}
-
       <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-password">
+          Contraseña
+        </InputLabel>
         <OutlinedInput
           id="outlined-adornment-password"
           type={values.showPassword ? "text" : "password"}
@@ -196,12 +175,42 @@ export const FormRegister = () => {
               </IconButton>
             </InputAdornment>
           }
-          label="Password"
+          label="Contraseña"
         />
         {errors.password?.message}
       </FormControl>
 
-      <button type="submit">Registrarse</button>
+      <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+        <InputLabel htmlFor="outlined-adornment-password-repeat">
+          Contraseña
+        </InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password-repeat"
+          type={values.showPasswordRepeat ? "text" : "password"}
+          value={values.passwordRepeat}
+          name="passwordRepeat"
+          {...register("passwordRepeat", { required: true })}
+          onChange={handleChange("passwordRepeat")}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPasswordRepeat}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {values.showPasswordRepeat ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Contraseña"
+        />
+        {errors.passwordRepeat?.message}
+      </FormControl>
+
+      <Button type="submit" variant="contained">
+        Registrarse
+      </Button>
     </form>
   );
 };
