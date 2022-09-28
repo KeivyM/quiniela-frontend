@@ -8,6 +8,7 @@ const style = {
   justifyContent: "space-between",
   color: "black",
   fontSize: "18px",
+  alignItems: "center",
 };
 export const Rival = (data) => {
   const { matchTime, homeName, awayName } = data;
