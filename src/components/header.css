@@ -10,6 +10,13 @@
   box-sizing: border-box;
 }
 
+.container-btns {
+  display: flex;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+}
+
 .btns-auth {
   color: rgb(210, 208, 208);
   padding: 20px;

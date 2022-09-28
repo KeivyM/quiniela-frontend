@@ -30,7 +30,7 @@ export const FormLogin = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm(); //falta el esquema
 
   const validar = async (value) => {
     try {

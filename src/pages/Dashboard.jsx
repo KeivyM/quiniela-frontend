@@ -7,21 +7,9 @@ import { EquiposAcertar } from "../components/EquiposAcertar";
 import { AuthContext } from "../context";
 
 export const Dashboard = () => {
-  const { userAuth, setUserAuth, username } = useContext(AuthContext);
-  // console.log(userAuth.username);
+  const { setUserAuth, username } = useContext(AuthContext);
+
   let navigate = useNavigate();
-
-  // const peticion = () => {
-  //   axios
-  //     .get("https://worldcup.sfg.io/teams/")
-  //     .then((res) => console.log(res))
-  //     .catch((error) => console.log("error: ", error));
-
-  // };
-
-  // useEffect(() => {
-  //   peticion();
-  // }, []);
 
   const Logout = () => {
     localStorage.removeItem("user_Auth");
