@@ -1,10 +1,7 @@
 import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthContext } from "../context";
-import { Dashboard } from "../pages/Dashboard";
-import { Home } from "../pages/Home";
-import { LoginPage } from "../pages/LoginPage";
-import { RegisterPage } from "../pages/RegisterPage";
+import { Dashboard, Home, LoginPage, RegisterPage } from "../pages";
 
 export const AppRoutes = () => {
   const { userAuth } = useContext(AuthContext);

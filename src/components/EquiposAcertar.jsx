@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import { Match } from "./Match";
-import { AxiosConfig } from "../utils/AxiosConfig";
 import { AuthContext } from "../context";
+import { AxiosConfig } from "../utils";
 // import { useForm } from "../hooks/useForm";
 
 export const EquiposAcertar = () => {
@@ -24,11 +24,11 @@ export const EquiposAcertar = () => {
 
     const res = await AxiosConfig.get(`prediction/findAll/${userId}`);
     // console.log(matchId);
-    console.log("Awui", res.data);
+    // console.log("Awui", res.data);
 
     setPredictions(res.data);
     for (const obj of res.data) {
-      console.log(obj);
+      // console.log(obj);
       delete obj._id;
       delete obj.userId;
       delete obj.__v;

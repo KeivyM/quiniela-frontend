@@ -16,7 +16,7 @@ export const Match = (data) => {
   } = data;
   // const { results } = prediction;
 
-  console.log(prediction);
+  // console.log(prediction);
 
   return (
     <div>

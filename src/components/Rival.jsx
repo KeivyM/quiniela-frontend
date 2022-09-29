@@ -15,36 +15,62 @@ export const Rival = (data) => {
   const dateMoment = moment(matchTime * 1000).format("L");
 
   return (
-    <div style={style}>
-      <img
-        src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
-          homeName
-        )}.png`}
-        width={60}
-        height={30}
-        alt="flag"
-        style={{
-          border: "1px solid",
-          borderRadius: "5px",
-          margin: "0 auto",
-        }}
-      />
-      <h3>{homeName}</h3>
-      <p>{dateMoment}</p>
-      <h3>{awayName}</h3>
-      <img
-        src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
-          awayName
-        )}.png`}
-        width={60}
-        height={30}
-        alt="flag"
-        style={{
-          border: "1px solid",
-          borderRadius: "5px",
-          margin: "0 auto",
-        }}
-      />
-    </div>
+    <>
+      <div style={style}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            width: "30%",
+            marginLeft: "15px",
+          }}
+        >
+          <img
+            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
+              homeName
+            )}.png`}
+            width={40}
+            height={40}
+            alt="flag"
+            style={{
+              border: "1px solid",
+              borderRadius: "5px",
+              // margin: "0 auto",
+              width: "max-content",
+            }}
+          />
+          <h4>{homeName}</h4>
+        </div>
+        <p>{dateMoment}</p>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            width: "30%",
+            justifyContent: "right",
+            marginRight: "15px",
+          }}
+        >
+          <h4>{awayName}</h4>
+          <img
+            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
+              awayName
+            )}.png`}
+            width={40}
+            height={40}
+            alt="flag"
+            style={{
+              border: "1px solid",
+              borderRadius: "5px",
+              // margin: "0 auto",
+              width: "max-content",
+            }}
+          />
+        </div>
+      </div>
+      <hr style={{ margin: "0" }} />
+    </>
   );
 };

@@ -17,6 +17,9 @@ import {
 import { ModalErrors } from "./ModalErrors";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaLogin } from "../utils/schemas";
+// probando sweetalert2
+import Swal from "sweetalert2";
+// import "sweetalert2/src/sweetalert2.scss";
 
 export const FormLogin = () => {
   const [values, setValues] = useState({
@@ -68,10 +71,18 @@ export const FormLogin = () => {
           },
         ]);
       }
-      setOpen([
-        true,
-        { msgTitle: "Tus datos no son correctos.", msgError: error.message },
-      ]);
+      console.log("datos incorrectos");
+      Swal.fire({
+        title: "Tus datos no son correctos!",
+        text: error.message,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+
+      // setOpen([
+      //   true,
+      //   { msgTitle: "Tus datos no son correctos.", msgError: error.message },
+      // ]);
     }
   };
 

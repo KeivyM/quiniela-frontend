@@ -1,5 +1,3 @@
-import React from "react";
-
 const style = {
   width: "100%",
   background: "#a86",
@@ -12,8 +10,8 @@ const style = {
 export const Participant = ({ user }) => {
   return (
     <div style={style}>
-      <h3>{user.username}</h3>
-      <p>{user?.points || "sin puntos"}</p>
+      <h4 style={{ width: "50%" }}>{user.username}</h4>
+      <h4 style={{ width: "50%" }}>{user?.points}</h4>
     </div>
   );
 };

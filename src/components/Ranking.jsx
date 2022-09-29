@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { AxiosConfig } from "../utils/AxiosConfig";
+import { useEffect, useState } from "react";
+import { AxiosConfig } from "../utils";
 import { Participant } from "./Participant";
 
 const style = {
@@ -15,23 +14,25 @@ const style = {
 export const Ranking = () => {
   const [users, setUsers] = useState([]);
 
-  const funcion = async () => {
+  const getUsers = async () => {
     const { data } = await AxiosConfig.get("/auth");
+
+    data.sort((a, b) => b.points - a.points);
     setUsers(data);
   };
 
   useEffect(() => {
-    funcion();
+    getUsers();
   }, []);
 
   return (
     <div style={style}>
       <h2>Ranking de Participantes</h2>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <h4>Nombre</h4>
-        <h4>Puntos</h4>
+        <h3>Nombre</h3>
+        <h3>Puntos</h3>
       </div>
-      <hr />
+      {/* <hr /> */}
       {users.map((user, i) => {
         return <Participant key={i} user={user} />;
       })}
