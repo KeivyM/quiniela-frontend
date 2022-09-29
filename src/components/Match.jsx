@@ -1,4 +1,6 @@
 // import { useForm } from "../hooks/useForm";
+import { useEffect } from "react";
+import { AxiosConfig } from "../utils/AxiosConfig";
 import { getFlagAway, getFlagHome } from "../utils/codeFlags";
 
 export const Match = (data) => {
@@ -9,8 +11,12 @@ export const Match = (data) => {
     homeName,
     awayName,
     matchId,
+    prediction,
     funcionAddPredictions,
   } = data;
+  // const { results } = prediction;
+
+  console.log(prediction);
 
   return (
     <div>
@@ -55,7 +61,9 @@ export const Match = (data) => {
             name="homeScore"
             min={0}
             // defaultValue={0}
-            max={20}
+            max={50}
+            value={prediction?.results?.homeScore}
+            required={true}
             onChange={(e) => funcionAddPredictions(e, matchId)}
             // {...register(data.matchId.toString())}
           />
@@ -86,7 +94,9 @@ export const Match = (data) => {
             type="number"
             name="awayScore"
             min={0}
-            max={20}
+            max={50}
+            required={true}
+            value={prediction?.results?.awayScore}
             onChange={(e) => funcionAddPredictions(e, matchId)}
           />
         </div>

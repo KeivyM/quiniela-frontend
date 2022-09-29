@@ -12,6 +12,35 @@ export const EquiposAcertar = () => {
   const [match, setMatches] = useState([1, 1]);
   const [predictions, setPredictions] = useState([]);
 
+  const getAllPredictions = async () => {
+    const TOKEN = userAuth;
+
+    const response = await AxiosConfig.get("auth/private", {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
+    const userId = response.data.user._id;
+
+    const res = await AxiosConfig.get(`prediction/findAll/${userId}`);
+    // console.log(matchId);
+    console.log("Awui", res.data);
+
+    setPredictions(res.data);
+    for (const obj of res.data) {
+      console.log(obj);
+      delete obj._id;
+      delete obj.userId;
+      delete obj.__v;
+      // predictions = obj;
+      // predictions.push(obj);
+    }
+  };
+
+  useEffect(() => {
+    getAllPredictions();
+  }, []);
+
   const funcionAddPredictions = (target, matchId) => {
     const { name, value } = target.target;
 
@@ -57,15 +86,8 @@ export const EquiposAcertar = () => {
       phase,
       predictions,
     };
-    // console.log(body);
 
     const TOKEN = userAuth;
-
-    //debo validar si ya existe la quiniela (actualizarla), si no exite agregarla.
-
-    // const quiniela = await AxiosConfig.get(
-    //   "quiniela/"
-    // );
 
     const res = await AxiosConfig.get("auth/private", {
       headers: {
@@ -73,37 +95,33 @@ export const EquiposAcertar = () => {
       },
     });
     const userId = res.data.user._id;
-    console.log(userId);
-    // const userQuinielas = res.data.user.quiniela;
-    // console.log({ userId, phase, userQuinielas });
 
     const values = { userId, phase };
-    // console.log({ userId, phase: "semifinales" });
 
     const { data } = await AxiosConfig.post("quiniela/find", values);
     console.log(data);
 
-    if (!!data === false) {
-      // para crear quiniela:
-      const respuesta = await AxiosConfig.post("quiniela/create", body, {
-        headers: { Authorization: `Bearer ${TOKEN}` },
-      });
-      console.log("añadido");
-      return "añadido";
-    } else {
-      // para actualizar quiniela
-      console.log(data._id);
+    if (!!data) {
+      // actualizar quiniela
       const respuesta = await AxiosConfig.put(`quiniela/${data._id}`, body, {
         headers: {
           Authorization: `Bearer ${TOKEN}`,
         },
       });
+    } else {
+      // crear quiniela:
+      const respuesta = await AxiosConfig.post("quiniela/create", body, {
+        headers: { Authorization: `Bearer ${TOKEN}` },
+      });
+      console.log("añadido");
+      console.log(respuesta);
+      return "añadido";
     }
   };
 
-  // useEffect(() => {
-  //   console.log(predictions);
-  // }, [predictions]);
+  useEffect(() => {
+    console.log(predictions);
+  }, [predictions]);
 
   // const {
   //   register,
@@ -111,8 +129,6 @@ export const EquiposAcertar = () => {
   //   watch,
   //   formState: { errors },
   // } = useForm();
-
-  const predicciones = [];
 
   const getMatches = () => {
     axios
@@ -299,25 +315,19 @@ export const EquiposAcertar = () => {
     >
       {/* <form onSubmit={handleSubmit(onSubmit)}> */}
       {match?.map((obj, index) => {
+        const prediction = predictions.find((e) => e.matchId === obj.matchId);
         const jornada2 = 1669370400;
         const jornada3 = 1669734000;
 
         const jornada =
           obj.matchTime < jornada2 ? "1" : obj.matchTime < jornada3 ? "2" : "3";
 
-        // predicciones.push({
-        //   matchId: obj.matchId,
-        //   results: {
-        //     scoreHome: 3,
-        //     AwayScore: 1,
-        //   },
-        // });
-
         const dateMoment = moment(obj.matchTime * 1000).format("lll");
 
         return (
           <Match
             key={index}
+            prediction={prediction}
             index={index}
             jornada={jornada}
             date={dateMoment}

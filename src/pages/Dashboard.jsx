@@ -38,7 +38,7 @@ export const Dashboard = () => {
             fontSize: "70px",
           }}
           alt={username}
-          src="/broken-image.jpg"
+          src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a..png"
         />
         <h2>{username}</h2>
         <strong>325 pts.</strong>
