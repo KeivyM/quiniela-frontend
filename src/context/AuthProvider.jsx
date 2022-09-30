@@ -5,6 +5,7 @@ import { AuthContext } from "./AuthContext";
 
 export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState("");
+  const [points, setPoints] = useState(null);
   const [userAuth, setUserAuth] = useState(() =>
     JSON.parse(localStorage.getItem("user_Auth"))
   ); // debe tener el JWT del usuario autenticado
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("user_Auth", JSON.stringify(data.token));
     setUserAuth(data.token);
     setUsername(data._doc.username);
+    setPoints(data._doc.points);
   }, [userAuth]);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <>
       <AuthContext.Provider
-        value={{ userAuth, setUserAuth, setUsername, username }}
+        value={{ userAuth, setUserAuth, setUsername, username, points }}
       >
         {children}
       </AuthContext.Provider>

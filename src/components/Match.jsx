@@ -1,6 +1,6 @@
 // import { useForm } from "../hooks/useForm";
-import { useEffect } from "react";
-import { AxiosConfig } from "../utils/AxiosConfig";
+// import { useEffect } from "react";
+// import { AxiosConfig } from "../utils/AxiosConfig";
 import { getFlagAway, getFlagHome } from "../utils/codeFlags";
 
 export const Match = (data) => {

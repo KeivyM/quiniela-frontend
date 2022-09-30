@@ -7,7 +7,7 @@ import { EquiposAcertar } from "../components/EquiposAcertar";
 import { AuthContext } from "../context";
 
 export const Dashboard = () => {
-  const { setUserAuth, username } = useContext(AuthContext);
+  const { setUserAuth, username, points } = useContext(AuthContext);
 
   let navigate = useNavigate();
 
@@ -41,7 +41,7 @@ export const Dashboard = () => {
           src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a..png"
         />
         <h2>{username}</h2>
-        <strong>325 pts.</strong>
+        <strong>{points} pts.</strong>
         <a
           target="_blank"
           rel="noreferrer"
