@@ -14,12 +14,9 @@ import {
   OutlinedInput,
   TextField,
 } from "@mui/material";
-import { ModalErrors } from "./ModalErrors";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaLogin } from "../utils/schemas";
-// probando sweetalert2
 import Swal from "sweetalert2";
-// import "sweetalert2/src/sweetalert2.scss";
 
 export const FormLogin = () => {
   const [values, setValues] = useState({
@@ -27,7 +24,6 @@ export const FormLogin = () => {
     email: "",
     showPassword: false,
   });
-  const [open, setOpen] = useState([false, { msgTitle: "", msgError: "" }]);
   const { setUserAuth, setUsername } = useContext(AuthContext);
   let navigate = useNavigate();
 
@@ -39,9 +35,9 @@ export const FormLogin = () => {
     resolver: yupResolver(schemaLogin),
   });
 
-  const validar = async (value) => {
+  const validateUser = async (userData) => {
     try {
-      const { data } = await AxiosConfig.post("auth/login", value);
+      const { data } = await AxiosConfig.post("auth/login", userData);
 
       if (typeof data === "string") throw new Error(data);
 
@@ -53,36 +49,28 @@ export const FormLogin = () => {
       navigate("/");
     } catch (error) {
       if (error.code === "ECONNABORTED") {
-        return setOpen([
-          true,
-          {
-            msgTitle: "Ha ocurrido un error.",
-            msgError: "Problemas con el servidos",
-          },
-        ]);
+        return Swal.fire({
+          title: "Problemas con el servidor!",
+          text: "Intentalo luego",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
       }
 
       if (error.code === "ERR_BAD_REQUEST") {
-        return setOpen([
-          true,
-          {
-            msgTitle: "Tus datos no son correctos.",
-            msgError: "Verificalos",
-          },
-        ]);
+        return Swal.fire({
+          title: "Tus datos no son correctos.!",
+          text: "Verificalos",
+          icon: "warning",
+          confirmButtonText: "Ok",
+        });
       }
-      console.log("datos incorrectos");
       Swal.fire({
-        title: "Tus datos no son correctos!",
+        title: "Verifica tus datos!",
         text: error.message,
         icon: "error",
         confirmButtonText: "Ok",
       });
-
-      // setOpen([
-      //   true,
-      //   { msgTitle: "Tus datos no son correctos.", msgError: error.message },
-      // ]);
     }
   };
 
@@ -102,8 +90,7 @@ export const FormLogin = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(validar)}>
-      <ModalErrors open={open} setOpen={setOpen} />
+    <form onSubmit={handleSubmit(validateUser)}>
       <Box sx={{ display: "flex", flexWrap: "wrap" }}>
         <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
           <TextField

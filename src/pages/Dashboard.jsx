@@ -1,9 +1,9 @@
 import { Avatar } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { Quiniela } from "../components";
 // import { CarruselMUI } from "../components/CarruselMUI";
 // import { CarruselMUIText } from "../components/CarruselMUIText";
-import { EquiposAcertar } from "../components/EquiposAcertar";
 import { AuthContext } from "../context";
 
 export const Dashboard = () => {
@@ -51,7 +51,7 @@ export const Dashboard = () => {
         </a>
       </div>
       <div style={{ background: "#ced", width: "100%" }}>
-        <EquiposAcertar />
+        <Quiniela />
       </div>
       <hr />
       {/* <CarruselMUI /> */}

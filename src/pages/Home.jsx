@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { Calendar } from "../components/Calendar";
-import { Header } from "../components/Header";
-import { Ranking } from "../components/Ranking";
+import { Calendar, Header, Ranking } from "../components";
 // import axios from "axios";
 import "./home.css";
 

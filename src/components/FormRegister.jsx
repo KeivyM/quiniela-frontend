@@ -15,10 +15,9 @@ import {
   TextField,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { ModalErrors } from "./ModalErrors";
+import Swal from "sweetalert2";
 
 export const FormRegister = () => {
-  const [open, setOpen] = useState([false, { msgTitle: "", msgError: "" }]);
   const { setUserAuth, setUsername } = useContext(AuthContext);
   let navigate = useNavigate();
 
@@ -44,31 +43,56 @@ export const FormRegister = () => {
   const validar = async (value) => {
     delete value.passwordRepeat;
 
-    const { data } = await axios.post(
-      "http://localhost:3000/auth/register",
-      value
-    );
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3000/auth/register",
+        value
+      );
 
-    if (data.code) {
-      let nameKey =
-        Object.keys(data.keyPattern)[0] === "username"
-          ? "nombre de usuario"
-          : "correo";
-      return setOpen([
-        true,
-        {
-          msgTitle: "Verifica los datos.",
-          msgError: `Ya existe un usuario con ese ${nameKey}`,
-        },
-      ]);
+      if (data.code) {
+        let nameKey =
+          Object.keys(data.keyPattern)[0] === "username"
+            ? "Un usuario ya existe con ese nombre de usuario"
+            : "Un usuario ya existe con ese correo";
+        throw new Error(nameKey);
+      }
+
+      const token = JSON.stringify(data.token);
+      localStorage.setItem("user_Auth", token);
+
+      setUsername(data._doc.username);
+      setUserAuth(data.token);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Verifica tus datos!",
+        text: error.message,
+        icon: "info",
+        confirmButtonText: "Ok",
+      });
     }
 
-    const token = JSON.stringify(data.token);
-    localStorage.setItem("user_Auth", token);
+    // if (data.code) {
+    //   let nameKey =
+    //     Object.keys(data.keyPattern)[0] === "username"
+    //       ? "nombre de usuario"
+    //       : "correo";
+    //   return setOpen([
+    //     true,
+    //     {
+    //       msgTitle: "Verifica los datos.",
+    //       msgError: `Ya existe un usuario con ese ${nameKey}`,
+    //     },
+    //   ]);
+    // }
 
-    setUsername(data._doc.username);
-    setUserAuth(data.token);
-    navigate("/");
+    // const token = JSON.stringify(data.token);
+    // localStorage.setItem("user_Auth", token);
+
+    // setUsername(data._doc.username);
+    // setUserAuth(data.token);
+    // navigate("/");
   };
 
   const handleChange = (prop) => (event) => {
@@ -95,7 +119,6 @@ export const FormRegister = () => {
 
   return (
     <form onSubmit={handleSubmit(validar)}>
-      <ModalErrors open={open} setOpen={setOpen} />
       <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
         <TextField
           id="outlined-basic-name"

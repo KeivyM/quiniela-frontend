@@ -1,4 +1,4 @@
-import { Rival } from "./Rival";
+import { CalendarMatch } from "./CalendarMatch";
 const style = {
   background: "#cda9",
   width: "700px",
@@ -22,7 +22,7 @@ export const Calendar = ({ matches, title }) => {
           //     : match.matchTime < jornada3
           //     ? "2"
           //     : "3";
-          return <Rival key={index} {...match} />;
+          return <CalendarMatch key={index} {...match} />;
         })}
       </div>
     </div>
