@@ -12,7 +12,7 @@ export const Match = (data) => {
     awayName,
     matchId,
     prediction,
-    funcionAddPredictions,
+    onAddPredictions,
   } = data;
   // const { results } = prediction;
 
@@ -64,7 +64,7 @@ export const Match = (data) => {
             max={50}
             value={prediction?.results?.homeScore}
             required={true}
-            onChange={(e) => funcionAddPredictions(e, matchId)}
+            onChange={(e) => onAddPredictions(e, matchId)}
             // {...register(data.matchId.toString())}
           />
         </div>
@@ -97,7 +97,7 @@ export const Match = (data) => {
             max={50}
             required={true}
             value={prediction?.results?.awayScore}
-            onChange={(e) => funcionAddPredictions(e, matchId)}
+            onChange={(e) => onAddPredictions(e, matchId)}
           />
         </div>
       </div>

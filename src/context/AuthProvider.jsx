@@ -1,5 +1,4 @@
-import { useCallback, useEffect } from "react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AxiosConfig } from "../utils/AxiosConfig";
 import { AuthContext } from "./AuthContext";
 
@@ -11,18 +10,20 @@ export const AuthProvider = ({ children }) => {
   ); // debe tener el JWT del usuario autenticado
 
   const refreshToken = useCallback(async () => {
-    const { data } = await AxiosConfig.get("auth/check-status", {
-      headers: { Authorization: `Bearer ${userAuth}` },
-    });
-    // console.log("DATA:", data);
-    localStorage.setItem("user_Auth", JSON.stringify(data.token));
-    setUserAuth(data.token);
-    setUsername(data._doc.username);
-    setPoints(data._doc.points);
+    try {
+      const { data } = await AxiosConfig.get("auth/check-status", {
+        headers: { Authorization: `Bearer ${userAuth}` },
+      });
+      localStorage.setItem("user_Auth", JSON.stringify(data.token));
+      setUserAuth(data.token);
+      setUsername(data._doc.username);
+      setPoints(data._doc.points);
+    } catch (error) {
+      console.info(error.code, error.message);
+    }
   }, [userAuth]);
 
   useEffect(() => {
-    // console.log(userAuth);
     refreshToken();
   }, [refreshToken, userAuth]);
 

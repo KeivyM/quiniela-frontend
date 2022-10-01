@@ -246,8 +246,6 @@ export const Quiniela = () => {
       delete obj._id;
       delete obj.userId;
       delete obj.__v;
-      // predictions = obj;
-      // predictions.push(obj);
     }
   }, [userAuth]);
 
@@ -255,7 +253,7 @@ export const Quiniela = () => {
     getAllPredictions();
   }, [getAllPredictions]);
 
-  const funcionAddPredictions = (target, matchId) => {
+  const onAddPredictions = (target, matchId) => {
     const { name, value } = target.target;
 
     if (predictions.length === 0) {
@@ -296,6 +294,19 @@ export const Quiniela = () => {
   };
 
   const addQuiniela = async () => {
+    console.log(predictions);
+    if (match.length !== predictions.length)
+      return Swal.fire({
+        title: "Hay campos vacios!",
+        text: "Toda la quiniela debe estar llena",
+        icon: "info",
+        confirmButtonText: "Ok",
+      });
+    for (const prediction of predictions) {
+      //verificar que cada prediccion tenga los resultados y si no pasar un modal
+      console.log(prediction);
+    }
+
     const body = {
       phase,
       predictions,
@@ -620,35 +631,43 @@ export const Quiniela = () => {
         margin: "0 auto",
       }}
     >
-      {/* <form onSubmit={handleSubmit(onSubmit)}> */}
-      {match?.map((obj, index) => {
-        const prediction = predictions.find((e) => e.matchId === obj.matchId);
-        const jornada2 = 1669370400;
-        const jornada3 = 1669734000;
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(e);
+        }}
+      >
+        {match?.map((obj, index) => {
+          const prediction = predictions.find((e) => e.matchId === obj.matchId);
+          const jornada2 = 1669370400;
+          const jornada3 = 1669734000;
 
-        const jornada =
-          obj.matchTime < jornada2 ? "1" : obj.matchTime < jornada3 ? "2" : "3";
+          const jornada =
+            obj.matchTime < jornada2
+              ? "1"
+              : obj.matchTime < jornada3
+              ? "2"
+              : "3";
 
-        const dateMoment = moment(obj.matchTime * 1000).format("lll");
+          const dateMoment = moment(obj.matchTime * 1000).format("lll");
 
-        return (
-          <Match
-            key={index}
-            prediction={prediction}
-            index={index}
-            jornada={jornada}
-            date={dateMoment}
-            setPredictions={setPredictions}
-            funcionAddPredictions={funcionAddPredictions}
-            // addQuiniela={addQuiniela}
-            {...obj}
-          />
-        );
-      })}
-      <button type="submit" onClick={addQuiniela}>
-        Guardar
-      </button>
-      {/* </form> */}
+          return (
+            <Match
+              key={index}
+              prediction={prediction}
+              index={index}
+              jornada={jornada}
+              date={dateMoment}
+              setPredictions={setPredictions}
+              onAddPredictions={onAddPredictions}
+              {...obj}
+            />
+          );
+        })}
+        <button type="submit" onClick={addQuiniela}>
+          Guardar
+        </button>
+      </form>
     </div>
   );
 };
