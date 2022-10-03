@@ -5,13 +5,35 @@ import { Quiniela } from "../components";
 // import { CarruselMUI } from "../components/CarruselMUI";
 // import { CarruselMUIText } from "../components/CarruselMUIText";
 import { AuthContext } from "../context";
+import { AxiosConfig } from "../utils";
 
 export const Dashboard = () => {
-  const { setUserAuth, username, points } = useContext(AuthContext);
+  const { setUserAuth, username, points, userAuth } = useContext(AuthContext);
 
   let navigate = useNavigate();
 
   const Logout = () => {
+    localStorage.removeItem("user_Auth");
+    setUserAuth(false);
+    navigate("/home");
+  };
+
+  const deleteCount = async () => {
+    const pregunta = window.confirm("Estas seguro de eliminar la cuenta?");
+
+    if (!pregunta) return;
+
+    const TOKEN = userAuth;
+
+    const res = await AxiosConfig.get("auth/private", {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    });
+    const userId = res.data.user._id;
+    // console.log(userId);
+
+    AxiosConfig.delete(`http://localhost:3000/auth/${userId}`);
     localStorage.removeItem("user_Auth");
     setUserAuth(false);
     navigate("/home");
@@ -49,6 +71,7 @@ export const Dashboard = () => {
         >
           Calendario
         </a>
+        <button onClick={deleteCount}>Eliminar Cuenta</button>
       </div>
       <div style={{ background: "#ced", width: "100%" }}>
         <Quiniela />

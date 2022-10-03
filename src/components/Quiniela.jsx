@@ -294,7 +294,7 @@ export const Quiniela = () => {
   };
 
   const addQuiniela = async () => {
-    console.log(predictions);
+    // console.log(predictions);
     if (match.length !== predictions.length)
       return Swal.fire({
         title: "Hay campos vacios!",
@@ -303,8 +303,17 @@ export const Quiniela = () => {
         confirmButtonText: "Ok",
       });
     for (const prediction of predictions) {
-      //verificar que cada prediccion tenga los resultados y si no pasar un modal
-      console.log(prediction);
+      //verifica que cada prediccion tenga los resultados y si no pasa un modal
+      if (
+        !!prediction?.results.awayScore === false ||
+        !!prediction?.results.homeScore === false
+      )
+        return Swal.fire({
+          title: "Hay campos vacios!",
+          text: "Toda la quiniela debe estar llena",
+          icon: "info",
+          confirmButtonText: "Ok",
+        });
     }
 
     const body = {
