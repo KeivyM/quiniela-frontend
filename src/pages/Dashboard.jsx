@@ -1,6 +1,7 @@
 import { Avatar } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { Quiniela } from "../components";
 // import { CarruselMUI } from "../components/CarruselMUI";
 // import { CarruselMUIText } from "../components/CarruselMUIText";
@@ -19,24 +20,31 @@ export const Dashboard = () => {
   };
 
   const deleteCount = async () => {
-    const pregunta = window.confirm("Estas seguro de eliminar la cuenta?");
+    await Swal.fire({
+      title: "¿Estas seguro de eliminar la cuenta?",
+      text: "Se borrarán todas tus predicciones.",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+      icon: "warning",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const TOKEN = userAuth;
 
-    if (!pregunta) return;
+        const res = await AxiosConfig.get("auth/private", {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        });
+        const userId = res.data.user._id;
+        // console.log(userId);
 
-    const TOKEN = userAuth;
-
-    const res = await AxiosConfig.get("auth/private", {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
+        AxiosConfig.delete(`http://localhost:3000/auth/${userId}`);
+        localStorage.removeItem("user_Auth");
+        setUserAuth(false);
+        navigate("/home");
+      } else if (result.isDenied) return;
     });
-    const userId = res.data.user._id;
-    // console.log(userId);
-
-    AxiosConfig.delete(`http://localhost:3000/auth/${userId}`);
-    localStorage.removeItem("user_Auth");
-    setUserAuth(false);
-    navigate("/home");
   };
 
   return (
