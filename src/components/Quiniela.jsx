@@ -223,14 +223,13 @@ import { MatchNothing } from "./MatchNothing";
 //   },
 // ];
 
-export const Quiniela = ({ arrayPredictions }) => {
+export const Quiniela = ({ arrayDePartidos, phase }) => {
   const { userAuth } = useContext(AuthContext);
-  const [phase, setPhase] = useState("");
-  const [match, setMatches] = useState([]);
+  // const [match, setMatches] = useState([]);
+  const [update, setUpdate] = useState(true);
   const [predictions, setPredictions] = useState([]);
-  // console.log(arrayPredictions);
 
-  const getAllPredictions = useCallback(async () => {
+  const getAllPredictions = async (phase) => {
     const TOKEN = userAuth;
 
     const response = await AxiosConfig.get("auth/private", {
@@ -238,31 +237,34 @@ export const Quiniela = ({ arrayPredictions }) => {
         Authorization: `Bearer ${TOKEN}`,
       },
     });
-
     const userId = response.data.user._id;
 
-    const { data } = await AxiosConfig.get(`prediction/findAll/${userId}`);
+    const quiniela = await AxiosConfig.post("quiniela/find", {
+      userId,
+      phase,
+    });
 
-    for (const obj of data) {
-      delete obj._id;
-      delete obj.userId;
-      delete obj.__v;
+    if (!!quiniela === false) return;
+
+    const IdsPredictions = quiniela.data.prediction;
+
+    const arrayPredictions = [];
+
+    for (const id of IdsPredictions) {
+      const PREDICTION = await AxiosConfig.get(`prediction/${id}`);
+      delete PREDICTION.data._id;
+      delete PREDICTION.data.__v;
+      delete PREDICTION.data.userId;
+      arrayPredictions.push(PREDICTION.data);
     }
-    setPredictions(data);
-  }, [userAuth]);
-
-  useEffect(() => {
-    getAllPredictions();
-  }, [getAllPredictions]);
+    setPredictions(arrayPredictions);
+  };
 
   const onAddPredictions = (target, matchId) => {
     const { name, value } = target.target;
 
     if (predictions.length === 0) {
-      setPredictions((prev) => [
-        ...prev,
-        { matchId: matchId, results: { [name]: value } },
-      ]);
+      setPredictions([{ matchId: matchId, results: { [name]: value } }]);
       return;
     }
 
@@ -283,6 +285,7 @@ export const Quiniela = ({ arrayPredictions }) => {
       const filtrado = predictions.filter(
         (prediction) => prediction.matchId !== matchId
       );
+      console.log("filtrado", filtrado);
 
       const obj = predictions.find(
         (prediction) => prediction.matchId === matchId
@@ -296,14 +299,14 @@ export const Quiniela = ({ arrayPredictions }) => {
   };
 
   const addQuiniela = async () => {
-    // console.log(predictions);
-    if (match.length !== predictions.length)
+    if (arrayDePartidos.length !== predictions.length)
       return Swal.fire({
         title: "Hay campos vacios!",
         text: "Toda la quiniela debe estar llena",
         icon: "info",
         confirmButtonText: "Ok",
       });
+
     for (const prediction of predictions) {
       //verifica que cada prediccion tenga los resultados y si no pasa un modal
       if (
@@ -363,6 +366,14 @@ export const Quiniela = ({ arrayPredictions }) => {
       });
     }
   };
+
+  useEffect(() => {
+    setPredictions([]);
+    console.log(predictions);
+    getAllPredictions(phase);
+    setUpdate(!!update);
+    console.log(predictions);
+  }, [phase]);
 
   // useEffect(() => {
   //   console.log(predictions);
@@ -645,11 +656,12 @@ export const Quiniela = ({ arrayPredictions }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          // console.log(e);
         }}
       >
-        {arrayPredictions?.map((obj, index) => {
+        {arrayDePartidos?.map((obj, index) => {
           const prediction = predictions.find((e) => e.matchId === obj.matchId);
+          // console.log("Prediccion:", prediction);
+
           const jornada2 = 1669370400;
           const jornada3 = 1669734000;
 
@@ -660,26 +672,13 @@ export const Quiniela = ({ arrayPredictions }) => {
               ? "2"
               : "3";
 
-          const phase =
-            arrayPredictions.length === 48
-              ? "Grupos"
-              : arrayPredictions.length === 8
-              ? "octavos"
-              : arrayPredictions.length === 4
-              ? "cuartos"
-              : arrayPredictions.length === 2 &&
-                arrayPredictions[0].matchId === "227058155573225"
-              ? "final"
-              : arrayPredictions.length === 2
-              ? "semifinales"
-              : "";
-          // console.log(arrayPredictions);
-
           const dateMoment = moment(obj.matchTime * 1000).format("lll");
+
+          // console.log("predictions into array: ", prediction);
 
           return (
             <>
-              {arrayPredictions.length === 48 ? (
+              {arrayDePartidos.length === 48 ? (
                 <Match
                   key={index}
                   prediction={prediction}
@@ -693,6 +692,7 @@ export const Quiniela = ({ arrayPredictions }) => {
               ) : (
                 <MatchNothing
                   phase={phase}
+                  prediction={prediction}
                   index={index}
                   date={dateMoment}
                   setPredictions={setPredictions}

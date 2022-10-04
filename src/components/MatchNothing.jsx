@@ -1,4 +1,6 @@
-import { useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context";
+import { AxiosConfig } from "../utils";
 import { getFlagAway, getFlagHome } from "../utils/codeFlags";
 
 export const MatchNothing = (data) => {
@@ -13,7 +15,19 @@ export const MatchNothing = (data) => {
     prediction,
     onAddPredictions,
   } = data;
-  // const { results } = prediction;
+
+  const [awayScore, setAwayScore] = useState();
+  const [homeScore, setHomeScore] = useState();
+
+  useEffect(() => {
+    if (prediction) {
+      setAwayScore(prediction?.results?.awayScore);
+      setHomeScore(prediction?.results?.homeScore);
+    } else {
+      setAwayScore("");
+      setHomeScore("");
+    }
+  }, [prediction]);
 
   const octavos = [
     {
@@ -125,13 +139,13 @@ export const MatchNothing = (data) => {
           />
 
           <span>
-            {phase === "cuartos"
+            {phase === "Cuartos"
               ? cuartos[index]?.homeName
-              : phase === "octavos"
+              : phase === "Octavos"
               ? octavos[index]?.homeName
-              : phase === "semifinales"
+              : phase === "Semifinales"
               ? semifinales[index]?.homeName
-              : phase === "final"
+              : phase === "Final"
               ? final[index]?.homeName
               : ""}
           </span>
@@ -141,7 +155,7 @@ export const MatchNothing = (data) => {
             min={0}
             // defaultValue={0}
             max={50}
-            value={prediction?.results?.homeScore}
+            value={homeScore}
             required={true}
             onChange={(e) => onAddPredictions(e, matchId)}
             // {...register(data.matchId.toString())}
@@ -167,13 +181,13 @@ export const MatchNothing = (data) => {
             }}
           />
           <span>
-            {phase === "cuartos"
+            {phase === "Cuartos"
               ? cuartos[index]?.awayName
-              : phase === "octavos"
+              : phase === "Octavos"
               ? octavos[index]?.awayName
-              : phase === "semifinales"
+              : phase === "Semifinales"
               ? semifinales[index]?.awayName
-              : phase === "final"
+              : phase === "Final"
               ? final[index]?.awayName
               : ""}
           </span>
@@ -183,7 +197,7 @@ export const MatchNothing = (data) => {
             min={0}
             max={50}
             required={true}
-            value={prediction?.results?.awayScore}
+            value={awayScore}
             onChange={(e) => onAddPredictions(e, matchId)}
           />
         </div>

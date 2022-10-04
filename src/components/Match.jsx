@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { getFlagAway, getFlagHome } from "../utils/codeFlags";
 
 export const Match = (data) => {
@@ -11,6 +12,8 @@ export const Match = (data) => {
     prediction,
     onAddPredictions,
   } = data;
+  const [predictions, setPredictions] = useState([]);
+
   // const { results } = prediction;
 
   // console.log(prediction);

@@ -717,46 +717,59 @@ export function CarruselMUIText() {
   const steps = [
     {
       label: "Fase de Grupos",
-      description: <Quiniela arrayPredictions={match?.slice(0, 48)} />,
+      description: (
+        <Quiniela phase="Grupos" arrayDePartidos={match?.slice(0, 48)} />
+      ),
     },
     {
       label: "Octavos de final",
-      description: <Quiniela arrayPredictions={dataDePrueba.octavos} />,
+      description: (
+        <Quiniela phase="Octavos" arrayDePartidos={dataDePrueba.octavos} />
+      ),
     },
     {
       label: "Cuartos de final",
-      description: <Quiniela arrayPredictions={dataDePrueba.cuartos} />,
+      description: (
+        <Quiniela phase="Cuartos" arrayDePartidos={dataDePrueba.cuartos} />
+      ),
     },
     {
       label: "Semifinales",
-      description: <Quiniela arrayPredictions={dataDePrueba.semifinales} />,
+      description: (
+        <Quiniela
+          phase="Semifinales"
+          arrayDePartidos={dataDePrueba.semifinales}
+        />
+      ),
     },
     {
       label: "Final",
-      description: <Quiniela arrayPredictions={dataDePrueba.final} />,
+      description: (
+        <Quiniela phase="Final" arrayDePartidos={dataDePrueba.final} />
+      ),
     },
   ];
 
   // const steps = [
   //   {
   //     label: "Fase de Grupos",
-  //     description: <Quiniela arrayPredictions={match?.slice(0, 48)} />,
+  //     description: <Quiniela arrayDePartidos={match?.slice(0, 48)} />,
   //   },
   //   {
   //     label: "Octavos de final",
-  //     description: <Quiniela arrayPredictions={match?.slice(39, -1)} />,
+  //     description: <Quiniela arrayDePartidos={match?.slice(39, -1)} />,
   //   },
   //   {
   //     label: "Cuartos de final",
-  //     description: <Quiniela arrayPredictions={match?.slice(43, -1)} />,
+  //     description: <Quiniela arrayDePartidos={match?.slice(43, -1)} />,
   //   },
   //   {
   //     label: "Semifinales",
-  //     description: <Quiniela arrayPredictions={match?.slice(45, -1)} />,
+  //     description: <Quiniela arrayDePartidos={match?.slice(45, -1)} />,
   //   },
   //   {
   //     label: "Final",
-  //     description: <Quiniela arrayPredictions={match?.slice(20, -26)} />,
+  //     description: <Quiniela arrayDePartidos={match?.slice(20, -26)} />,
   //   },
   // ];
 
