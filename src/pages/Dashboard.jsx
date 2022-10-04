@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Quiniela } from "../components";
+import { CarruselMUIText } from "../components/CarruselMUIText";
 // import { CarruselMUI } from "../components/CarruselMUI";
 // import { CarruselMUIText } from "../components/CarruselMUIText";
 import { AuthContext } from "../context";
@@ -82,7 +83,8 @@ export const Dashboard = () => {
         <button onClick={deleteCount}>Eliminar Cuenta</button>
       </div>
       <div style={{ background: "#ced", width: "100%" }}>
-        <Quiniela />
+        <CarruselMUIText />
+        {/* <Quiniela /> */}
       </div>
       <hr />
       {/* <CarruselMUI /> */}

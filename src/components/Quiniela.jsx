@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import { Match } from "./Match";
 import { AuthContext } from "../context";
 import { AxiosConfig } from "../utils";
 import Swal from "sweetalert2";
-import { useCallback } from "react";
+import { MatchNothing } from "./MatchNothing";
 // import { useForm } from "../hooks/useForm";
 
 // const dataDePrueba = [
@@ -223,11 +223,12 @@ import { useCallback } from "react";
 //   },
 // ];
 
-export const Quiniela = () => {
+export const Quiniela = ({ arrayPredictions }) => {
   const { userAuth } = useContext(AuthContext);
   const [phase, setPhase] = useState("");
-  const [match, setMatches] = useState([1, 1]);
+  const [match, setMatches] = useState([]);
   const [predictions, setPredictions] = useState([]);
+  // console.log(arrayPredictions);
 
   const getAllPredictions = useCallback(async () => {
     const TOKEN = userAuth;
@@ -237,16 +238,17 @@ export const Quiniela = () => {
         Authorization: `Bearer ${TOKEN}`,
       },
     });
+
     const userId = response.data.user._id;
 
-    const res = await AxiosConfig.get(`prediction/findAll/${userId}`);
+    const { data } = await AxiosConfig.get(`prediction/findAll/${userId}`);
 
-    setPredictions(res.data);
-    for (const obj of res.data) {
+    for (const obj of data) {
       delete obj._id;
       delete obj.userId;
       delete obj.__v;
     }
+    setPredictions(data);
   }, [userAuth]);
 
   useEffect(() => {
@@ -373,266 +375,266 @@ export const Quiniela = () => {
   //   formState: { errors },
   // } = useForm();
 
-  const getMatches = async () => {
-    axios
-      .get(
-        "http://api.isportsapi.com/sport/football/schedule?api_key=7ysUHBwXouU3Bb48&leagueId=1572"
-      )
-      .then((res) => setMatches(res.data.data));
+  // const getMatches = async () => {
+  //   // axios
+  //   //   .get(
+  //   //     "http://api.isportsapi.com/sport/football/schedule?api_key=7ysUHBwXouU3Bb48&leagueId=1572"
+  //   //   )
+  //   //   .then((res) => setMatches(res.data.data));
 
-    /////para hacer pruebas con champions league
-    // axios
-    //   .get(
-    //     "http://api.isportsapi.com/sport/football/schedule?api_key=7ysUHBwXouU3Bb48&leagueId=13014"
-    //   )
-    //   .then((res) => {
-    //     const resultado = res.data.data.filter((obj) => obj.group != "");
-    //     return setMatches(resultado);
-    //   });
-    // console.log(match);
+  //   /////para hacer pruebas con champions league
+  //   // axios
+  //   //   .get(
+  //   //     "http://api.isportsapi.com/sport/football/schedule?api_key=7ysUHBwXouU3Bb48&leagueId=13014"
+  //   //   )
+  //   //   .then((res) => {
+  //   //     const resultado = res.data.data.filter((obj) => obj.group != "");
+  //   //     return setMatches(resultado);
+  //   //   });
+  //   // console.log(match);
 
-    // setMatches([
-    //   {
-    //     matchId: "227058125",
-    //     leagueType: 2,
-    //     leagueId: "1572",
-    //     leagueName: "FIFA World Cup",
-    //     leagueShortName: "World Cup",
-    //     leagueColor: "#660000",
-    //     subLeagueId: "",
-    //     subLeagueName: "",
-    //     matchTime: 1668959940,
-    //     halfStartTime: 0,
-    //     status: 0,
-    //     homeId: "904",
-    //     homeName: "Qatar",
-    //     awayId: "779",
-    //     awayName: "Ecuador",
-    //     homeScore: 0,
-    //     awayScore: 0,
-    //     homeHalfScore: 0,
-    //     awayHalfScore: 0,
-    //     homeRed: 0,
-    //     awayRed: 0,
-    //     homeYellow: 0,
-    //     awayYellow: 0,
-    //     homeCorner: 0,
-    //     awayCorner: 0,
-    //     homeRank: "",
-    //     awayRank: "",
-    //     season: "2022",
-    //     stageId: "21534",
-    //     round: "Groups",
-    //     group: "A",
-    //     location: "Khalifa International",
-    //     weather: "",
-    //     temperature: "",
-    //     explain: "",
-    //     extraExplain: {
-    //       kickOff: 0,
-    //       minute: 0,
-    //       homeScore: 0,
-    //       awayScore: 0,
-    //       extraTimeStatus: 0,
-    //       extraHomeScore: 0,
-    //       extraAwayScore: 0,
-    //       penHomeScore: 0,
-    //       penAwayScore: 0,
-    //       twoRoundsHomeScore: 0,
-    //       twoRoundsAwayScore: 0,
-    //       winner: 0,
-    //     },
-    //     hasLineup: false,
-    //     neutral: false,
-    //   },
-    //   {
-    //     matchId: "267058129",
-    //     leagueType: 2,
-    //     leagueId: "1572",
-    //     leagueName: "FIFA World Cup",
-    //     leagueShortName: "World Cup",
-    //     leagueColor: "#660000",
-    //     subLeagueId: "",
-    //     subLeagueName: "",
-    //     matchTime: 1669035600,
-    //     halfStartTime: 0,
-    //     status: 0,
-    //     homeId: "744",
-    //     homeName: "England",
-    //     awayId: "783",
-    //     awayName: "Iran",
-    //     homeScore: 0,
-    //     awayScore: 0,
-    //     homeHalfScore: 0,
-    //     awayHalfScore: 0,
-    //     homeRed: 0,
-    //     awayRed: 0,
-    //     homeYellow: 0,
-    //     awayYellow: 0,
-    //     homeCorner: 0,
-    //     awayCorner: 0,
-    //     homeRank: "",
-    //     awayRank: "",
-    //     season: "2022",
-    //     stageId: "21534",
-    //     round: "Groups",
-    //     group: "B",
-    //     location: "",
-    //     weather: "",
-    //     temperature: "",
-    //     explain: "",
-    //     extraExplain: {
-    //       kickOff: 0,
-    //       minute: 0,
-    //       homeScore: 0,
-    //       awayScore: 0,
-    //       extraTimeStatus: 0,
-    //       extraHomeScore: 0,
-    //       extraAwayScore: 0,
-    //       penHomeScore: 0,
-    //       penAwayScore: 0,
-    //       twoRoundsHomeScore: 0,
-    //       twoRoundsAwayScore: 0,
-    //       winner: 0,
-    //     },
-    //     hasLineup: false,
-    //     neutral: true,
-    //   },
-    //   {
-    //     matchId: "237058126",
-    //     leagueType: 2,
-    //     leagueId: "1572",
-    //     leagueName: "FIFA World Cup",
-    //     leagueShortName: "World Cup",
-    //     leagueColor: "#660000",
-    //     subLeagueId: "",
-    //     subLeagueName: "",
-    //     matchTime: 1669046340,
-    //     halfStartTime: 0,
-    //     status: 0,
-    //     homeId: "815",
-    //     homeName: "Senegal",
-    //     awayId: "646",
-    //     awayName: "Netherlands",
-    //     homeScore: 0,
-    //     awayScore: 0,
-    //     homeHalfScore: 0,
-    //     awayHalfScore: 0,
-    //     homeRed: 0,
-    //     awayRed: 0,
-    //     homeYellow: 0,
-    //     awayYellow: 0,
-    //     homeCorner: 0,
-    //     awayCorner: 0,
-    //     homeRank: "",
-    //     awayRank: "",
-    //     season: "2022",
-    //     stageId: "21534",
-    //     round: "Groups",
-    //     group: "A",
-    //     location: "",
-    //     weather: "",
-    //     temperature: "",
-    //     explain: "",
-    //     extraExplain: {
-    //       kickOff: 0,
-    //       minute: 0,
-    //       homeScore: 0,
-    //       awayScore: 0,
-    //       extraTimeStatus: 0,
-    //       extraHomeScore: 0,
-    //       extraAwayScore: 0,
-    //       penHomeScore: 0,
-    //       penAwayScore: 0,
-    //       twoRoundsHomeScore: 0,
-    //       twoRoundsAwayScore: 0,
-    //       winner: 0,
-    //     },
-    //     hasLineup: false,
-    //     neutral: true,
-    //   },
-    //   {
-    //     matchId: "393358121",
-    //     leagueType: 2,
-    //     leagueId: "1572",
-    //     leagueName: "FIFA World Cup",
-    //     leagueShortName: "World Cup",
-    //     leagueColor: "#660000",
-    //     subLeagueId: "",
-    //     subLeagueName: "",
-    //     matchTime: 1669057200,
-    //     halfStartTime: 0,
-    //     status: 0,
-    //     homeId: "797",
-    //     homeName: "USA",
-    //     awayId: "7384",
-    //     awayName: "Wales",
-    //     homeScore: 0,
-    //     awayScore: 0,
-    //     homeHalfScore: 0,
-    //     awayHalfScore: 0,
-    //     homeRed: 0,
-    //     awayRed: 0,
-    //     homeYellow: 0,
-    //     awayYellow: 0,
-    //     homeCorner: 0,
-    //     awayCorner: 0,
-    //     homeRank: "",
-    //     awayRank: "",
-    //     season: "2022",
-    //     stageId: "21534",
-    //     round: "Groups",
-    //     group: "B",
-    //     location: "",
-    //     weather: "",
-    //     temperature: "",
-    //     explain: "",
-    //     extraExplain: {
-    //       kickOff: 0,
-    //       minute: 0,
-    //       homeScore: 0,
-    //       awayScore: 0,
-    //       extraTimeStatus: 0,
-    //       extraHomeScore: 0,
-    //       extraAwayScore: 0,
-    //       penHomeScore: 0,
-    //       penAwayScore: 0,
-    //       twoRoundsHomeScore: 0,
-    //       twoRoundsAwayScore: 0,
-    //       winner: 0,
-    //     },
-    //     hasLineup: false,
-    //     neutral: true,
-    //   },
-    // ]);
-  };
+  //   setMatches([
+  //     {
+  //       matchId: "227058125",
+  //       leagueType: 2,
+  //       leagueId: "1572",
+  //       leagueName: "FIFA World Cup",
+  //       leagueShortName: "World Cup",
+  //       leagueColor: "#660000",
+  //       subLeagueId: "",
+  //       subLeagueName: "",
+  //       matchTime: 1668959940,
+  //       halfStartTime: 0,
+  //       status: 0,
+  //       homeId: "904",
+  //       homeName: "Qatar",
+  //       awayId: "779",
+  //       awayName: "Ecuador",
+  //       homeScore: 0,
+  //       awayScore: 0,
+  //       homeHalfScore: 0,
+  //       awayHalfScore: 0,
+  //       homeRed: 0,
+  //       awayRed: 0,
+  //       homeYellow: 0,
+  //       awayYellow: 0,
+  //       homeCorner: 0,
+  //       awayCorner: 0,
+  //       homeRank: "",
+  //       awayRank: "",
+  //       season: "2022",
+  //       stageId: "21534",
+  //       round: "Groups",
+  //       group: "A",
+  //       location: "Khalifa International",
+  //       weather: "",
+  //       temperature: "",
+  //       explain: "",
+  //       extraExplain: {
+  //         kickOff: 0,
+  //         minute: 0,
+  //         homeScore: 0,
+  //         awayScore: 0,
+  //         extraTimeStatus: 0,
+  //         extraHomeScore: 0,
+  //         extraAwayScore: 0,
+  //         penHomeScore: 0,
+  //         penAwayScore: 0,
+  //         twoRoundsHomeScore: 0,
+  //         twoRoundsAwayScore: 0,
+  //         winner: 0,
+  //       },
+  //       hasLineup: false,
+  //       neutral: false,
+  //     },
+  //     {
+  //       matchId: "267058129",
+  //       leagueType: 2,
+  //       leagueId: "1572",
+  //       leagueName: "FIFA World Cup",
+  //       leagueShortName: "World Cup",
+  //       leagueColor: "#660000",
+  //       subLeagueId: "",
+  //       subLeagueName: "",
+  //       matchTime: 1669035600,
+  //       halfStartTime: 0,
+  //       status: 0,
+  //       homeId: "744",
+  //       homeName: "England",
+  //       awayId: "783",
+  //       awayName: "Iran",
+  //       homeScore: 0,
+  //       awayScore: 0,
+  //       homeHalfScore: 0,
+  //       awayHalfScore: 0,
+  //       homeRed: 0,
+  //       awayRed: 0,
+  //       homeYellow: 0,
+  //       awayYellow: 0,
+  //       homeCorner: 0,
+  //       awayCorner: 0,
+  //       homeRank: "",
+  //       awayRank: "",
+  //       season: "2022",
+  //       stageId: "21534",
+  //       round: "Groups",
+  //       group: "B",
+  //       location: "",
+  //       weather: "",
+  //       temperature: "",
+  //       explain: "",
+  //       extraExplain: {
+  //         kickOff: 0,
+  //         minute: 0,
+  //         homeScore: 0,
+  //         awayScore: 0,
+  //         extraTimeStatus: 0,
+  //         extraHomeScore: 0,
+  //         extraAwayScore: 0,
+  //         penHomeScore: 0,
+  //         penAwayScore: 0,
+  //         twoRoundsHomeScore: 0,
+  //         twoRoundsAwayScore: 0,
+  //         winner: 0,
+  //       },
+  //       hasLineup: false,
+  //       neutral: true,
+  //     },
+  //     {
+  //       matchId: "237058126",
+  //       leagueType: 2,
+  //       leagueId: "1572",
+  //       leagueName: "FIFA World Cup",
+  //       leagueShortName: "World Cup",
+  //       leagueColor: "#660000",
+  //       subLeagueId: "",
+  //       subLeagueName: "",
+  //       matchTime: 1669046340,
+  //       halfStartTime: 0,
+  //       status: 0,
+  //       homeId: "815",
+  //       homeName: "Senegal",
+  //       awayId: "646",
+  //       awayName: "Netherlands",
+  //       homeScore: 0,
+  //       awayScore: 0,
+  //       homeHalfScore: 0,
+  //       awayHalfScore: 0,
+  //       homeRed: 0,
+  //       awayRed: 0,
+  //       homeYellow: 0,
+  //       awayYellow: 0,
+  //       homeCorner: 0,
+  //       awayCorner: 0,
+  //       homeRank: "",
+  //       awayRank: "",
+  //       season: "2022",
+  //       stageId: "21534",
+  //       round: "Groups",
+  //       group: "A",
+  //       location: "",
+  //       weather: "",
+  //       temperature: "",
+  //       explain: "",
+  //       extraExplain: {
+  //         kickOff: 0,
+  //         minute: 0,
+  //         homeScore: 0,
+  //         awayScore: 0,
+  //         extraTimeStatus: 0,
+  //         extraHomeScore: 0,
+  //         extraAwayScore: 0,
+  //         penHomeScore: 0,
+  //         penAwayScore: 0,
+  //         twoRoundsHomeScore: 0,
+  //         twoRoundsAwayScore: 0,
+  //         winner: 0,
+  //       },
+  //       hasLineup: false,
+  //       neutral: true,
+  //     },
+  //     {
+  //       matchId: "393358121",
+  //       leagueType: 2,
+  //       leagueId: "1572",
+  //       leagueName: "FIFA World Cup",
+  //       leagueShortName: "World Cup",
+  //       leagueColor: "#660000",
+  //       subLeagueId: "",
+  //       subLeagueName: "",
+  //       matchTime: 1669057200,
+  //       halfStartTime: 0,
+  //       status: 0,
+  //       homeId: "797",
+  //       homeName: "USA",
+  //       awayId: "7384",
+  //       awayName: "Wales",
+  //       homeScore: 0,
+  //       awayScore: 0,
+  //       homeHalfScore: 0,
+  //       awayHalfScore: 0,
+  //       homeRed: 0,
+  //       awayRed: 0,
+  //       homeYellow: 0,
+  //       awayYellow: 0,
+  //       homeCorner: 0,
+  //       awayCorner: 0,
+  //       homeRank: "",
+  //       awayRank: "",
+  //       season: "2022",
+  //       stageId: "21534",
+  //       round: "Groups",
+  //       group: "B",
+  //       location: "",
+  //       weather: "",
+  //       temperature: "",
+  //       explain: "",
+  //       extraExplain: {
+  //         kickOff: 0,
+  //         minute: 0,
+  //         homeScore: 0,
+  //         awayScore: 0,
+  //         extraTimeStatus: 0,
+  //         extraHomeScore: 0,
+  //         extraAwayScore: 0,
+  //         penHomeScore: 0,
+  //         penAwayScore: 0,
+  //         twoRoundsHomeScore: 0,
+  //         twoRoundsAwayScore: 0,
+  //         winner: 0,
+  //       },
+  //       hasLineup: false,
+  //       neutral: true,
+  //     },
+  //   ]);
+  // };
 
-  const updatePhase = useCallback(() => {
-    if (match?.length === 48) setPhase("Fase de grupos");
-    if (match?.length === 8) {
-      setPhase("Octavos de final");
-    }
-    if (match?.length === 4) {
-      setPhase("Cuartos de final");
-    }
-    if (match?.length === 2) {
-      setPhase("Semi-finales");
-    }
-  }, [match]);
+  // const updatePhase = useCallback(() => {
+  //   if (match?.length === 48) setPhase("Fase de grupos");
+  //   if (match?.length === 8) {
+  //     setPhase("Octavos de final");
+  //   }
+  //   if (match?.length === 4) {
+  //     setPhase("Cuartos de final");
+  //   }
+  //   if (match?.length === 2) {
+  //     setPhase("Semi-finales");
+  //   }
+  // }, [match]);
 
-  useEffect(() => {
-    updatePhase();
-  }, [updatePhase, match]);
+  // useEffect(() => {
+  //   updatePhase();
+  // }, [updatePhase, match]);
 
-  useEffect(() => {
-    getMatches();
-  }, []);
+  // useEffect(() => {
+  //   getMatches();
+  // }, []);
 
   return (
     <div
       style={{
         background: "grey",
-        width: "800px",
+        width: "110%",
         padding: "40px",
         display: "flex",
         gap: "50px",
@@ -643,10 +645,10 @@ export const Quiniela = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(e);
+          // console.log(e);
         }}
       >
-        {match?.map((obj, index) => {
+        {arrayPredictions?.map((obj, index) => {
           const prediction = predictions.find((e) => e.matchId === obj.matchId);
           const jornada2 = 1669370400;
           const jornada3 = 1669734000;
@@ -658,19 +660,47 @@ export const Quiniela = () => {
               ? "2"
               : "3";
 
+          const phase =
+            arrayPredictions.length === 48
+              ? "Grupos"
+              : arrayPredictions.length === 8
+              ? "octavos"
+              : arrayPredictions.length === 4
+              ? "cuartos"
+              : arrayPredictions.length === 2 &&
+                arrayPredictions[0].matchId === "227058155573225"
+              ? "final"
+              : arrayPredictions.length === 2
+              ? "semifinales"
+              : "";
+          // console.log(arrayPredictions);
+
           const dateMoment = moment(obj.matchTime * 1000).format("lll");
 
           return (
-            <Match
-              key={index}
-              prediction={prediction}
-              index={index}
-              jornada={jornada}
-              date={dateMoment}
-              setPredictions={setPredictions}
-              onAddPredictions={onAddPredictions}
-              {...obj}
-            />
+            <>
+              {arrayPredictions.length === 48 ? (
+                <Match
+                  key={index}
+                  prediction={prediction}
+                  index={index}
+                  jornada={jornada}
+                  date={dateMoment}
+                  setPredictions={setPredictions}
+                  onAddPredictions={onAddPredictions}
+                  {...obj}
+                />
+              ) : (
+                <MatchNothing
+                  phase={phase}
+                  index={index}
+                  date={dateMoment}
+                  setPredictions={setPredictions}
+                  onAddPredictions={onAddPredictions}
+                  {...obj}
+                />
+              )}
+            </>
           );
         })}
         <button type="submit" onClick={addQuiniela}>

@@ -1,6 +1,3 @@
-// import { useForm } from "../hooks/useForm";
-// import { useEffect } from "react";
-// import { AxiosConfig } from "../utils/AxiosConfig";
 import { getFlagAway, getFlagHome } from "../utils/codeFlags";
 
 export const Match = (data) => {
@@ -19,9 +16,9 @@ export const Match = (data) => {
   // console.log(prediction);
 
   return (
-    <div>
+    <div style={{ border: "1px solid", marginBottom: "2px", padding: "15px" }}>
       <h3>
-        Grupo {group}. {date}. Jornada {jornada} / 3
+        Grupo {group}. {date}. Jornada {jornada || "s/j"} / 3
       </h3>
 
       <div
