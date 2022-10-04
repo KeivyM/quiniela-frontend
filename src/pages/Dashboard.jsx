@@ -1,17 +1,13 @@
-import { Avatar } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import { Quiniela } from "../components";
-import { CarruselMUIText } from "../components/CarruselMUIText";
-// import { CarruselMUI } from "../components/CarruselMUI";
-// import { CarruselMUIText } from "../components/CarruselMUIText";
+import { Avatar, Button } from "@mui/material";
 import { AuthContext } from "../context";
+import { CarouselQuinielas } from "../components";
 import { AxiosConfig } from "../utils";
+import Swal from "sweetalert2";
 
 export const Dashboard = () => {
   const { setUserAuth, username, points, userAuth } = useContext(AuthContext);
-
   let navigate = useNavigate();
 
   const Logout = () => {
@@ -21,31 +17,48 @@ export const Dashboard = () => {
   };
 
   const deleteCount = async () => {
-    await Swal.fire({
-      title: "¿Estas seguro de eliminar la cuenta?",
-      text: "Se borrarán todas tus predicciones.",
+    const { value: password } = await Swal.fire({
+      title: "Tu contraseña es requeridas",
+      input: "password",
+      html: `Ésta accion no se puede deshacer!`,
       showCancelButton: true,
       confirmButtonText: "Eliminar",
       cancelButtonText: "Cancelar",
-      icon: "warning",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const TOKEN = userAuth;
-
-        const res = await AxiosConfig.get("auth/private", {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-          },
-        });
-        const userId = res.data.user._id;
-        // console.log(userId);
-
-        AxiosConfig.delete(`http://localhost:3000/auth/${userId}`);
-        localStorage.removeItem("user_Auth");
-        setUserAuth(false);
-        navigate("/home");
-      } else if (result.isDenied) return;
+      inputPlaceholder: "Contraseña",
+      // icon: "warning",
+      inputAttributes: {
+        maxlength: 10,
+        autocapitalize: "off",
+        autocorrect: "off",
+      },
     });
+
+    if (password) {
+      const TOKEN = userAuth;
+
+      const res = await AxiosConfig.get("auth/private", {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+
+      const userId = res.data.user._id;
+
+      const Respuesta = await AxiosConfig.post(`auth/${userId}`, {
+        password,
+      });
+
+      if (Respuesta.data.length < 2)
+        return Swal.fire(
+          "Contraseña Incorrecta",
+          "Intentalo de nuevo",
+          "error"
+        );
+
+      localStorage.removeItem("user_Auth");
+      setUserAuth(false);
+      navigate("/home");
+    }
   };
 
   return (
@@ -59,7 +72,9 @@ export const Dashboard = () => {
           boxSizing: "border-box",
         }}
       >
-        <button onClick={Logout}>Cerrar sesion</button>
+        <Button variant="contained" onClick={Logout}>
+          Cerrar sesion
+        </Button>
         <Avatar
           sx={{
             bgcolor: "#ca1",
@@ -80,15 +95,14 @@ export const Dashboard = () => {
         >
           Calendario
         </a>
-        <button onClick={deleteCount}>Eliminar Cuenta</button>
+        <Button variant="contained" onClick={deleteCount}>
+          Eliminar Cuenta
+        </Button>
       </div>
       <div style={{ background: "#ced", width: "100%" }}>
-        <CarruselMUIText />
-        {/* <Quiniela /> */}
+        <CarouselQuinielas />
       </div>
       <hr />
-      {/* <CarruselMUI /> */}
-      {/* <CarruselMUIText /> */}
     </div>
   );
 };

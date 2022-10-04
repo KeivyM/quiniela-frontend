@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
@@ -8,12 +8,13 @@ import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Quiniela } from "./Quiniela";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-export function CarruselMUIText() {
+export function CarouselQuinielas() {
   const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [match, setMatches] = React.useState([]);
+  const [activeStep, setActiveStep] = useState(0);
+  const [match, setMatches] = useState([]);
   // data.slice(0, 32); //16avos de final
   // data.slice(0, 16); //8vos de final
   // data.slice(0, 8); //4tos de final
@@ -778,238 +779,24 @@ export function CarruselMUIText() {
   const getMatches = async () => {
     await axios
       .get(
-        "http://api.isportsapi.com/sport/football/schedule?api_key=7ysUHBwXouU3Bb48&leagueId=1572"
+        "http://api.isportsapi.com/sport/football/schedule?api_key=EGlD1j0CeqDo3hcr&leagueId=1572"
       )
       .then((res) => setMatches(res.data.data));
-
+    //
+    //
     /////para hacer pruebas con champions league
     // axios
     //   .get(
-    //     "http://api.isportsapi.com/sport/football/schedule?api_key=7ysUHBwXouU3Bb48&leagueId=13014"
+    //     "http://api.isportsapi.com/sport/football/schedule?api_key=EGlD1j0CeqDo3hcr&leagueId=13014"
     //   )
     //   .then((res) => {
     //     const resultado = res.data.data.filter((obj) => obj.group != "");
     //     return setMatches(resultado);
     //   });
     // console.log(match);
-
-    // setMatches([
-    //   {
-    //     matchId: "227058125",
-    //     leagueType: 2,
-    //     leagueId: "1572",
-    //     leagueName: "FIFA World Cup",
-    //     leagueShortName: "World Cup",
-    //     leagueColor: "#660000",
-    //     subLeagueId: "",
-    //     subLeagueName: "",
-    //     matchTime: 1668959940,
-    //     halfStartTime: 0,
-    //     status: 0,
-    //     homeId: "904",
-    //     homeName: "Qatar",
-    //     awayId: "779",
-    //     awayName: "Ecuador",
-    //     homeScore: 0,
-    //     awayScore: 0,
-    //     homeHalfScore: 0,
-    //     awayHalfScore: 0,
-    //     homeRed: 0,
-    //     awayRed: 0,
-    //     homeYellow: 0,
-    //     awayYellow: 0,
-    //     homeCorner: 0,
-    //     awayCorner: 0,
-    //     homeRank: "",
-    //     awayRank: "",
-    //     season: "2022",
-    //     stageId: "21534",
-    //     round: "Groups",
-    //     group: "A",
-    //     location: "Khalifa International",
-    //     weather: "",
-    //     temperature: "",
-    //     explain: "",
-    //     extraExplain: {
-    //       kickOff: 0,
-    //       minute: 0,
-    //       homeScore: 0,
-    //       awayScore: 0,
-    //       extraTimeStatus: 0,
-    //       extraHomeScore: 0,
-    //       extraAwayScore: 0,
-    //       penHomeScore: 0,
-    //       penAwayScore: 0,
-    //       twoRoundsHomeScore: 0,
-    //       twoRoundsAwayScore: 0,
-    //       winner: 0,
-    //     },
-    //     hasLineup: false,
-    //     neutral: false,
-    //   },
-    //   {
-    //     matchId: "267058129",
-    //     leagueType: 2,
-    //     leagueId: "1572",
-    //     leagueName: "FIFA World Cup",
-    //     leagueShortName: "World Cup",
-    //     leagueColor: "#660000",
-    //     subLeagueId: "",
-    //     subLeagueName: "",
-    //     matchTime: 1669035600,
-    //     halfStartTime: 0,
-    //     status: 0,
-    //     homeId: "744",
-    //     homeName: "England",
-    //     awayId: "783",
-    //     awayName: "Iran",
-    //     homeScore: 0,
-    //     awayScore: 0,
-    //     homeHalfScore: 0,
-    //     awayHalfScore: 0,
-    //     homeRed: 0,
-    //     awayRed: 0,
-    //     homeYellow: 0,
-    //     awayYellow: 0,
-    //     homeCorner: 0,
-    //     awayCorner: 0,
-    //     homeRank: "",
-    //     awayRank: "",
-    //     season: "2022",
-    //     stageId: "21534",
-    //     round: "Groups",
-    //     group: "B",
-    //     location: "",
-    //     weather: "",
-    //     temperature: "",
-    //     explain: "",
-    //     extraExplain: {
-    //       kickOff: 0,
-    //       minute: 0,
-    //       homeScore: 0,
-    //       awayScore: 0,
-    //       extraTimeStatus: 0,
-    //       extraHomeScore: 0,
-    //       extraAwayScore: 0,
-    //       penHomeScore: 0,
-    //       penAwayScore: 0,
-    //       twoRoundsHomeScore: 0,
-    //       twoRoundsAwayScore: 0,
-    //       winner: 0,
-    //     },
-    //     hasLineup: false,
-    //     neutral: true,
-    //   },
-    //   {
-    //     matchId: "237058126",
-    //     leagueType: 2,
-    //     leagueId: "1572",
-    //     leagueName: "FIFA World Cup",
-    //     leagueShortName: "World Cup",
-    //     leagueColor: "#660000",
-    //     subLeagueId: "",
-    //     subLeagueName: "",
-    //     matchTime: 1669046340,
-    //     halfStartTime: 0,
-    //     status: 0,
-    //     homeId: "815",
-    //     homeName: "Senegal",
-    //     awayId: "646",
-    //     awayName: "Netherlands",
-    //     homeScore: 0,
-    //     awayScore: 0,
-    //     homeHalfScore: 0,
-    //     awayHalfScore: 0,
-    //     homeRed: 0,
-    //     awayRed: 0,
-    //     homeYellow: 0,
-    //     awayYellow: 0,
-    //     homeCorner: 0,
-    //     awayCorner: 0,
-    //     homeRank: "",
-    //     awayRank: "",
-    //     season: "2022",
-    //     stageId: "21534",
-    //     round: "Groups",
-    //     group: "A",
-    //     location: "",
-    //     weather: "",
-    //     temperature: "",
-    //     explain: "",
-    //     extraExplain: {
-    //       kickOff: 0,
-    //       minute: 0,
-    //       homeScore: 0,
-    //       awayScore: 0,
-    //       extraTimeStatus: 0,
-    //       extraHomeScore: 0,
-    //       extraAwayScore: 0,
-    //       penHomeScore: 0,
-    //       penAwayScore: 0,
-    //       twoRoundsHomeScore: 0,
-    //       twoRoundsAwayScore: 0,
-    //       winner: 0,
-    //     },
-    //     hasLineup: false,
-    //     neutral: true,
-    //   },
-    //   {
-    //     matchId: "393358121",
-    //     leagueType: 2,
-    //     leagueId: "1572",
-    //     leagueName: "FIFA World Cup",
-    //     leagueShortName: "World Cup",
-    //     leagueColor: "#660000",
-    //     subLeagueId: "",
-    //     subLeagueName: "",
-    //     matchTime: 1669057200,
-    //     halfStartTime: 0,
-    //     status: 0,
-    //     homeId: "797",
-    //     homeName: "USA",
-    //     awayId: "7384",
-    //     awayName: "Wales",
-    //     homeScore: 0,
-    //     awayScore: 0,
-    //     homeHalfScore: 0,
-    //     awayHalfScore: 0,
-    //     homeRed: 0,
-    //     awayRed: 0,
-    //     homeYellow: 0,
-    //     awayYellow: 0,
-    //     homeCorner: 0,
-    //     awayCorner: 0,
-    //     homeRank: "",
-    //     awayRank: "",
-    //     season: "2022",
-    //     stageId: "21534",
-    //     round: "Groups",
-    //     group: "B",
-    //     location: "",
-    //     weather: "",
-    //     temperature: "",
-    //     explain: "",
-    //     extraExplain: {
-    //       kickOff: 0,
-    //       minute: 0,
-    //       homeScore: 0,
-    //       awayScore: 0,
-    //       extraTimeStatus: 0,
-    //       extraHomeScore: 0,
-    //       extraAwayScore: 0,
-    //       penHomeScore: 0,
-    //       penAwayScore: 0,
-    //       twoRoundsHomeScore: 0,
-    //       twoRoundsAwayScore: 0,
-    //       winner: 0,
-    //     },
-    //     hasLineup: false,
-    //     neutral: true,
-    //   },
-    // ]);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getMatches();
   }, []);
 

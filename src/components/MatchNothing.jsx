@@ -1,16 +1,14 @@
-import { useCallback, useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context";
-import { AxiosConfig } from "../utils";
-import { getFlagAway, getFlagHome } from "../utils/codeFlags";
+import { useEffect, useState } from "react";
+// import { getFlagAway, getFlagHome } from "../utils/codeFlags";
 
 export const MatchNothing = (data) => {
   const {
     index,
-    group,
+    // group,
     phase,
     date,
-    homeName,
-    awayName,
+    // homeName,
+    // awayName,
     matchId,
     prediction,
     onAddPredictions,

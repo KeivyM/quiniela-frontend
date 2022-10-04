@@ -7,3 +7,4 @@ export * from "./Match";
 export * from "./Participant";
 export * from "./Quiniela";
 export * from "./Ranking";
+export * from "./CarouselQuinielas";
