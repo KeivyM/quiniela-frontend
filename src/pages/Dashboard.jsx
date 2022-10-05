@@ -18,7 +18,7 @@ export const Dashboard = () => {
 
   const deleteCount = async () => {
     const { value: password } = await Swal.fire({
-      title: "Tu contraseña es requeridas",
+      title: "Tu contraseña es requerida",
       input: "password",
       html: `Ésta accion no se puede deshacer!`,
       showCancelButton: true,

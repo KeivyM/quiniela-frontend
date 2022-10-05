@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getFlagAway, getFlagHome } from "../utils";
 // import { getFlagAway, getFlagHome } from "../utils/codeFlags";
 
 export const MatchNothing = (data) => {
@@ -7,15 +8,15 @@ export const MatchNothing = (data) => {
     // group,
     phase,
     date,
-    // homeName,
-    // awayName,
+    homeName,
+    awayName,
     matchId,
     prediction,
     onAddPredictions,
   } = data;
 
-  const [awayScore, setAwayScore] = useState();
-  const [homeScore, setHomeScore] = useState();
+  const [awayScore, setAwayScore] = useState("");
+  const [homeScore, setHomeScore] = useState("");
 
   useEffect(() => {
     if (prediction) {
@@ -26,82 +27,6 @@ export const MatchNothing = (data) => {
       setHomeScore("");
     }
   }, [prediction]);
-
-  const octavos = [
-    {
-      homeName: "1A",
-      awayName: "2B",
-    },
-    {
-      homeName: "1C",
-      awayName: "2D",
-    },
-    {
-      homeName: "1D",
-      awayName: "2C",
-    },
-    {
-      homeName: "1B",
-      awayName: "2A",
-    },
-    {
-      homeName: "1E",
-      awayName: "2F",
-    },
-    {
-      homeName: "1G",
-      awayName: "2H",
-    },
-    {
-      homeName: "1F",
-      awayName: "2E",
-    },
-    {
-      homeName: "1H",
-      awayName: "2G",
-    },
-  ];
-
-  const cuartos = [
-    {
-      homeName: "Ganador octavos 5",
-      awayName: "Ganador octavos 6",
-    },
-    {
-      homeName: "Ganador octavos 1",
-      awayName: "Ganador octavos 2",
-    },
-    {
-      homeName: "Ganador octavos 7",
-      awayName: "Ganador octavos 8",
-    },
-    {
-      homeName: "Ganador octavos 3",
-      awayName: "Ganador octavos4",
-    },
-  ];
-
-  const semifinales = [
-    {
-      homeName: "Ganador cuartos de final 1",
-      awayName: "Ganador cuartos de final 2",
-    },
-    {
-      homeName: "Ganador cuartos de final 3",
-      awayName: "Ganador cuartos de final 4",
-    },
-  ];
-
-  const final = [
-    {
-      homeName: "Perdedor semifinal 1",
-      awayName: "perdedor semifinal 2",
-    },
-    {
-      homeName: "Ganador semifinal 1",
-      awayName: "Ganador semifinal 2",
-    },
-  ];
 
   return (
     <div style={{ border: "1px solid", marginBottom: "2px", padding: "15px" }}>
@@ -125,7 +50,13 @@ export const MatchNothing = (data) => {
           }}
         >
           <img
-            src={`https://www.fundaciontabitafeyes.org/wp-content/themes/childcare/images/default.png`}
+            src={
+              !getFlagHome(homeName)
+                ? `https://www.fundaciontabitafeyes.org/wp-content/themes/childcare/images/default.png`
+                : `https://cdn.sportmonks.com/images/countries/png/short/${getFlagHome(
+                    homeName
+                  )}.png`
+            }
             width={60}
             height={30}
             alt="flag"
@@ -136,24 +67,13 @@ export const MatchNothing = (data) => {
             }}
           />
 
-          <span>
-            {phase === "Cuartos"
-              ? cuartos[index]?.homeName
-              : phase === "Octavos"
-              ? octavos[index]?.homeName
-              : phase === "Semifinales"
-              ? semifinales[index]?.homeName
-              : phase === "Final"
-              ? final[index]?.homeName
-              : ""}
-          </span>
+          <span>{homeName}</span>
           <input
             type="number"
             name="homeScore"
             min={0}
-            // defaultValue={0}
             max={50}
-            value={homeScore}
+            value={homeScore || ""}
             required={true}
             onChange={(e) => onAddPredictions(e, matchId)}
             // {...register(data.matchId.toString())}
@@ -168,7 +88,13 @@ export const MatchNothing = (data) => {
           }}
         >
           <img
-            src={`https://www.fundaciontabitafeyes.org/wp-content/themes/childcare/images/default.png`}
+            src={
+              !getFlagAway(awayName)
+                ? `https://www.fundaciontabitafeyes.org/wp-content/themes/childcare/images/default.png`
+                : `https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
+                    awayName
+                  )}.png`
+            }
             width={60}
             height={30}
             alt="flag"
@@ -178,24 +104,14 @@ export const MatchNothing = (data) => {
               margin: "0 auto",
             }}
           />
-          <span>
-            {phase === "Cuartos"
-              ? cuartos[index]?.awayName
-              : phase === "Octavos"
-              ? octavos[index]?.awayName
-              : phase === "Semifinales"
-              ? semifinales[index]?.awayName
-              : phase === "Final"
-              ? final[index]?.awayName
-              : ""}
-          </span>
+          <span>{awayName}</span>
           <input
             type="number"
             name="awayScore"
             min={0}
             max={50}
             required={true}
-            value={awayScore}
+            value={awayScore || ""}
             onChange={(e) => onAddPredictions(e, matchId)}
           />
         </div>

@@ -54,9 +54,8 @@ export const Match = (data) => {
             type="number"
             name="homeScore"
             min={0}
-            // defaultValue={0}
             max={50}
-            value={prediction?.results?.homeScore}
+            value={prediction?.results?.homeScore || ""}
             required={true}
             onChange={(e) => onAddPredictions(e, matchId)}
             // {...register(data.matchId.toString())}
@@ -90,7 +89,7 @@ export const Match = (data) => {
             min={0}
             max={50}
             required={true}
-            value={prediction?.results?.awayScore}
+            value={prediction?.results?.awayScore || ""}
             onChange={(e) => onAddPredictions(e, matchId)}
           />
         </div>

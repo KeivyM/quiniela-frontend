@@ -1,9 +1,9 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import moment from "moment";
-import { Match } from "./Match";
 import { AuthContext } from "../context";
 import { AxiosConfig } from "../utils";
 import Swal from "sweetalert2";
+import { Match } from "./Match";
 import { MatchNothing } from "./MatchNothing";
 // import { useForm } from "../hooks/useForm";
 
@@ -224,7 +224,6 @@ import { MatchNothing } from "./MatchNothing";
 
 export const Quiniela = ({ arrayDePartidos, phase }) => {
   const { userAuth } = useContext(AuthContext);
-  // const [update, setUpdate] = useState(true);
   const [predictions, setPredictions] = useState([]);
 
   const getAllPredictions = useCallback(
@@ -373,7 +372,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   useEffect(() => {
     setPredictions([]);
     getAllPredictions(phase);
-    // setUpdate(!!update);
   }, [getAllPredictions, phase]);
 
   return (
@@ -412,7 +410,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
             <div key={index}>
               {arrayDePartidos.length === 48 ? (
                 <Match
-                  key={index}
+                  // key={index}
                   prediction={prediction}
                   index={index}
                   jornada={jornada}
@@ -423,7 +421,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
                 />
               ) : (
                 <MatchNothing
-                  key={index}
+                  // key={index}
                   phase={phase}
                   prediction={prediction}
                   index={index}
