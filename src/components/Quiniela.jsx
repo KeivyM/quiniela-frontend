@@ -226,12 +226,20 @@ import { Button } from "@mui/material";
 
 // const phases = [{ timeStart: 1670079600 }];
 
+// const phases = {
+//   Grupos: { timeStart: 1668949200, timeEnd: 1670014800 }, //timeStart es a las 9 am y el primer partido es a las 12 pm  // timeEnd es a las 5pm y el ultimo partido a las 3pm
+//   Octavos: { timeStart: 1670072400, timeEnd: 1670360400 }, //timeStart: 9am primer partido 11am // timeEnd 5pm
+//   Cuartos: { timeStart: 1670590800, timeEnd: 1670706000 }, //timeStart: 9am primer partido 11am // timeEnd 5pm
+//   Semifinales: { timeStart: 1670950800, timeEnd: 1671051600 }, //timeStart: 1pm primer partido 3pm // timeEnd 5pm
+//   Final: { timeStart: 1671282000, timeEnd: 1671382800 }, //timeStart: 9am primer partido 11am // timeEnd 1pm
+// };
+
 const phases = {
-  Grupos: { timeStart: 1668959940, timeEnd: 1670007600 },
-  Octavos: { timeStart: 1670079600, timeEnd: 1670353200 },
-  Cuartos: { timeStart: 1670598000, timeEnd: 1670698800 },
-  Semifinales: { timeStart: 1670958000, timeEnd: 1671044400 },
-  Final: { timeStart: 1671289200, timeEnd: 1671375600 },
+  Grupos: { timeStart: 168949200, timeEnd: 167014800 },
+  Octavos: { timeStart: 160072400, timeEnd: 160360400 },
+  Cuartos: { timeStart: 160590800, timeEnd: 167076000 },
+  Semifinales: { timeStart: 1670950800, timeEnd: 1671051600 },
+  Final: { timeStart: 1671282000, timeEnd: 1671382800 },
 };
 
 export const Quiniela = ({ arrayDePartidos, phase }) => {
@@ -396,13 +404,66 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       .tz(dateUtc, "YYYY-MM-DD h:mm a", "America/Caracas")
       .unix();
 
-    const boolean =
-      !(timeNow >= phases[phase]?.timeStart) && phase !== "Grupos";
-    //debo cambiar la hora que se activaran las demas quinielas
-    // console.log("debe ser mayor", timeNow);
-    // console.log("debe ser menor", phases[phase]?.timeStart);
+    let boolean;
 
-    setDisabled(boolean);
+    switch (phase) {
+      case "Grupos":
+        boolean = timeNow >= phases.Grupos.timeStart;
+        setDisabled(boolean);
+        break;
+      case "Octavos":
+        boolean =
+          timeNow < phases.Grupos?.timeEnd ||
+          timeNow > phases.Octavos?.timeStart;
+        setDisabled(boolean);
+        break;
+      case "Cuartos":
+        boolean =
+          timeNow < phases.Octavos?.timeEnd ||
+          timeNow > phases.Cuartos?.timeStart;
+        setDisabled(boolean);
+        break;
+      case "Semifinales":
+        boolean =
+          timeNow < phases.Cuartos?.timeEnd ||
+          timeNow > phases.Semifinales?.timeStart;
+        setDisabled(boolean);
+        break;
+      case "Final":
+        boolean =
+          timeNow < phases.Semifinales?.timeEnd ||
+          timeNow > phases.Final?.timeStart;
+        setDisabled(boolean);
+        break;
+
+      default:
+        setDisabled(true);
+        break;
+    }
+
+    // if (phase === "Grupos") {
+    //   const boolean = timeNow >= phases.Grupos.timeStart;
+    //   return setDisabled(boolean);
+    // } else if (phase === "Octavos") {
+    //   const boolean =
+    //     timeNow < phases.Grupos?.timeEnd || timeNow > phases.Octavos?.timeStart;
+    //   setDisabled(boolean);
+    // } else if (phase === "Cuartos") {
+    //   const boolean =
+    //     timeNow < phases.Octavos?.timeEnd ||
+    //     timeNow > phases.Cuartos?.timeStart;
+    //   setDisabled(boolean);
+    // } else if (phase === "Semifinales") {
+    //   const boolean =
+    //     timeNow < phases.Cuartos?.timeEnd ||
+    //     timeNow > phases.Semifinales?.timeStart;
+    //   setDisabled(boolean);
+    // } else if (phase === "Final") {
+    //   const boolean =
+    //     timeNow < phases.Semifinales?.timeEnd ||
+    //     timeNow > phases.Final?.timeStart;
+    //   setDisabled(boolean);
+    // }
   }, [phase]);
 
   return (

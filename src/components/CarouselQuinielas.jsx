@@ -157,7 +157,7 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Octavos"
           arrayDePartidos={
-            match.length > 48 ? match?.slice(48, 56) : dataDePrueba.octavos
+            match?.length > 48 ? match?.slice(48, 56) : dataDePrueba.octavos
           } // cambiar a match?.slice(48,56)) y match.length > 48
         />
       ),
@@ -168,7 +168,7 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Cuartos"
           arrayDePartidos={
-            match.length > 48 ? match?.slice(56, 60) : dataDePrueba.cuartos
+            match?.length > 56 ? match?.slice(56, 60) : dataDePrueba.cuartos
           }
         />
       ),
@@ -179,7 +179,7 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Semifinales"
           arrayDePartidos={
-            match.length > 48 ? match?.slice(60, 62) : dataDePrueba.semifinales
+            match?.length > 60 ? match?.slice(60, 62) : dataDePrueba.semifinales
           }
         />
       ),
@@ -190,7 +190,7 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Final"
           arrayDePartidos={
-            match.length > 48 ? match?.slice(62, 64) : dataDePrueba.final
+            match?.length > 62 ? match?.slice(62, 64) : dataDePrueba.final
           }
         />
       ),
@@ -200,11 +200,11 @@ export function CarouselQuinielas() {
   const maxSteps = steps.length;
 
   const getMatches = async () => {
-    // // await axios
-    // //   .get(
-    // //     "http://api.isportsapi.com/sport/football/schedule?api_key=EGlD1j0CeqDo3hcr&leagueId=1572"
-    // //   )
-    // //   .then((res) => setMatches(res.data.data));
+    await axios
+      .get(
+        "http://api.isportsapi.com/sport/football/schedule?api_key=c5LOkPHn9mDlm00W&leagueId=1572"
+      )
+      .then((res) => setMatches(res.data.data));
     //
     //
     /////para hacer pruebas con champions league

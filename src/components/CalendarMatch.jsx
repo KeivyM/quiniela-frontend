@@ -1,4 +1,6 @@
 import moment from "moment";
+import "moment-timezone";
+import { useEffect, useState } from "react";
 import { getFlagAway } from "../utils/codeFlags";
 
 const style = {
@@ -11,8 +13,20 @@ const style = {
   alignItems: "center",
 };
 export const CalendarMatch = (data) => {
-  const { matchTime, homeName, awayName } = data;
+  const { matchTime, homeName, awayName, awayScore, homeScore } = data;
   const dateMoment = moment(matchTime * 1000).format("L");
+  const [scores, setScores] = useState(null);
+
+  useEffect(() => {
+    const dateUtc = moment.utc();
+    const timeNow = moment
+      .tz(dateUtc, "YYYY-MM-DD h:mm a", "America/Caracas")
+      .unix();
+
+    if (timeNow >= matchTime) {
+      setScores({ home: homeScore, away: awayScore });
+    }
+  }, [matchTime, awayScore, homeScore]);
 
   return (
     <>
@@ -42,7 +56,14 @@ export const CalendarMatch = (data) => {
           />
           <h4>{homeName}</h4>
         </div>
-        <p>{dateMoment}</p>
+        <div>
+          <p style={{ margin: "0" }}>{dateMoment}</p>
+          <p style={{ margin: "0", background: "white" }}>
+            {scores != null && (
+              <strong>{`${scores.home} - ${scores.away}`}</strong>
+            )}
+          </p>
+        </div>
         <div
           style={{
             display: "flex",
