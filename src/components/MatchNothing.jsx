@@ -4,9 +4,10 @@ import { getFlagAway, getFlagHome } from "../utils";
 
 export const MatchNothing = (data) => {
   const {
-    index,
+    // index,
     // group,
-    phase,
+    // phase,
+    disabled,
     date,
     homeName,
     awayName,
@@ -69,6 +70,7 @@ export const MatchNothing = (data) => {
 
           <span>{homeName}</span>
           <input
+            disabled={disabled}
             type="number"
             name="homeScore"
             min={0}
@@ -106,6 +108,7 @@ export const MatchNothing = (data) => {
           />
           <span>{awayName}</span>
           <input
+            disabled={disabled}
             type="number"
             name="awayScore"
             min={0}

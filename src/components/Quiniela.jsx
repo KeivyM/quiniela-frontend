@@ -1,10 +1,12 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import moment from "moment";
 import { AuthContext } from "../context";
 import { AxiosConfig } from "../utils";
 import Swal from "sweetalert2";
 import { Match } from "./Match";
 import { MatchNothing } from "./MatchNothing";
+import moment from "moment";
+import "moment-timezone";
+import { Button } from "@mui/material";
 // import { useForm } from "../hooks/useForm";
 
 // const dataDePrueba = [
@@ -222,9 +224,20 @@ import { MatchNothing } from "./MatchNothing";
 //   },
 // ];
 
+// const phases = [{ timeStart: 1670079600 }];
+
+const phases = {
+  Grupos: { timeStart: 1668959940, timeEnd: 1670007600 },
+  Octavos: { timeStart: 1670079600, timeEnd: 1670353200 },
+  Cuartos: { timeStart: 1670598000, timeEnd: 1670698800 },
+  Semifinales: { timeStart: 1670958000, timeEnd: 1671044400 },
+  Final: { timeStart: 1671289200, timeEnd: 1671375600 },
+};
+
 export const Quiniela = ({ arrayDePartidos, phase }) => {
   const { userAuth } = useContext(AuthContext);
   const [predictions, setPredictions] = useState([]);
+  const [disabled, setDisabled] = useState(true);
 
   const getAllPredictions = useCallback(
     async (phase) => {
@@ -301,6 +314,9 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   };
 
   const addQuiniela = async () => {
+    if (disabled) return console.log("No ha terminado la fase anterior");
+    //debe permitir hacer la quiniela antes de que comienze el primer partido
+
     if (arrayDePartidos.length !== predictions.length)
       return Swal.fire({
         title: "Hay campos vacios!",
@@ -374,6 +390,21 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
     getAllPredictions(phase);
   }, [getAllPredictions, phase]);
 
+  useEffect(() => {
+    const dateUtc = moment.utc();
+    const timeNow = moment
+      .tz(dateUtc, "YYYY-MM-DD h:mm a", "America/Caracas")
+      .unix();
+
+    const boolean =
+      !(timeNow >= phases[phase]?.timeStart) && phase !== "Grupos";
+    //debo cambiar la hora que se activaran las demas quinielas
+    // console.log("debe ser mayor", timeNow);
+    // console.log("debe ser menor", phases[phase]?.timeStart);
+
+    setDisabled(boolean);
+  }, [phase]);
+
   return (
     <div
       style={{
@@ -384,8 +415,25 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
         gap: "50px",
         overflowX: "auto",
         margin: "0 auto",
+        position: "relative",
       }}
     >
+      {disabled && (
+        <div
+          style={{
+            position: "absolute",
+            background: "#ddd5",
+            height: "100%",
+            top: "0",
+            width: "100%",
+            left: "0",
+            textAlign: "center",
+          }}
+        >
+          <p>Esta quiniela no esta disponible</p>
+        </div>
+      )}
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -410,7 +458,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
             <div key={index}>
               {arrayDePartidos.length === 48 ? (
                 <Match
-                  // key={index}
                   prediction={prediction}
                   index={index}
                   jornada={jornada}
@@ -421,7 +468,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
                 />
               ) : (
                 <MatchNothing
-                  // key={index}
+                  disabled={disabled}
                   phase={phase}
                   prediction={prediction}
                   index={index}
@@ -434,9 +481,9 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
             </div>
           );
         })}
-        <button type="submit" onClick={addQuiniela}>
+        <Button variant="contained" disabled={disabled} onClick={addQuiniela}>
           Guardar
-        </button>
+        </Button>
       </form>
     </div>
   );

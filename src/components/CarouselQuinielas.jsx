@@ -25,56 +25,56 @@ export function CarouselQuinielas() {
     octavos: [
       {
         matchId: "2270583212125",
-        matchTime: 1668959940,
+        matchTime: 1670079600,
         status: 0,
         homeName: "1A",
         awayName: "2B",
       },
       {
         matchId: "11235267058129",
-        matchTime: 1669035600,
+        matchTime: 1670094000,
         status: 0,
         homeName: "1C",
         awayName: "2D",
       },
       {
         matchId: "771221237058126",
-        matchTime: 1669046340,
+        matchTime: 1670166000,
         status: 0,
         homeName: "1D",
         awayName: "2C",
       },
       {
         matchId: "341232193358121",
-        matchTime: 1669057200,
+        matchTime: 1670180400,
         status: 0,
         homeName: "1B",
         awayName: "2A",
       },
       {
         matchId: "22705812339875",
-        matchTime: 1668959940,
+        matchTime: 1670252400,
         status: 0,
         homeName: "1E",
         awayName: "2F",
       },
       {
         matchId: "267058108765429",
-        matchTime: 1669035600,
+        matchTime: 1670266800,
         status: 0,
         homeName: "1G",
         awayName: "2H",
       },
       {
         matchId: "23705678958126",
-        matchTime: 1669046340,
+        matchTime: 1670338800,
         status: 0,
         homeName: "1F",
         awayName: "2E",
       },
       {
         matchId: "39541335812144",
-        matchTime: 1669057200,
+        matchTime: 1670353200,
         status: 0,
         homeName: "1H",
         awayName: "2G",
@@ -83,28 +83,28 @@ export function CarouselQuinielas() {
     cuartos: [
       {
         matchId: "2273312321058125",
-        matchTime: 1668959940,
+        matchTime: 1670598000,
         status: 0,
         homeName: "Ganador octavos 5",
         awayName: "Ganador octavos 6",
       },
       {
         matchId: "267058789863129",
-        matchTime: 1669035600,
+        matchTime: 1670612400,
         status: 0,
         homeName: "Ganador octavos 1",
         awayName: "Ganador octavos 2",
       },
       {
         matchId: "23703458125546",
-        matchTime: 1669046340,
+        matchTime: 1670684400,
         status: 0,
         homeName: "Ganador octavos 7",
         awayName: "Ganador octavos 8",
       },
       {
         matchId: "3933586775433121",
-        matchTime: 1669057200,
+        matchTime: 1670698800,
         status: 0,
         homeName: "Ganador octavos 3",
         awayName: "Ganador octavos4",
@@ -113,14 +113,14 @@ export function CarouselQuinielas() {
     semifinales: [
       {
         matchId: "22707600358125",
-        matchTime: 1668959940,
+        matchTime: 1670958000,
         status: 0,
         homeName: "Ganador cuartos de final 1",
         awayName: "Ganador cuartos de final 2",
       },
       {
         matchId: "267058122987429",
-        matchTime: 1669035600,
+        matchTime: 1671044400,
         status: 0,
         homeName: "Ganador cuartos de final 3",
         awayName: "Ganador cuartos de final 4",
@@ -129,32 +129,30 @@ export function CarouselQuinielas() {
     final: [
       {
         matchId: "227058155573225",
-        matchTime: 1668959940,
+        matchTime: 1671289200,
         status: 0,
         homeName: "Perdedor semifinal 1",
         awayName: "perdedor semifinal 2",
       },
       {
         matchId: "26705812955986332",
-        matchTime: 1669035600,
+        matchTime: 1671375600,
         status: 0,
         homeName: "Ganador semifinal 1",
         awayName: "Ganador semifinal 2",
       },
     ],
   };
-  // console.log(match.length);
 
-  // console.log(match?.slice(38, 46));
   const steps = [
     {
-      label: "Fase de Grupos",
+      label: <span>Fase de Grupos</span>,
       description: (
         <Quiniela phase="Grupos" arrayDePartidos={match?.slice(0, 48)} />
       ),
     },
     {
-      label: "Octavos de final",
+      label: <span>Octavos de final</span>,
       description: (
         <Quiniela
           phase="Octavos"
@@ -165,7 +163,7 @@ export function CarouselQuinielas() {
       ),
     },
     {
-      label: "Cuartos de final",
+      label: <span>Cuartos de final</span>,
       description: (
         <Quiniela
           phase="Cuartos"
@@ -176,9 +174,8 @@ export function CarouselQuinielas() {
       ),
     },
     {
-      label: "Semifinales",
+      label: <span>Semifinales</span>,
       description: (
-        // Math.floor(Date.now() / 1000) >= 1670958000 ? (
         <Quiniela
           phase="Semifinales"
           arrayDePartidos={
@@ -186,12 +183,9 @@ export function CarouselQuinielas() {
           }
         />
       ),
-      // ) : (
-      //   <h3>Ésta Quiniela no está disponible</h3>
-      // ),
     },
     {
-      label: "Final",
+      label: <span>Final</span>,
       description: (
         <Quiniela
           phase="Final"
@@ -203,37 +197,14 @@ export function CarouselQuinielas() {
     },
   ];
 
-  // const steps = [
-  //   {
-  //     label: "Fase de Grupos",
-  //     description: <Quiniela arrayDePartidos={match?.slice(0, 48)} />,
-  //   },
-  //   {
-  //     label: "Octavos de final",
-  //     description: <Quiniela arrayDePartidos={match?.slice(39, -1)} />,
-  //   },
-  //   {
-  //     label: "Cuartos de final",
-  //     description: <Quiniela arrayDePartidos={match?.slice(43, -1)} />,
-  //   },
-  //   {
-  //     label: "Semifinales",
-  //     description: <Quiniela arrayDePartidos={match?.slice(45, -1)} />,
-  //   },
-  //   {
-  //     label: "Final",
-  //     description: <Quiniela arrayDePartidos={match?.slice(20, -26)} />,
-  //   },
-  // ];
-
   const maxSteps = steps.length;
 
   const getMatches = async () => {
-    await axios
-      .get(
-        "http://api.isportsapi.com/sport/football/schedule?api_key=EGlD1j0CeqDo3hcr&leagueId=1572"
-      )
-      .then((res) => setMatches(res.data.data));
+    // // await axios
+    // //   .get(
+    // //     "http://api.isportsapi.com/sport/football/schedule?api_key=EGlD1j0CeqDo3hcr&leagueId=1572"
+    // //   )
+    // //   .then((res) => setMatches(res.data.data));
     //
     //
     /////para hacer pruebas con champions league
@@ -242,8 +213,9 @@ export function CarouselQuinielas() {
     //     "http://api.isportsapi.com/sport/football/schedule?api_key=EGlD1j0CeqDo3hcr&leagueId=13014"
     //   )
     //   .then((res) => {
-    //     const resultado = res.data.data.filter((obj) => obj.group != "");
-    //     return setMatches(resultado);
+    //     // const resultado = res.data.data.filter((obj) => obj.group != "");
+    //     // console.log(res.data.data);
+    //     return setMatches(res.data.data);
     //   });
     // console.log(match);
   };

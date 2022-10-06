@@ -15,7 +15,7 @@ export const Match = (data) => {
   return (
     <div style={{ border: "1px solid", marginBottom: "2px", padding: "15px" }}>
       <h3>
-        Grupo {group}. {date}. Jornada {jornada || "s/j"} / 3
+        Grupo {group}. {date}. Jornada {jornada} / 3
       </h3>
 
       <div
