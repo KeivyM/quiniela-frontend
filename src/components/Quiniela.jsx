@@ -7,6 +7,7 @@ import { MatchNothing } from "./MatchNothing";
 import moment from "moment";
 import "moment-timezone";
 import { Button } from "@mui/material";
+import { SelectPlayer } from "./SelectPlayer";
 // import { useForm } from "../hooks/useForm";
 
 // const dataDePrueba = [
@@ -238,7 +239,7 @@ const phases = {
   Grupos: { timeStart: 168949200, timeEnd: 167014800 },
   Octavos: { timeStart: 160072400, timeEnd: 160360400 },
   Cuartos: { timeStart: 160590800, timeEnd: 167076000 },
-  Semifinales: { timeStart: 1670950800, timeEnd: 1671051600 },
+  Semifinales: { timeStart: 160950800, timeEnd: 167051600 },
   Final: { timeStart: 1671282000, timeEnd: 1671382800 },
 };
 
@@ -269,7 +270,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
 
       const arrayPredictions = [];
       if (!IdsPredictions) return;
-      // console.log(!IdsPredictions);
 
       for (const id of IdsPredictions) {
         const PREDICTION = await AxiosConfig.get(`prediction/${id}`);
@@ -308,7 +308,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       const filtrado = predictions.filter(
         (prediction) => prediction.matchId !== matchId
       );
-      // console.log("filtrado", filtrado);
 
       const obj = predictions.find(
         (prediction) => prediction.matchId === matchId
@@ -440,30 +439,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
         setDisabled(true);
         break;
     }
-
-    // if (phase === "Grupos") {
-    //   const boolean = timeNow >= phases.Grupos.timeStart;
-    //   return setDisabled(boolean);
-    // } else if (phase === "Octavos") {
-    //   const boolean =
-    //     timeNow < phases.Grupos?.timeEnd || timeNow > phases.Octavos?.timeStart;
-    //   setDisabled(boolean);
-    // } else if (phase === "Cuartos") {
-    //   const boolean =
-    //     timeNow < phases.Octavos?.timeEnd ||
-    //     timeNow > phases.Cuartos?.timeStart;
-    //   setDisabled(boolean);
-    // } else if (phase === "Semifinales") {
-    //   const boolean =
-    //     timeNow < phases.Cuartos?.timeEnd ||
-    //     timeNow > phases.Semifinales?.timeStart;
-    //   setDisabled(boolean);
-    // } else if (phase === "Final") {
-    //   const boolean =
-    //     timeNow < phases.Semifinales?.timeEnd ||
-    //     timeNow > phases.Final?.timeStart;
-    //   setDisabled(boolean);
-    // }
   }, [phase]);
 
   return (
@@ -489,12 +464,14 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
             width: "100%",
             left: "0",
             textAlign: "center",
+            zIndex: "1000",
           }}
         >
           <p>Esta quiniela no esta disponible</p>
         </div>
       )}
 
+      {phase === "Final" && <SelectPlayer disabled={disabled} />}
       <form
         onSubmit={(e) => {
           e.preventDefault();
