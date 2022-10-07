@@ -7,7 +7,7 @@ import { MatchNothing } from "./MatchNothing";
 import moment from "moment";
 import "moment-timezone";
 import { Button } from "@mui/material";
-import { SelectPlayer } from "./SelectPlayer";
+import { QuinielaPlayer } from "./QuinielaPlayer";
 // import { useForm } from "../hooks/useForm";
 
 // const dataDePrueba = [
@@ -471,7 +471,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
         </div>
       )}
 
-      {phase === "Final" && <SelectPlayer disabled={disabled} />}
+      {phase === "Final" && <QuinielaPlayer disabled={disabled} />}
       <form
         onSubmit={(e) => {
           e.preventDefault();

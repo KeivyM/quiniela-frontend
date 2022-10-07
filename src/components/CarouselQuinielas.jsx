@@ -200,11 +200,11 @@ export function CarouselQuinielas() {
   const maxSteps = steps.length;
 
   const getMatches = async () => {
-    await axios
-      .get(
-        "http://api.isportsapi.com/sport/football/schedule?api_key=c5LOkPHn9mDlm00W&leagueId=1572"
-      )
-      .then((res) => setMatches(res.data.data));
+    // await axios
+    //   .get(
+    //     "http://api.isportsapi.com/sport/football/schedule?api_key=c5LOkPHn9mDlm00W&leagueId=1572"
+    //   )
+    //   .then((res) => setMatches(res.data.data));
     //
     //
     /////para hacer pruebas con champions league
