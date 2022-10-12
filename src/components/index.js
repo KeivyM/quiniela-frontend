@@ -10,3 +10,4 @@ export * from "./Ranking";
 export * from "./CarouselQuinielas";
 export * from "./QuinielaPlayer";
 export * from "./MatchNothing";
+export * from "./Sidebar";

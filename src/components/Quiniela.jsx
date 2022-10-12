@@ -6,8 +6,9 @@ import { Match } from "./Match";
 import { MatchNothing } from "./MatchNothing";
 import moment from "moment";
 import "moment-timezone";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { QuinielaPlayer } from "./QuinielaPlayer";
+import { Save } from "@mui/icons-material";
 // import { useForm } from "../hooks/useForm";
 
 // const dataDePrueba = [
@@ -227,21 +228,22 @@ import { QuinielaPlayer } from "./QuinielaPlayer";
 
 // const phases = [{ timeStart: 1670079600 }];
 
-// const phases = {
-//   Grupos: { timeStart: 1668949200, timeEnd: 1670014800 }, //timeStart es a las 9 am y el primer partido es a las 12 pm  // timeEnd es a las 5pm y el ultimo partido a las 3pm
-//   Octavos: { timeStart: 1670072400, timeEnd: 1670360400 }, //timeStart: 9am primer partido 11am // timeEnd 5pm
-//   Cuartos: { timeStart: 1670590800, timeEnd: 1670706000 }, //timeStart: 9am primer partido 11am // timeEnd 5pm
-//   Semifinales: { timeStart: 1670950800, timeEnd: 1671051600 }, //timeStart: 1pm primer partido 3pm // timeEnd 5pm
-//   Final: { timeStart: 1671282000, timeEnd: 1671382800 }, //timeStart: 9am primer partido 11am // timeEnd 1pm
-// };
-
+console.log("");
 const phases = {
-  Grupos: { timeStart: 168949200, timeEnd: 167014800 },
-  Octavos: { timeStart: 160072400, timeEnd: 160360400 },
-  Cuartos: { timeStart: 160590800, timeEnd: 167076000 },
-  Semifinales: { timeStart: 160950800, timeEnd: 167051600 },
-  Final: { timeStart: 1671282000, timeEnd: 1671382800 },
+  Grupos: { timeStart: 1668949200, timeEnd: 1670014800 }, //timeStart es a las 9 am y el primer partido es a las 12 pm  // timeEnd es a las 5pm y el ultimo partido a las 3pm
+  Octavos: { timeStart: 1670072400, timeEnd: 1670360400 }, //timeStart: 9am primer partido 11am // timeEnd 5pm
+  Cuartos: { timeStart: 1670590800, timeEnd: 1670706000 }, //timeStart: 9am primer partido 11am // timeEnd 5pm
+  Semifinales: { timeStart: 1670950800, timeEnd: 1671051600 }, //timeStart: 1pm primer partido 3pm // timeEnd 5pm
+  Final: { timeStart: 1671282000, timeEnd: 1671382800 }, //timeStart: 9am primer partido 11am // timeEnd 1pm
 };
+
+// const phases = {
+//   Grupos: { timeStart: 1765417004, timeEnd: 1987014800 },
+//   Octavos: { timeStart: 160072400, timeEnd: 160360400 },
+//   Cuartos: { timeStart: 160590800, timeEnd: 167076000 },
+//   Semifinales: { timeStart: 160950800, timeEnd: 167051600 },
+//   Final: { timeStart: 1671282000, timeEnd: 1671382800 },
+// };
 
 export const Quiniela = ({ arrayDePartidos, phase }) => {
   const { userAuth } = useContext(AuthContext);
@@ -252,12 +254,12 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
     async (phase) => {
       const TOKEN = userAuth;
 
-      const response = await AxiosConfig.get("auth/private", {
+      const USER = await AxiosConfig.get("auth/private", {
         headers: {
           Authorization: `Bearer ${TOKEN}`,
         },
       });
-      const userId = response.data.user._id;
+      const userId = USER.data.user._id;
 
       const quiniela = await AxiosConfig.post("quiniela/find", {
         userId,
@@ -266,12 +268,12 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
 
       if (!!quiniela === false) return;
 
-      const IdsPredictions = quiniela.data.prediction;
+      const predictionsId = quiniela.data.prediction;
 
       const arrayPredictions = [];
-      if (!IdsPredictions) return;
+      if (!predictionsId) return;
 
-      for (const id of IdsPredictions) {
+      for (const id of predictionsId) {
         const PREDICTION = await AxiosConfig.get(`prediction/${id}`);
         delete PREDICTION.data._id;
         delete PREDICTION.data.__v;
@@ -322,9 +324,16 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
 
   const addQuiniela = async () => {
     if (disabled) return console.log("No ha terminado la fase anterior");
-    //debe permitir hacer la quiniela antes de que comienze el primer partido
 
-    if (arrayDePartidos.length !== predictions.length)
+    if (arrayDePartidos?.length < 1)
+      return Swal.fire({
+        title: "Tienes Problemas?",
+        text: "Espera 5 min o intenta mañana",
+        icon: "info",
+        confirmButtonText: "Ok",
+      });
+
+    if (arrayDePartidos?.length !== predictions?.length)
       return Swal.fire({
         title: "Hay campos vacios!",
         text: "Toda la quiniela debe estar llena",
@@ -333,7 +342,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       });
 
     for (const prediction of predictions) {
-      //verifica que cada prediccion tenga los resultados y si no pasa un modal
       if (
         !!prediction?.results.awayScore === false ||
         !!prediction?.results.homeScore === false
@@ -395,6 +403,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   useEffect(() => {
     setPredictions([]);
     getAllPredictions(phase);
+    document.getElementById("cambiarScroll").scrollTo(0, 0);
   }, [getAllPredictions, phase]);
 
   useEffect(() => {
@@ -442,19 +451,25 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   }, [phase]);
 
   return (
-    <div
+    <Box
+      sx={{
+        bgcolor: "custom.light",
+        boxSizing: "border-box",
+        overflow: disabled ? "hidden" : "auto",
+        height: "calc( 100vh - 116px )",
+        // height: "500px",
+        // borderRadius: "5px",
+      }}
+      id="cambiarScroll"
       style={{
-        background: "grey",
-        width: "110%",
-        padding: "40px",
+        width: "100%",
         display: "flex",
-        gap: "50px",
-        overflowX: "auto",
         margin: "0 auto",
         position: "relative",
       }}
     >
       {disabled && (
+        //eliminar el & false
         <div
           style={{
             position: "absolute",
@@ -464,7 +479,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
             width: "100%",
             left: "0",
             textAlign: "center",
-            zIndex: "1000",
+            // borderRadius:'5px'
           }}
         >
           <p>Esta quiniela no esta disponible</p>
@@ -472,7 +487,24 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       )}
 
       {phase === "Final" && <QuinielaPlayer disabled={disabled} />}
-      <form
+      {/* <form
+        style={{ display: "grid", background: "primary.main" }}
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      > */}
+      <Box
+        component="form"
+        // style={{ borderRadius: "5px" }}
+        sx={{
+          bgcolor: "primary.light",
+          width: "100%",
+          height: "max-content",
+          // borderRadius: "50px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+        }}
         onSubmit={(e) => {
           e.preventDefault();
         }}
@@ -519,10 +551,18 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
             </div>
           );
         })}
-        <Button variant="contained" disabled={disabled} onClick={addQuiniela}>
+        <Button
+          variant="contained"
+          type="submit"
+          color="secondary"
+          disabled={disabled}
+          onClick={addQuiniela}
+          startIcon={<Save />}
+        >
           Guardar
         </Button>
-      </form>
-    </div>
+      </Box>
+      {/* </form> */}
+    </Box>
   );
 };

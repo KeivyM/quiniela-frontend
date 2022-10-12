@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
@@ -7,21 +8,14 @@ import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Quiniela } from "./Quiniela";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
 export function CarouselQuinielas() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const [match, setMatches] = useState([]);
-  // data.slice(0, 32); //16avos de final
-  // data.slice(0, 16); //8vos de final
-  // data.slice(0, 8); //4tos de final
-  // data.slice(0, 4); //Semis
-  // data.slice(5, 8); //Tercer puesto
-  // data.slice(0, 2); //Final
 
-  const dataDePrueba = {
+  const predefinedData = {
     octavos: [
       {
         matchId: "2270583212125",
@@ -157,8 +151,8 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Octavos"
           arrayDePartidos={
-            match?.length > 48 ? match?.slice(48, 56) : dataDePrueba.octavos
-          } // cambiar a match?.slice(48,56)) y match.length > 48
+            match?.length > 48 ? match?.slice(48, 56) : predefinedData.octavos
+          }
         />
       ),
     },
@@ -168,7 +162,7 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Cuartos"
           arrayDePartidos={
-            match?.length > 56 ? match?.slice(56, 60) : dataDePrueba.cuartos
+            match?.length > 56 ? match?.slice(56, 60) : predefinedData.cuartos
           }
         />
       ),
@@ -179,7 +173,9 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Semifinales"
           arrayDePartidos={
-            match?.length > 60 ? match?.slice(60, 62) : dataDePrueba.semifinales
+            match?.length > 60
+              ? match?.slice(60, 62)
+              : predefinedData.semifinales
           }
         />
       ),
@@ -190,7 +186,7 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Final"
           arrayDePartidos={
-            match?.length > 62 ? match?.slice(62, 64) : dataDePrueba.final
+            match?.length > 62 ? match?.slice(62, 64) : predefinedData.final
           }
         />
       ),
@@ -200,24 +196,21 @@ export function CarouselQuinielas() {
   const maxSteps = steps.length;
 
   const getMatches = async () => {
-    // await axios
-    //   .get(
-    //     "http://api.isportsapi.com/sport/football/schedule?api_key=c5LOkPHn9mDlm00W&leagueId=1572"
-    //   )
-    //   .then((res) => setMatches(res.data.data));
+    await axios //cambiar apiKey
+      .get(
+        "http://api.isportsapi.com/sport/football/schedule?api_key=EGlD1j0CeqDo3hcr&leagueId=1572"
+      )
+      .then((res) => setMatches(res.data.data));
     //
     //
-    /////para hacer pruebas con champions league
+    /////para hacer pruebas con champions league //eliminar
     // axios
     //   .get(
     //     "http://api.isportsapi.com/sport/football/schedule?api_key=EGlD1j0CeqDo3hcr&leagueId=13014"
     //   )
     //   .then((res) => {
-    //     // const resultado = res.data.data.filter((obj) => obj.group != "");
-    //     // console.log(res.data.data);
     //     return setMatches(res.data.data);
     //   });
-    // console.log(match);
   };
 
   useEffect(() => {
@@ -233,8 +226,21 @@ export function CarouselQuinielas() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+    <Box
+      sx={{
+        maxWidth: "100%",
+        minHeight: "100%",
+        flexGrow: 1,
+        borderRadius: "5px",
+      }}
+    >
       <MobileStepper
+        sx={{
+          bgcolor: "custom.light",
+          display: "flex",
+          justifyContent: "space-between",
+          borderRadius: "5px",
+        }}
         variant="text"
         steps={maxSteps}
         position="static"
@@ -242,10 +248,12 @@ export function CarouselQuinielas() {
         nextButton={
           <Button
             size="small"
+            color="secondary"
+            variant="contained"
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
           >
-            Next
+            Adelante
             {theme.direction === "rtl" ? (
               <KeyboardArrowLeft />
             ) : (
@@ -254,13 +262,19 @@ export function CarouselQuinielas() {
           </Button>
         }
         backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+          <Button
+            size="small"
+            color="secondary"
+            variant="contained"
+            onClick={handleBack}
+            disabled={activeStep === 0}
+          >
             {theme.direction === "rtl" ? (
               <KeyboardArrowRight />
             ) : (
               <KeyboardArrowLeft />
             )}
-            Back
+            Atrás
           </Button>
         }
       />
@@ -271,15 +285,19 @@ export function CarouselQuinielas() {
           display: "flex",
           alignItems: "center",
           height: 50,
-          pl: 2,
-          bgcolor: "background.default",
+          bgcolor: "primary.light",
         }}
       >
-        <Typography>{steps[activeStep].label}</Typography>
+        <Typography
+          style={{
+            fontSize: "29px",
+            margin: "0 auto",
+            color: "#cad",
+          }}
+        >
+          {steps[activeStep].label}
+        </Typography>
       </Paper>
-      {/* <Box sx={{ height: 255, maxWidth: 400, width: "100%", p: 2 }}>
-        {steps[activeStep].description}
-      </Box> */}
       {steps[activeStep].description}
     </Box>
   );

@@ -1,17 +1,11 @@
-const style = {
-  width: "100%",
-  background: "#a86",
-  display: "flex",
-  justifyContent: "space-around",
-  color: "black",
-  fontSize: "18px",
-};
+import { Box } from "@mui/material";
+import "./participant.css";
 
-export const Participant = ({ user }) => {
+export const Participant = ({ user, size = "big" }) => {
   return (
-    <div style={style}>
+    <Box className={size === "big" ? "participant-big" : "participant-small"}>
       <h4 style={{ width: "50%" }}>{user.username}</h4>
       <h4 style={{ width: "50%" }}>{user?.points}</h4>
-    </div>
+    </Box>
   );
 };

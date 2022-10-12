@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getFlagAway, getFlagHome } from "../utils";
 // import { getFlagAway, getFlagHome } from "../utils/codeFlags";
@@ -30,7 +31,7 @@ export const MatchNothing = (data) => {
   }, [prediction]);
 
   return (
-    <div style={{ border: "1px solid", marginBottom: "2px", padding: "15px" }}>
+    <Box style={{ border: "1px solid", marginBottom: "2px", padding: "15px" }}>
       <h3>{date}.</h3>
 
       <div
@@ -119,6 +120,6 @@ export const MatchNothing = (data) => {
           />
         </div>
       </div>
-    </div>
+    </Box>
   );
 };

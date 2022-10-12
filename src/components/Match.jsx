@@ -1,3 +1,5 @@
+import { TextField } from "@mui/material";
+import { Box } from "@mui/system";
 import { getFlagAway, getFlagHome } from "../utils/codeFlags";
 
 export const Match = (data) => {
@@ -13,87 +15,129 @@ export const Match = (data) => {
   } = data;
 
   return (
-    <div style={{ border: "1px solid", marginBottom: "2px", padding: "15px" }}>
+    <Box
+      sx={{
+        marginBottom: "2px",
+        justifyContent: "center",
+        bgcolor: "custom.dark",
+      }}
+      style={{
+        border: "1px solid",
+        padding: "15px",
+      }}
+    >
       <h3>
         Grupo {group}. {date}. Jornada {jornada} / 3
       </h3>
 
-      <div
+      <Box
         style={{
-          background: "#ccc",
           display: "flex",
           justifyContent: "space-around",
-          width: "400px",
-          height: "100px",
+          width: "100%",
+          height: "130px",
           alignItems: "center",
         }}
+        sx={{ bgcolor: "custom.light" }}
       >
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            textAlign: "center",
-          }}
-        >
-          <img
-            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagHome(
-              homeName
-            )}.png`}
-            width={60}
-            height={30}
-            alt="flag"
-            style={{
-              border: "1px solid",
-              borderRadius: "5px",
-              margin: "0 auto",
-            }}
-          />
-
-          <span>{homeName}</span>
-          <input
-            type="number"
-            name="homeScore"
-            min={0}
-            max={50}
-            value={prediction?.results?.homeScore || ""}
-            required={true}
-            onChange={(e) => onAddPredictions(e, matchId)}
-            // {...register(data.matchId.toString())}
-          />
-        </div>
-        vs
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            textAlign: "center",
+            alignItems: "end",
+            gap: "10px",
+            width: "30%",
+            justifyItems: "center",
+            justifyContent: "center",
           }}
         >
           <img
             src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
-              awayName
+              homeName
             )}.png`}
-            width={60}
-            height={30}
+            height={40}
             alt="flag"
             style={{
-              border: "1px solid",
+              border: ".8px solid",
               borderRadius: "5px",
-              margin: "0 auto",
+              width: "max-content",
+              maxWidth: "70px",
             }}
           />
-          <span>{awayName}</span>
-          <input
-            type="number"
-            name="awayScore"
-            min={0}
-            max={50}
-            required={true}
-            value={prediction?.results?.awayScore || ""}
-            onChange={(e) => onAddPredictions(e, matchId)}
+          <div style={{ display: "grid", justifyItems: "center" }}>
+            <h4 style={{ margin: "0px" }}>{homeName}</h4>
+            <TextField
+              id="outlined-number"
+              type="number"
+              name="homeScore"
+              required={true}
+              style={{ padding: "0" }}
+              sx={{ width: "100px" }}
+              onChange={(e) => onAddPredictions(e, matchId)}
+              InputProps={{
+                inputProps: {
+                  min: 0,
+                  value: prediction?.results?.homeScore || "",
+                  style: {
+                    padding: "8px",
+                    textAlign: "center",
+                    background: "#fff",
+                    borderRadius: 5,
+                  },
+                },
+              }}
+            />
+          </div>
+        </div>
+        <h3>VS</h3>
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            width: "30%",
+            alignItems: "end",
+            textAlign: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div style={{ display: "grid", justifyItems: "center" }}>
+            <h4 style={{ margin: "0px" }}>{awayName}</h4>
+            <TextField
+              id="outlined-number"
+              type="number"
+              name="awayScore"
+              required={true}
+              style={{ padding: "0" }}
+              sx={{ width: "100px" }}
+              onChange={(e) => onAddPredictions(e, matchId)}
+              InputProps={{
+                inputProps: {
+                  min: 0,
+                  value: prediction?.results?.awayScore || "",
+                  style: {
+                    padding: "8px",
+                    textAlign: "center",
+                    background: "#fff",
+                    borderRadius: 5,
+                  },
+                },
+              }}
+            />
+          </div>
+          <img
+            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
+              awayName
+            )}.png`}
+            height={40}
+            alt="flag"
+            style={{
+              border: ".8px solid",
+              borderRadius: "5px",
+              width: "max-content",
+              maxWidth: "70px",
+            }}
           />
         </div>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };

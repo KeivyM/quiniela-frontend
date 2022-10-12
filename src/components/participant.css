@@ -1,0 +1,24 @@
+.participant-big {
+  width: 100%;
+  background: #a86;
+  display: flex;
+  justify-content: space-around;
+  color: black;
+  font-size: 18px;
+}
+
+.participant-small {
+  width: 100%;
+  background: #a86;
+  display: flex;
+  justify-content: space-around;
+  color: black;
+  font-size: 14px;
+  border-bottom: 0.1px solid #000;
+  border-top: 0.1px solid #000;
+}
+
+.participant-small > h4 {
+  margin: 10px;
+  font-weight: 100;
+}

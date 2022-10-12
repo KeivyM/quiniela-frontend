@@ -1,0 +1,54 @@
+.sidebar-container {
+  height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1552318965-6e6be7484ada?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80");
+  background-position: center;
+  background-size: cover;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  position: relative;
+  min-width: 230px;
+  width: 23%;
+}
+
+.sidebar-container::before {
+  content: "";
+  background-color: rgba(97, 97, 97, 0.416);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-custom {
+  filter: contrast(1);
+}
+
+.avatar-custom::before {
+  content: "";
+  position: absolute;
+  right: 20px;
+  bottom: -9px;
+  width: 66%;
+  transform: rotateZ(0deg);
+  height: 22%;
+  border-radius: 50%;
+  background-color: rgb(255, 0, 0) !important;
+}
+
+.username-title {
+  position: relative;
+  background-color: rgba(170, 214, 199, 0.811);
+  top: 20px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-shadow: 1px 0.1px 0px rgb(255, 255, 255);
+  min-width: max-content;
+  padding: 5px 15px;
+}
+
+.points {
+  background-color: rgba(192, 192, 192, 0.863);
+  position: relative;
+}

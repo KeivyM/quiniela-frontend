@@ -1,0 +1,39 @@
+.ranking-big {
+  background: #cda9;
+  width: 700px;
+  color: black;
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+}
+
+.ranking-small {
+  background: rgba(204, 221, 170, 0.358);
+  width: 100%;
+  color: black;
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+  font-size: 13px;
+  height: 300px;
+  /* height: 60%; */
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 2px #000;
+  overflow: auto;
+  scrollbar-width: none;
+}
+.ranking-small::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.ranking-small > h2 {
+  font-weight: 600;
+  font-size: 18px;
+  padding-top: 5px;
+}
+.ranking-small h3 {
+  font-weight: 100;
+  margin: 0;
+}

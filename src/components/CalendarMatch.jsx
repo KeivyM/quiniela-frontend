@@ -48,7 +48,7 @@ export const CalendarMatch = (data) => {
             height={40}
             alt="flag"
             style={{
-              border: "1px solid",
+              border: ".8px solid",
               borderRadius: "5px",
               // margin: "0 auto",
               width: "max-content",
@@ -83,10 +83,11 @@ export const CalendarMatch = (data) => {
             height={40}
             alt="flag"
             style={{
-              border: "1px solid",
+              border: ".8px solid",
               borderRadius: "5px",
               // margin: "0 auto",
               width: "max-content",
+              maxWidth: "70px",
             }}
           />
         </div>

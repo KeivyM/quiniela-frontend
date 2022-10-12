@@ -1,17 +1,9 @@
 import { useEffect, useState } from "react";
 import { AxiosConfig } from "../utils";
 import { Participant } from "./Participant";
+import "./ranking.css";
 
-const style = {
-  background: "#cda9",
-  width: "700px",
-  color: "black",
-  textAlign: "center",
-  position: "relative",
-  margin: "0 auto",
-};
-
-export const Ranking = () => {
+export const Ranking = ({ size = "big" }) => {
   const [users, setUsers] = useState([]);
 
   const getUsers = async () => {
@@ -25,14 +17,14 @@ export const Ranking = () => {
   }, []);
 
   return (
-    <div style={style}>
-      <h2>Ranking de Participantes</h2>
+    <div className={size === "big" ? "ranking-big" : "ranking-small"}>
+      <h2>{size === "big" ? "Ranking de Participantes" : "Participantes"}</h2>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         <h3>Nombre</h3>
         <h3>Puntos</h3>
       </div>
       {users.map((user, i) => {
-        return <Participant key={i} user={user} />;
+        return <Participant size="small" key={i} user={user} />;
       })}
     </div>
   );
