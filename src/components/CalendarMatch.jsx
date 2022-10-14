@@ -1,7 +1,7 @@
 import moment from "moment";
 import "moment-timezone";
 import { useEffect, useState } from "react";
-import { getFlagAway } from "../utils/codeFlags";
+import { getFlag } from "../utils";
 
 const style = {
   width: "100%",
@@ -41,7 +41,7 @@ export const CalendarMatch = (data) => {
           }}
         >
           <img
-            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
+            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
               homeName
             )}.png`}
             width={40}
@@ -76,7 +76,7 @@ export const CalendarMatch = (data) => {
         >
           <h4>{awayName}</h4>
           <img
-            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
+            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
               awayName
             )}.png`}
             width={40}

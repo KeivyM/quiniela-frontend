@@ -1,12 +1,13 @@
-import { TextField } from "@mui/material";
-import { Box } from "@mui/system";
-import { getFlagAway, getFlagHome } from "../utils/codeFlags";
+import { TextField, Typography, Box } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { getFlag } from "../utils";
+import "./match.css";
 
 export const Match = (data) => {
   const {
-    group,
+    dateMomentDay,
+    disabled,
     date,
-    jornada,
     homeName,
     awayName,
     matchId,
@@ -19,26 +20,42 @@ export const Match = (data) => {
       sx={{
         marginBottom: "2px",
         justifyContent: "center",
-        bgcolor: "custom.dark",
-      }}
-      style={{
+        bgcolor: "#8D1B3D",
         border: "1px solid",
-        padding: "15px",
+        borderRadius: "15px",
       }}
     >
-      <h3>
-        Grupo {group}. {date}. Jornada {jornada} / 3
-      </h3>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "end",
+          gap: "6px",
+          color: "white",
+          paddingRight: "20px",
+        }}
+      >
+        <AccessTimeIcon />
+        <Typography variant="h6" style={{ padding: 0, margin: 0 }}>
+          {date}.
+        </Typography>
+      </Box>
 
       <Box
         style={{
           display: "flex",
-          justifyContent: "space-around",
+          justifyContent: "space-evenly",
           width: "100%",
-          height: "130px",
+          height: "85px",
           alignItems: "center",
+          borderRadius: "15px",
         }}
-        sx={{ bgcolor: "custom.light" }}
+        sx={{
+          bgcolor: "#40929d",
+          boxShadow: "0px -4px 2px #0005",
+          padding: "0px 75px",
+          boxSizing: "border-box",
+        }}
       >
         <div
           style={{
@@ -51,7 +68,7 @@ export const Match = (data) => {
           }}
         >
           <img
-            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
+            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
               homeName
             )}.png`}
             height={40}
@@ -70,6 +87,7 @@ export const Match = (data) => {
               type="number"
               name="homeScore"
               required={true}
+              disabled={disabled}
               style={{ padding: "0" }}
               sx={{ width: "100px" }}
               onChange={(e) => onAddPredictions(e, matchId)}
@@ -82,6 +100,7 @@ export const Match = (data) => {
                     textAlign: "center",
                     background: "#fff",
                     borderRadius: 5,
+                    fontWeight: 800,
                   },
                 },
               }}
@@ -106,6 +125,7 @@ export const Match = (data) => {
               type="number"
               name="awayScore"
               required={true}
+              disabled={disabled}
               style={{ padding: "0" }}
               sx={{ width: "100px" }}
               onChange={(e) => onAddPredictions(e, matchId)}
@@ -118,13 +138,14 @@ export const Match = (data) => {
                     textAlign: "center",
                     background: "#fff",
                     borderRadius: 5,
+                    fontWeight: 800,
                   },
                 },
               }}
             />
           </div>
           <img
-            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
+            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
               awayName
             )}.png`}
             height={40}

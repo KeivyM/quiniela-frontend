@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material";
-import { green } from "@mui/material/colors";
 
 export const theme = createTheme({
   // palette: {
@@ -19,9 +18,11 @@ export const theme = createTheme({
   palette: {
     primary: {
       main: "#051367",
+      mainOpacity: "#05136777",
     },
     secondary: {
       main: "#2D31FA",
+      mainOpacity: "#2D31FA44",
     },
     custom: {
       dark: "#5D8BF4",

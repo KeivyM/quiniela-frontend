@@ -1,48 +1,41 @@
 export const flags = [
-  { name: "Poland", abv: "pl" },
-  { name: "Portugal", abv: "pt" },
-  { name: "Spain", abv: "es" },
-  { name: "Ecuador", abv: "ec" },
-  { name: "England", abv: "gb" },
-  { name: "Senegal", abv: "sn" },
-  { name: "Netherlands", abv: "nl" },
-  { name: "Wales", abv: "wa" },
-  { name: "Argentina", abv: "ar" },
-  { name: "Tunisia", abv: "tn" },
-  { name: "Mexico", abv: "mx" },
-  { name: "France", abv: "fr" },
-  { name: "Australia", abv: "au" },
-  { name: "Morocco", abv: "ma" },
-  { name: "Croatia", abv: "hr" },
-  { name: "Japan", abv: "jp" },
-  { name: "Costa Rica", abv: "cr" },
-  { name: "Belgium", abv: "be" },
-  { name: "Canada", abv: "ca" },
-  { name: "Switzerland", abv: "ch" },
-  { name: "Cameroon", abv: "cm" },
-  { name: "South Korea", abv: "kr" },
-  { name: "Ghana", abv: "gh" },
-  { name: "Brazil", abv: "br" },
-  { name: "Serbia", abv: "rs" },
-  { name: "Iran", abv: "ir" },
-  { name: "Germany", abv: "de" },
-  { name: "Denmark", abv: "dk" },
-  { name: "Uruguay", abv: "uy" },
-  { name: "USA", abv: "us" },
-  { name: "Qatar", abv: "qa" },
-  { name: "Saudi Arabia", abv: "sa" },
+  { country: "Poland", abv: "pl" },
+  { country: "Portugal", abv: "pt" },
+  { country: "Spain", abv: "es" },
+  { country: "Ecuador", abv: "ec" },
+  { country: "England", abv: "gb" },
+  { country: "Senegal", abv: "sn" },
+  { country: "Netherlands", abv: "nl" },
+  { country: "Wales", abv: "wa" },
+  { country: "Argentina", abv: "ar" },
+  { country: "Tunisia", abv: "tn" },
+  { country: "Mexico", abv: "mx" },
+  { country: "France", abv: "fr" },
+  { country: "Australia", abv: "au" },
+  { country: "Morocco", abv: "ma" },
+  { country: "Croatia", abv: "hr" },
+  { country: "Japan", abv: "jp" },
+  { country: "Costa Rica", abv: "cr" },
+  { country: "Belgium", abv: "be" },
+  { country: "Canada", abv: "ca" },
+  { country: "Switzerland", abv: "ch" },
+  { country: "Cameroon", abv: "cm" },
+  { country: "South Korea", abv: "kr" },
+  { country: "Ghana", abv: "gh" },
+  { country: "Brazil", abv: "br" },
+  { country: "Serbia", abv: "rs" },
+  { country: "Iran", abv: "ir" },
+  { country: "Germany", abv: "de" },
+  { country: "Denmark", abv: "dk" },
+  { country: "Uruguay", abv: "uy" },
+  { country: "USA", abv: "us" },
+  { country: "Qatar", abv: "qa" },
+  { country: "Saudi Arabia", abv: "sa" },
 ];
 
-export const getFlagAway = (awayName) => {
+export const getFlag = (country) => {
   const flag = flags.find(
-    (elemento) => elemento.name === awayName && elemento.abv
-  );
-  return flag?.abv;
-};
-
-export const getFlagHome = (homeName) => {
-  const flag = flags.find(
-    (elemento) => elemento.name === homeName && elemento.abv
+    (elemento) => elemento.country === country && elemento.abv
   );
   return flag?.abv;
 };

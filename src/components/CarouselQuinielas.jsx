@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
-import MobileStepper from "@mui/material/MobileStepper";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { Quiniela } from "./Quiniela";
+import { Quiniela, QuinielaPlayer } from "./";
+import {
+  Box,
+  Button,
+  MobileStepper,
+  Paper,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import {
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
+  SportsSoccer as SportsSoccerIcon,
+} from "@mui/icons-material";
 import axios from "axios";
 
 export function CarouselQuinielas() {
@@ -181,6 +186,15 @@ export function CarouselQuinielas() {
       ),
     },
     {
+      label: (
+        <span style={{ display: "flex", alignItems: "center" }}>
+          G<SportsSoccerIcon style={{ fontSize: "21px", marginTop: "3px" }} />
+          leador del Mundial
+        </span>
+      ),
+      description: <QuinielaPlayer />,
+    },
+    {
       label: <span>Final</span>,
       description: (
         <Quiniela
@@ -196,17 +210,17 @@ export function CarouselQuinielas() {
   const maxSteps = steps.length;
 
   const getMatches = async () => {
-    await axios //cambiar apiKey
-      .get(
-        "http://api.isportsapi.com/sport/football/schedule?api_key=EGlD1j0CeqDo3hcr&leagueId=1572"
-      )
-      .then((res) => setMatches(res.data.data));
+    // await axios //cambiar apiKey
+    //   .get(
+    //     "http://api.isportsapi.com/sport/football/schedule?api_key=nqt7nbnv0VyRFjJf&leagueId=1572"
+    //   )
+    //   .then((res) => setMatches(res.data.data));
     //
     //
     /////para hacer pruebas con champions league //eliminar
     // axios
     //   .get(
-    //     "http://api.isportsapi.com/sport/football/schedule?api_key=EGlD1j0CeqDo3hcr&leagueId=13014"
+    //     "http://api.isportsapi.com/sport/football/schedule?api_key=c5LOkPHn9mDlm00W&leagueId=13014"
     //   )
     //   .then((res) => {
     //     return setMatches(res.data.data);
@@ -230,13 +244,38 @@ export function CarouselQuinielas() {
       sx={{
         maxWidth: "100%",
         minHeight: "100%",
+        height: "100%",
         flexGrow: 1,
         borderRadius: "5px",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
+      <Paper
+        square
+        elevation={0}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          height: 50,
+          bgcolor: "#083358",
+        }}
+      >
+        <Typography
+          style={{
+            fontSize: "29px",
+            margin: "0 auto",
+            color: "#cad",
+          }}
+        >
+          {steps[activeStep].label}
+        </Typography>
+      </Paper>
       <MobileStepper
         sx={{
-          bgcolor: "custom.light",
+          // bgcolor: "custom.light",
+          bgcolor: "white",
+          border: "1px solid",
           display: "flex",
           justifyContent: "space-between",
           borderRadius: "5px",
@@ -278,26 +317,7 @@ export function CarouselQuinielas() {
           </Button>
         }
       />
-      <Paper
-        square
-        elevation={0}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          height: 50,
-          bgcolor: "primary.light",
-        }}
-      >
-        <Typography
-          style={{
-            fontSize: "29px",
-            margin: "0 auto",
-            color: "#cad",
-          }}
-        >
-          {steps[activeStep].label}
-        </Typography>
-      </Paper>
+
       {steps[activeStep].description}
     </Box>
   );

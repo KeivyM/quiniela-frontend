@@ -1,13 +1,10 @@
-import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getFlagAway, getFlagHome } from "../utils";
-// import { getFlagAway, getFlagHome } from "../utils/codeFlags";
+import { Box, TextField, Typography } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { getFlag } from "../utils";
 
 export const MatchNothing = (data) => {
   const {
-    // index,
-    // group,
-    // phase,
     disabled,
     date,
     homeName,
@@ -31,95 +28,163 @@ export const MatchNothing = (data) => {
   }, [prediction]);
 
   return (
-    <Box style={{ border: "1px solid", marginBottom: "2px", padding: "15px" }}>
-      <h3>{date}.</h3>
+    <Box
+      sx={{
+        marginBottom: "2px",
+        justifyContent: "center",
+        bgcolor: "#8D1B3D",
+        border: "1px solid",
+        borderRadius: "15px",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "end",
+          gap: "6px",
+          color: "white",
+          paddingRight: "20px",
+        }}
+      >
+        <AccessTimeIcon />
+        <Typography variant="h6" style={{ padding: 0, margin: 0 }}>
+          {date}.
+        </Typography>
+      </Box>
 
-      <div
+      <Box
         style={{
-          background: "#ccc",
           display: "flex",
           justifyContent: "space-around",
-          width: "400px",
-          height: "100px",
+          width: "100%",
+          height: "85px",
           alignItems: "center",
+          borderRadius: "15px",
+        }}
+        sx={{
+          bgcolor: "#40929d",
+          boxShadow: "0px -4px 2px #0005",
+          padding: "0px 75px",
+          boxSizing: "border-box",
         }}
       >
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            textAlign: "center",
+            alignItems: "end",
+            gap: "10px",
+            width: "30%",
+            justifyItems: "center",
+            justifyContent: "center",
           }}
         >
           <img
             src={
-              !getFlagHome(homeName)
+              !getFlag(homeName)
                 ? `https://www.fundaciontabitafeyes.org/wp-content/themes/childcare/images/default.png`
-                : `https://cdn.sportmonks.com/images/countries/png/short/${getFlagHome(
+                : `https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
                     homeName
                   )}.png`
             }
-            width={60}
-            height={30}
+            width={90}
+            height={40}
             alt="flag"
             style={{
-              border: "1px solid",
+              border: ".8px solid",
               borderRadius: "5px",
-              margin: "0 auto",
+              maxWidth: "70px",
+              // margin: "0 auto",
             }}
           />
 
-          <span>{homeName}</span>
-          <input
-            disabled={disabled}
-            type="number"
-            name="homeScore"
-            min={0}
-            max={50}
-            value={homeScore || ""}
-            required={true}
-            onChange={(e) => onAddPredictions(e, matchId)}
-            // {...register(data.matchId.toString())}
-          />
+          <div style={{ display: "grid", justifyItems: "center" }}>
+            <h4 style={{ margin: "0" }}>{homeName}</h4>
+
+            <TextField
+              id="outlined-number"
+              type="number"
+              name="homeScore"
+              required={true}
+              disabled={disabled}
+              style={{ padding: "0" }}
+              sx={{ width: "100px" }}
+              onChange={(e) => onAddPredictions(e, matchId)}
+              InputProps={{
+                inputProps: {
+                  min: 0,
+                  value: homeScore || "",
+                  style: {
+                    padding: "8px",
+                    textAlign: "center",
+                    background: "#fff",
+                    borderRadius: 5,
+                    fontWeight: 800,
+                  },
+                },
+              }}
+            />
+          </div>
         </div>
-        vs
+        <h3>VS</h3>
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
+            gap: "10px",
+            width: "30%",
+            alignItems: "end",
             textAlign: "center",
+            justifyContent: "center",
           }}
         >
+          <div style={{ display: "grid", justifyItems: "center" }}>
+            <h4 style={{ margin: 0 }}>{awayName}</h4>
+
+            <TextField
+              id="outlined-number"
+              type="number"
+              name="awayScore"
+              required={true}
+              disabled={disabled}
+              style={{ padding: "0" }}
+              sx={{ width: "100px" }}
+              onChange={(e) => onAddPredictions(e, matchId)}
+              InputProps={{
+                inputProps: {
+                  min: 0,
+                  value: awayScore || "",
+                  style: {
+                    padding: "8px",
+                    textAlign: "center",
+                    background: "#fff",
+                    borderRadius: 5,
+                    fontWeight: 800,
+                  },
+                },
+              }}
+            />
+          </div>
           <img
             src={
-              !getFlagAway(awayName)
+              !getFlag(awayName)
                 ? `https://www.fundaciontabitafeyes.org/wp-content/themes/childcare/images/default.png`
-                : `https://cdn.sportmonks.com/images/countries/png/short/${getFlagAway(
+                : `https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
                     awayName
                   )}.png`
             }
-            width={60}
-            height={30}
+            width={90}
+            height={40}
             alt="flag"
             style={{
-              border: "1px solid",
+              border: ".8px solid",
               borderRadius: "5px",
-              margin: "0 auto",
+              width: "max-content",
+              maxWidth: "70px",
+              // margin: "0 auto",
             }}
           />
-          <span>{awayName}</span>
-          <input
-            disabled={disabled}
-            type="number"
-            name="awayScore"
-            min={0}
-            max={50}
-            required={true}
-            value={awayScore || ""}
-            onChange={(e) => onAddPredictions(e, matchId)}
-          />
         </div>
-      </div>
+      </Box>
     </Box>
   );
 };

@@ -1,15 +1,12 @@
 import { useCallback, useContext, useEffect, useState } from "react";
+import { Box, Button, Tooltip, Typography } from "@mui/material";
+import { Save, Info as InfoIcon } from "@mui/icons-material";
 import { AuthContext } from "../context";
 import { AxiosConfig } from "../utils";
 import Swal from "sweetalert2";
-import { Match } from "./Match";
-import { MatchNothing } from "./MatchNothing";
+import { Match, MatchNothing } from "./";
 import moment from "moment";
 import "moment-timezone";
-import { Box, Button } from "@mui/material";
-import { QuinielaPlayer } from "./QuinielaPlayer";
-import { Save } from "@mui/icons-material";
-// import { useForm } from "../hooks/useForm";
 
 // const dataDePrueba = [
 //   {
@@ -228,6 +225,23 @@ import { Save } from "@mui/icons-material";
 
 // const phases = [{ timeStart: 1670079600 }];
 
+moment.updateLocale("es", {
+  months: [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ],
+});
+
 console.log("");
 const phases = {
   Grupos: { timeStart: 1668949200, timeEnd: 1670014800 }, //timeStart es a las 9 am y el primer partido es a las 12 pm  // timeEnd es a las 5pm y el ultimo partido a las 3pm
@@ -249,6 +263,9 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   const { userAuth } = useContext(AuthContext);
   const [predictions, setPredictions] = useState([]);
   const [disabled, setDisabled] = useState(true);
+  let dayMoment = "";
+
+  // const [dayMoment, setDayMoment] = useState("");
 
   const getAllPredictions = useCallback(
     async (phase) => {
@@ -453,12 +470,11 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   return (
     <Box
       sx={{
-        bgcolor: "custom.light",
+        // bgcolor: "custom.light",
+        bgcolor: "#083358",
         boxSizing: "border-box",
-        overflow: disabled ? "hidden" : "auto",
+        overflow: "auto",
         height: "calc( 100vh - 116px )",
-        // height: "500px",
-        // borderRadius: "5px",
       }}
       id="cambiarScroll"
       style={{
@@ -469,41 +485,62 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       }}
     >
       {disabled && (
-        //eliminar el & false
-        <div
+        <Box
           style={{
-            position: "absolute",
             background: "#ddd5",
-            height: "100%",
-            top: "0",
             width: "100%",
-            left: "0",
-            textAlign: "center",
-            // borderRadius:'5px'
+            height: "100%",
+            position: "sticky",
+            top: 0,
+            zIndex: 1000,
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "end",
+            padding: "4px 9px",
+            boxSizing: "border-box",
           }}
         >
-          <p>Esta quiniela no esta disponible</p>
-        </div>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: "7px",
+              padding: "10px",
+              backdropFilter: "blur(2px)",
+              background: "#ffffff94",
+              border: "0.1px solid",
+              borderRadius: "10px",
+            }}
+          >
+            <Typography>Esta quiniela no está disponible</Typography>
+            <Tooltip
+              title={
+                <h3>
+                  La fase anterior no ha terminado <br />o ésta fase ya comenzó
+                </h3>
+              }
+              arrow
+            >
+              <InfoIcon />
+            </Tooltip>
+          </Box>
+        </Box>
       )}
 
-      {phase === "Final" && <QuinielaPlayer disabled={disabled} />}
-      {/* <form
-        style={{ display: "grid", background: "primary.main" }}
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      > */}
+      {/* {phase === "Final" && <QuinielaPlayer disabled={disabled} />} */}
+
       <Box
         component="form"
-        // style={{ borderRadius: "5px" }}
         sx={{
-          bgcolor: "primary.light",
+          position: "absolute",
           width: "100%",
-          height: "max-content",
-          // borderRadius: "50px",
           display: "flex",
           flexDirection: "column",
           gap: "10px",
+          bgcolor: "#083358",
+          padding: "0px 40px 10px",
+          boxSizing: "border-box",
         }}
         onSubmit={(e) => {
           e.preventDefault();
@@ -511,42 +548,62 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       >
         {arrayDePartidos?.map((obj, index) => {
           const prediction = predictions.find((e) => e.matchId === obj.matchId);
+          const dateMoment = moment(obj.matchTime * 1000).format("LT");
+          const dateMomentDay = moment(obj.matchTime * 1000).format("LL");
+          let day = false;
 
-          const jornada2 = 1669370400;
-          const jornada3 = 1669734000;
-
-          const jornada =
-            obj.matchTime < jornada2
-              ? "1"
-              : obj.matchTime < jornada3
-              ? "2"
-              : "3";
-
-          const dateMoment = moment(obj.matchTime * 1000).format("lll");
+          if (dayMoment !== dateMomentDay) {
+            day = true;
+            dayMoment = dateMomentDay;
+          } else {
+            day = false;
+          }
 
           return (
             <div key={index}>
               {arrayDePartidos.length === 48 ? (
-                <Match
-                  prediction={prediction}
-                  index={index}
-                  jornada={jornada}
-                  date={dateMoment}
-                  setPredictions={setPredictions}
-                  onAddPredictions={onAddPredictions}
-                  {...obj}
-                />
+                <>
+                  {day && (
+                    <Typography
+                      variant="h5"
+                      sx={{ margin: "20px 24px 4px", color: "white" }}
+                    >
+                      {dayMoment}
+                    </Typography>
+                  )}
+
+                  <Match
+                    dateMomentDay={dateMomentDay}
+                    prediction={prediction}
+                    index={index}
+                    disabled={disabled}
+                    date={dateMoment}
+                    setPredictions={setPredictions}
+                    onAddPredictions={onAddPredictions}
+                    {...obj}
+                  />
+                </>
               ) : (
-                <MatchNothing
-                  disabled={disabled}
-                  phase={phase}
-                  prediction={prediction}
-                  index={index}
-                  date={dateMoment}
-                  setPredictions={setPredictions}
-                  onAddPredictions={onAddPredictions}
-                  {...obj}
-                />
+                <>
+                  {day && (
+                    <Typography
+                      variant="h5"
+                      sx={{ margin: "20px 24px 4px", color: "white" }}
+                    >
+                      {dayMoment}
+                    </Typography>
+                  )}
+                  <MatchNothing
+                    disabled={disabled}
+                    phase={phase}
+                    prediction={prediction}
+                    index={index}
+                    date={dateMoment}
+                    setPredictions={setPredictions}
+                    onAddPredictions={onAddPredictions}
+                    {...obj}
+                  />
+                </>
               )}
             </div>
           );
@@ -558,11 +615,16 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
           disabled={disabled}
           onClick={addQuiniela}
           startIcon={<Save />}
+          sx={{
+            width: "120px",
+            position: "sticky",
+            bottom: "10px",
+            left: "100%",
+          }}
         >
           Guardar
         </Button>
       </Box>
-      {/* </form> */}
     </Box>
   );
 };

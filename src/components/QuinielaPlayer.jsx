@@ -1,17 +1,25 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import { Button } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { Save, Info as InfoIcon } from "@mui/icons-material";
 import { AuthContext } from "../context";
 import { AxiosConfig } from "../utils";
+import moment from "moment";
+import "moment-timezone";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-export const QuinielaPlayer = ({ disabled }) => {
+export const QuinielaPlayer = () => {
   const { userAuth } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [player, setPlayer] = useState({});
   const [playerName, setPlayerName] = useState("");
+  const [disabled, setDisabled] = useState(true);
 
   const addPlayer = async () => {
     if (disabled) return console.log("No ha terminado la fase anterior");
@@ -79,7 +87,7 @@ export const QuinielaPlayer = ({ disabled }) => {
 
   const returnDefaultValue = useCallback(() => {
     if (!!player?.playerName) {
-      for (let index = 0; index < data.length; index++) {
+      for (let index = 0; index < data?.length; index++) {
         if (data[index].playerName === player?.playerName) {
           return index;
         } else {
@@ -121,7 +129,7 @@ export const QuinielaPlayer = ({ disabled }) => {
     //Cambiar Api Y leagueId
     try {
       const results = await axios.get(
-        `http://api.isportsapi.com/sport/football/topscorer?api_key=EGlD1j0CeqDo3hcr&leagueId=13014`
+        `http://api.isportsapi.com/sport/football/topscorer?api_key=nqt7nbnv0VyRFjJf&leagueId=13014`
       );
       setData(results.data.data);
     } catch (error) {
@@ -140,54 +148,180 @@ export const QuinielaPlayer = ({ disabled }) => {
     }
   }, [returnDefaultValue, player, setPlayerName, data]);
 
+  useEffect(() => {
+    const dateUtc = moment.utc();
+    const timeNow = moment
+      .tz(dateUtc, "YYYY-MM-DD h:mm a", "America/Caracas")
+      .unix();
+
+    let boolean = timeNow < 1671051600 || timeNow > 1671282000;
+
+    setDisabled(boolean);
+  }, []);
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
+    <Box
+      sx={{
+        // bgcolor: "custom.light",
+        bgcolor: "#083358",
+        boxSizing: "border-box",
+        overflow: "auto",
+        // height: "calc( 100vh - 116px )",
+        height: "100%",
+      }}
+      id="cambiarScroll"
+      style={{
+        width: "100%",
+        display: "flex",
+        margin: "0 auto",
+        position: "relative",
       }}
     >
-      <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={data}
-        sx={{ width: 300 }}
-        value={playerName || null}
-        disabled={disabled}
-        getOptionLabel={(option) => option.playerName}
-        onInputChange={(e, value) => onAddPlayer(value, "playerName")}
-        isOptionEqualToValue={(option, value) =>
-          option.playerName === value.playerName
-        }
-        renderInput={(params) => (
-          <TextField
-            type="text"
-            name="playerName"
-            required={true}
-            {...params}
-            label="Goleador del Mundial"
-          />
-        )}
-      />
-      <TextField
-        id="outlined-number"
-        label="Goles"
-        name="goals"
-        type="number"
-        onChange={(e) => onAddPlayer(e.target.value, "goals")}
-        required={true}
-        disabled={disabled}
-        InputProps={{ inputProps: { min: 1, value: player?.goals || "" } }}
-      />
+      {disabled && (
+        <Box
+          style={{
+            background: "#ddd5",
+            width: "100%",
+            height: "100%",
+            position: "sticky",
+            top: 0,
+            zIndex: 1000,
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "end",
+            padding: "4px 9px",
+            boxSizing: "border-box",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: "7px",
+              padding: "10px",
+              backdropFilter: "blur(2px)",
+              background: "#ffffff94",
+              border: "0.1px solid",
+              borderRadius: "10px",
+            }}
+          >
+            <Typography>Esta quiniela no está disponible</Typography>
+            <InfoIcon />
+          </Box>
+        </Box>
+      )}
 
-      <Button
-        variant="contained"
-        type="submit"
-        disabled={disabled}
-        onClick={addPlayer}
+      <Box
+        component="form"
+        sx={{
+          position: "absolute",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          bgcolor: "#083358",
+          padding: "0px 40px 10px",
+          boxSizing: "border-box",
+        }}
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
       >
-        Enviar
-      </Button>
-    </form>
+        <Box
+          sx={{
+            marginBottom: "2px",
+            justifyContent: "center",
+            bgcolor: "#8D1B3D",
+            border: "1px solid",
+            borderRadius: "15px",
+            marginTop: "56px",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "end",
+              gap: "6px",
+              color: "white",
+              paddingRight: "20px",
+            }}
+          >
+            {/* <AccessTimeIcon /> */}
+            <Typography variant="h6" style={{ padding: 0, margin: 0 }}>
+              Elige el goleador del Mundial
+            </Typography>
+          </Box>
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              width: "100%",
+              height: "85px",
+              alignItems: "center",
+              borderRadius: "15px",
+            }}
+            sx={{
+              bgcolor: "#40929d",
+              boxShadow: "0px -4px 2px #0005",
+              padding: "0px 75px",
+              boxSizing: "border-box",
+            }}
+          >
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={data}
+              sx={{ width: 300 }}
+              value={playerName || null}
+              disabled={disabled}
+              getOptionLabel={(option) => option.playerName}
+              onInputChange={(e, value) => onAddPlayer(value, "playerName")}
+              isOptionEqualToValue={(option, value) =>
+                option.playerName === value.playerName
+              }
+              renderInput={(params) => (
+                <TextField
+                  type="text"
+                  name="playerName"
+                  required={true}
+                  {...params}
+                  label="Goleador del Mundial"
+                />
+              )}
+            />
+            <TextField
+              id="outlined-number"
+              label="Goles"
+              name="goals"
+              type="number"
+              onChange={(e) => onAddPlayer(e.target.value, "goals")}
+              required={true}
+              disabled={disabled}
+              InputProps={{
+                inputProps: { min: 1, value: player?.goals || "" },
+              }}
+            />
+          </Box>
+        </Box>
+        <Button
+          variant="contained"
+          type="submit"
+          disabled={disabled}
+          onClick={addPlayer}
+          startIcon={<Save />}
+          sx={{
+            width: "120px",
+            position: "sticky",
+            bottom: "10px",
+            left: "100%",
+          }}
+        >
+          Guardar
+        </Button>
+      </Box>
+    </Box>
   );
 };
 

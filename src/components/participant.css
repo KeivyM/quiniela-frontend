@@ -9,7 +9,7 @@
 
 .participant-small {
   width: 100%;
-  background: #a86;
+  /* background: #a86; */
   display: flex;
   justify-content: space-around;
   color: black;

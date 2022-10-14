@@ -7,10 +7,10 @@ export const Dashboard = () => {
       <Sidebar />
       <Box
         sx={{
-          bgcolor: "primary.light",
+          bgcolor: "#0F4471",
           width: "100%",
           height: "100vh",
-          padding: "20px",
+          padding: "50px",
           boxSizing: "border-box",
         }}
       >
