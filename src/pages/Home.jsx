@@ -15,9 +15,10 @@ export const Home = () => {
   const getMatches = () => {
     // axios
     //   .get(
-    //     "http://api.isportsapi.com/sport/football/schedule?api_key=c5LOkPHn9mDlm00W&leagueId=1572"
+    //     "http://api.isportsapi.com/sport/football/schedule?api_key=nqt7nbnv0VyRFjJf&leagueId=1572"
     //   )
     //   .then((res) => setMatches(res.data.data));
+    //
     setMatches([
       {
         awayCorner: 0,
@@ -224,12 +225,13 @@ export const Home = () => {
         </p>
       </div>
 
-      <div className="div-calendar-landing-page">
+      <div className="div-calendar-landing-page" style={{ paddingTop: "50px" }}>
         <Calendar title="Jornada 1" matches={jornada1} />
         <Calendar title="Jornada 2" matches={jornada2} />
         <Calendar title="Jornada 3" matches={jornada3} />
 
         <Ranking />
+        {/* <div className="container-mascota"></div> */}
       </div>
     </div>
   );

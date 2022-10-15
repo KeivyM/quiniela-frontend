@@ -27,3 +27,14 @@
 .div-calendar-landing-page {
   background-color: #fff;
 }
+
+.container-mascota {
+  background-image: url("../assets/mascota.jpg");
+  /* background-color: red; */
+  width: 50%;
+  height: 500px;
+  position: sticky;
+  top: 83%;
+  bottom: 0;
+  left: 100%;
+}

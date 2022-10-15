@@ -72,35 +72,32 @@ export const MatchNothing = (data) => {
         <div
           style={{
             display: "flex",
-            alignItems: "end",
-            gap: "10px",
+            alignItems: "center",
+            flexDirection: "column",
             width: "30%",
             justifyItems: "center",
             justifyContent: "center",
           }}
         >
-          <img
-            src={
-              !getFlag(homeName)
-                ? `https://www.fundaciontabitafeyes.org/wp-content/themes/childcare/images/default.png`
-                : `https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
-                    homeName
-                  )}.png`
-            }
-            width={90}
-            height={40}
-            alt="flag"
-            style={{
-              border: ".8px solid",
-              borderRadius: "5px",
-              maxWidth: "70px",
-              // margin: "0 auto",
-            }}
-          />
-
-          <div style={{ display: "grid", justifyItems: "center" }}>
-            <h4 style={{ margin: "0" }}>{homeName}</h4>
-
+          <h4 style={{ margin: "0" }}>{homeName}</h4>
+          <div style={{ display: "flex", justifyItems: "center", gap: "8px" }}>
+            <img
+              src={
+                !getFlag(homeName)
+                  ? `https://www.fundaciontabitafeyes.org/wp-content/themes/childcare/images/default.png`
+                  : `https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
+                      homeName
+                    )}.png`
+              }
+              width={90}
+              height={40}
+              alt="flag"
+              style={{
+                border: ".8px solid",
+                borderRadius: "5px",
+                maxWidth: "70px",
+              }}
+            />
             <TextField
               id="outlined-number"
               type="number"
@@ -108,7 +105,7 @@ export const MatchNothing = (data) => {
               required={true}
               disabled={disabled}
               style={{ padding: "0" }}
-              sx={{ width: "100px" }}
+              sx={{ width: "77px" }}
               onChange={(e) => onAddPredictions(e, matchId)}
               InputProps={{
                 inputProps: {
@@ -130,16 +127,15 @@ export const MatchNothing = (data) => {
         <div
           style={{
             display: "flex",
-            gap: "10px",
             width: "30%",
-            alignItems: "end",
+            alignItems: "center",
             textAlign: "center",
+            flexDirection: "column",
             justifyContent: "center",
           }}
         >
-          <div style={{ display: "grid", justifyItems: "center" }}>
-            <h4 style={{ margin: 0 }}>{awayName}</h4>
-
+          <h4 style={{ margin: 0 }}>{awayName}</h4>
+          <div style={{ display: "flex", justifyItems: "center", gap: "8px" }}>
             <TextField
               id="outlined-number"
               type="number"
@@ -147,7 +143,7 @@ export const MatchNothing = (data) => {
               required={true}
               disabled={disabled}
               style={{ padding: "0" }}
-              sx={{ width: "100px" }}
+              sx={{ width: "77px" }}
               onChange={(e) => onAddPredictions(e, matchId)}
               InputProps={{
                 inputProps: {
@@ -163,26 +159,25 @@ export const MatchNothing = (data) => {
                 },
               }}
             />
+            <img
+              src={
+                !getFlag(awayName)
+                  ? `https://www.fundaciontabitafeyes.org/wp-content/themes/childcare/images/default.png`
+                  : `https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
+                      awayName
+                    )}.png`
+              }
+              width={90}
+              height={40}
+              alt="flag"
+              style={{
+                border: ".8px solid",
+                borderRadius: "5px",
+                width: "max-content",
+                maxWidth: "70px",
+              }}
+            />
           </div>
-          <img
-            src={
-              !getFlag(awayName)
-                ? `https://www.fundaciontabitafeyes.org/wp-content/themes/childcare/images/default.png`
-                : `https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
-                    awayName
-                  )}.png`
-            }
-            width={90}
-            height={40}
-            alt="flag"
-            style={{
-              border: ".8px solid",
-              borderRadius: "5px",
-              width: "max-content",
-              maxWidth: "70px",
-              // margin: "0 auto",
-            }}
-          />
         </div>
       </Box>
     </Box>

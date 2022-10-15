@@ -39,16 +39,19 @@
 
 .username-title {
   position: relative;
-  background-color: rgba(170, 214, 199, 0.811);
+  background-color: rgba(119, 133, 220, 0.811);
   top: 20px;
   font-size: 1.5rem;
   font-weight: 800;
   text-shadow: 1px 0.1px 0px rgb(255, 255, 255);
-  min-width: max-content;
+  /* min-width: max-content; */
+  backdrop-filter: blur(2px);
   padding: 5px 15px;
+  margin: 5px 0 24px;
 }
 
 .points {
   background-color: rgba(192, 192, 192, 0.863);
   position: relative;
+  margin-bottom: 10px;
 }

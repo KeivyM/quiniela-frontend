@@ -13,7 +13,7 @@ import {
   KeyboardArrowRight,
   SportsSoccer as SportsSoccerIcon,
 } from "@mui/icons-material";
-import axios from "axios";
+// import axios from "axios";
 
 export function CarouselQuinielas() {
   const theme = useTheme();
@@ -26,57 +26,57 @@ export function CarouselQuinielas() {
         matchId: "2270583212125",
         matchTime: 1670079600,
         status: 0,
-        homeName: "1A",
-        awayName: "2B",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "11235267058129",
         matchTime: 1670094000,
         status: 0,
-        homeName: "1C",
-        awayName: "2D",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "771221237058126",
         matchTime: 1670166000,
         status: 0,
-        homeName: "1D",
-        awayName: "2C",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "341232193358121",
         matchTime: 1670180400,
         status: 0,
-        homeName: "1B",
-        awayName: "2A",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "22705812339875",
         matchTime: 1670252400,
         status: 0,
-        homeName: "1E",
-        awayName: "2F",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "267058108765429",
         matchTime: 1670266800,
         status: 0,
-        homeName: "1G",
-        awayName: "2H",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "23705678958126",
         matchTime: 1670338800,
         status: 0,
-        homeName: "1F",
-        awayName: "2E",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "39541335812144",
         matchTime: 1670353200,
         status: 0,
-        homeName: "1H",
-        awayName: "2G",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
     ],
     cuartos: [
@@ -84,29 +84,29 @@ export function CarouselQuinielas() {
         matchId: "2273312321058125",
         matchTime: 1670598000,
         status: 0,
-        homeName: "Ganador octavos 5",
-        awayName: "Ganador octavos 6",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "267058789863129",
         matchTime: 1670612400,
         status: 0,
-        homeName: "Ganador octavos 1",
-        awayName: "Ganador octavos 2",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "23703458125546",
         matchTime: 1670684400,
         status: 0,
-        homeName: "Ganador octavos 7",
-        awayName: "Ganador octavos 8",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "3933586775433121",
         matchTime: 1670698800,
         status: 0,
-        homeName: "Ganador octavos 3",
-        awayName: "Ganador octavos4",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
     ],
     semifinales: [
@@ -114,15 +114,15 @@ export function CarouselQuinielas() {
         matchId: "22707600358125",
         matchTime: 1670958000,
         status: 0,
-        homeName: "Ganador cuartos de final 1",
-        awayName: "Ganador cuartos de final 2",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "267058122987429",
         matchTime: 1671044400,
         status: 0,
-        homeName: "Ganador cuartos de final 3",
-        awayName: "Ganador cuartos de final 4",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
     ],
     final: [
@@ -130,15 +130,15 @@ export function CarouselQuinielas() {
         matchId: "227058155573225",
         matchTime: 1671289200,
         status: 0,
-        homeName: "Perdedor semifinal 1",
-        awayName: "perdedor semifinal 2",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
       {
         matchId: "26705812955986332",
         matchTime: 1671375600,
         status: 0,
-        homeName: "Ganador semifinal 1",
-        awayName: "Ganador semifinal 2",
+        homeName: "Por definirse",
+        awayName: "Por definirse",
       },
     ],
   };
@@ -217,10 +217,10 @@ export function CarouselQuinielas() {
     //   .then((res) => setMatches(res.data.data));
     //
     //
-    /////para hacer pruebas con champions league //eliminar
+    ///para hacer pruebas con champions league //eliminar
     // axios
     //   .get(
-    //     "http://api.isportsapi.com/sport/football/schedule?api_key=c5LOkPHn9mDlm00W&leagueId=13014"
+    //     "http://api.isportsapi.com/sport/football/schedule?api_key=nqt7nbnv0VyRFjJf&leagueId=13014"
     //   )
     //   .then((res) => {
     //     return setMatches(res.data.data);
@@ -243,6 +243,7 @@ export function CarouselQuinielas() {
     <Box
       sx={{
         maxWidth: "100%",
+        minWidth: "480px",
         minHeight: "100%",
         height: "100%",
         flexGrow: 1,
@@ -271,6 +272,8 @@ export function CarouselQuinielas() {
           {steps[activeStep].label}
         </Typography>
       </Paper>
+
+      {steps[activeStep].description}
       <MobileStepper
         sx={{
           // bgcolor: "custom.light",
@@ -317,8 +320,6 @@ export function CarouselQuinielas() {
           </Button>
         }
       />
-
-      {steps[activeStep].description}
     </Box>
   );
 }

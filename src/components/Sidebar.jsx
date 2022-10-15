@@ -9,7 +9,7 @@ import "./sidebar.css";
 import { Ranking } from "./Ranking";
 
 export const Sidebar = () => {
-  const { setUserAuth, username, points, userAuth } = useContext(AuthContext);
+  const { setUserAuth, username, points } = useContext(AuthContext);
   let navigate = useNavigate();
 
   const Logout = () => {
@@ -70,11 +70,12 @@ export const Sidebar = () => {
         sx={{
           bgcolor: "primary.dark",
           margin: "0 auto",
-          width: "120px",
-          height: "120px",
-          fontSize: "85px",
-          top: "20px",
-          bottom: "20px",
+          width: "11rem",
+          height: "11rem",
+          fontSize: "150px",
+          fontFamily: "Signika",
+          top: "13px",
+          // bottom: "20px",
           position: "relative",
           border: "4px solid",
         }}
@@ -84,7 +85,12 @@ export const Sidebar = () => {
       <h2 className="username-title">{username}</h2>
       <h3 className="points">{points} pts.</h3>
 
-      <Box>
+      <Box
+        sx={{
+          height: "45%",
+          marginBottom: "15px",
+        }}
+      >
         <Ranking size="small" />
       </Box>
 

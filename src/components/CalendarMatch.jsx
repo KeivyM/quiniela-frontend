@@ -11,6 +11,8 @@ const style = {
   color: "black",
   fontSize: "18px",
   alignItems: "center",
+  padding: "9px 20px",
+  borderRadius: "5px",
 };
 export const CalendarMatch = (data) => {
   const { matchTime, homeName, awayName, awayScore, homeScore } = data;
@@ -44,14 +46,14 @@ export const CalendarMatch = (data) => {
             src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
               homeName
             )}.png`}
-            width={40}
+            // width={40}
             height={40}
             alt="flag"
             style={{
               border: ".8px solid",
               borderRadius: "5px",
               // margin: "0 auto",
-              width: "max-content",
+              maxWidth: "70px",
             }}
           />
           <h4>{homeName}</h4>

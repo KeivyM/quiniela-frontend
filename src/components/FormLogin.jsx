@@ -90,9 +90,25 @@ export const FormLogin = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(validateUser)}>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+    <Box
+      component="form"
+      onSubmit={handleSubmit(validateUser)}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        gap: "23px",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "7px",
+        }}
+      >
+        <FormControl sx={{ m: 1, width: "30ch" }} variant="outlined">
           <TextField
             id="outlined-basic"
             label="Correo"
@@ -106,7 +122,7 @@ export const FormLogin = () => {
           {errors.email?.message}
         </FormControl>
 
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+        <FormControl sx={{ m: 1, width: "30ch" }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">
             Contraseña
           </InputLabel>
@@ -135,9 +151,9 @@ export const FormLogin = () => {
         </FormControl>
       </Box>
 
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" sx={{ margin: "0 auto" }}>
         Ingresar
       </Button>
-    </form>
+    </Box>
   );
 };

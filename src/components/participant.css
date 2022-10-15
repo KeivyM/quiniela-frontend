@@ -12,6 +12,7 @@
   /* background: #a86; */
   display: flex;
   justify-content: space-around;
+  align-items: center;
   color: black;
   font-size: 14px;
   border-bottom: 0.1px solid #000;

@@ -1,12 +1,15 @@
-import React from "react";
 import "./header.css";
 import { Link } from "react-router-dom";
-import logo from "../assets/Qatar2022.png";
+import logo1 from "../assets/logo1.png";
+import logo2 from "../assets/logo2.png";
 
 export const Header = () => {
   return (
     <div className="Header">
-      <img src={logo} alt="logo" width={100} />
+      <div style={{ display: "flex ", alignItems: "flex-end" }}>
+        <img src={logo1} alt="logo" width={40} />
+        <img src={logo2} alt="logo" height={55} />
+      </div>
       <div className="container-btns">
         <h3>
           <Link className="btns-auth" to="/login">

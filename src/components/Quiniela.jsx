@@ -3,10 +3,11 @@ import { Box, Button, Tooltip, Typography } from "@mui/material";
 import { Save, Info as InfoIcon } from "@mui/icons-material";
 import { AuthContext } from "../context";
 import { AxiosConfig } from "../utils";
-import Swal from "sweetalert2";
 import { Match, MatchNothing } from "./";
+import Swal from "sweetalert2";
 import moment from "moment";
 import "moment-timezone";
+import "./quiniela.css";
 
 // const dataDePrueba = [
 //   {
@@ -265,8 +266,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   const [disabled, setDisabled] = useState(true);
   let dayMoment = "";
 
-  // const [dayMoment, setDayMoment] = useState("");
-
   const getAllPredictions = useCallback(
     async (phase) => {
       const TOKEN = userAuth;
@@ -420,7 +419,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   useEffect(() => {
     setPredictions([]);
     getAllPredictions(phase);
-    document.getElementById("cambiarScroll").scrollTo(0, 0);
+    document.getElementById("scrollTop").scrollTo(0, 0);
   }, [getAllPredictions, phase]);
 
   useEffect(() => {
@@ -469,48 +468,16 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
 
   return (
     <Box
-      sx={{
-        // bgcolor: "custom.light",
-        bgcolor: "#083358",
-        boxSizing: "border-box",
-        overflow: "auto",
-        height: "calc( 100vh - 116px )",
-      }}
-      id="cambiarScroll"
-      style={{
-        width: "100%",
-        display: "flex",
-        margin: "0 auto",
-        position: "relative",
-      }}
+      id="scrollTop"
+      className="container-quiniela custom-scrollbar"
+      sx={{ bgcolor: "#083358" }}
     >
       {disabled && (
-        <Box
-          style={{
-            background: "#ddd5",
-            width: "100%",
-            height: "100%",
-            position: "sticky",
-            top: 0,
-            zIndex: 1000,
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "end",
-            padding: "4px 9px",
-            boxSizing: "border-box",
-          }}
-        >
+        <Box className="container-blocked-quiniela" sx={{ bgcolor: "#ddd5" }}>
           <Box
+            className="container-message"
             sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              gap: "7px",
-              padding: "10px",
-              backdropFilter: "blur(2px)",
-              background: "#ffffff94",
-              border: "0.1px solid",
-              borderRadius: "10px",
+              bgcolor: "#ffffff94",
             }}
           >
             <Typography>Esta quiniela no está disponible</Typography>
@@ -528,20 +495,10 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
         </Box>
       )}
 
-      {/* {phase === "Final" && <QuinielaPlayer disabled={disabled} />} */}
-
       <Box
         component="form"
-        sx={{
-          position: "absolute",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          bgcolor: "#083358",
-          padding: "0px 40px 10px",
-          boxSizing: "border-box",
-        }}
+        className="form-quiniela"
+        sx={{ bgcolor: "#083358" }}
         onSubmit={(e) => {
           e.preventDefault();
         }}
@@ -550,20 +507,20 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
           const prediction = predictions.find((e) => e.matchId === obj.matchId);
           const dateMoment = moment(obj.matchTime * 1000).format("LT");
           const dateMomentDay = moment(obj.matchTime * 1000).format("LL");
-          let day = false;
+          let showDay = false;
 
           if (dayMoment !== dateMomentDay) {
-            day = true;
+            showDay = true;
             dayMoment = dateMomentDay;
           } else {
-            day = false;
+            showDay = false;
           }
 
           return (
             <div key={index}>
               {arrayDePartidos.length === 48 ? (
                 <>
-                  {day && (
+                  {showDay && (
                     <Typography
                       variant="h5"
                       sx={{ margin: "20px 24px 4px", color: "white" }}
@@ -573,7 +530,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
                   )}
 
                   <Match
-                    dateMomentDay={dateMomentDay}
                     prediction={prediction}
                     index={index}
                     disabled={disabled}
@@ -585,7 +541,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
                 </>
               ) : (
                 <>
-                  {day && (
+                  {showDay && (
                     <Typography
                       variant="h5"
                       sx={{ margin: "20px 24px 4px", color: "white" }}

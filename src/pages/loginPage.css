@@ -1,0 +1,25 @@
+/* .page-login::before {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 100vh;
+  background: linear-gradient(65deg, #8d1b3d, transparent);
+  margin-left: -50px;
+} */
+
+.icon-arrowBack {
+  position: absolute;
+  top: 23px;
+  left: 23px;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  /* background: red; */
+  font-size: 32px;
+}
+.icon-arrowBack:hover {
+  background: #8d1b3d1f;
+}
+.icon-arrowBack:active {
+  background: #8d1b3d2f;
+}

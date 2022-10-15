@@ -5,7 +5,6 @@ import "./match.css";
 
 export const Match = (data) => {
   const {
-    dateMomentDay,
     disabled,
     date,
     homeName,
@@ -49,6 +48,7 @@ export const Match = (data) => {
           height: "85px",
           alignItems: "center",
           borderRadius: "15px",
+          gap: "10px",
         }}
         sx={{
           bgcolor: "#40929d",
@@ -60,28 +60,27 @@ export const Match = (data) => {
         <div
           style={{
             display: "flex",
-            alignItems: "end",
-            gap: "10px",
-            width: "30%",
             justifyItems: "center",
+            flexDirection: "column",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <img
-            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
-              homeName
-            )}.png`}
-            height={40}
-            alt="flag"
-            style={{
-              border: ".8px solid",
-              borderRadius: "5px",
-              width: "max-content",
-              maxWidth: "70px",
-            }}
-          />
-          <div style={{ display: "grid", justifyItems: "center" }}>
-            <h4 style={{ margin: "0px" }}>{homeName}</h4>
+          <h4 style={{ margin: "0px" }}>{homeName}</h4>
+          <div style={{ display: "flex", justifyItems: "center", gap: "8px" }}>
+            <img
+              src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
+                homeName
+              )}.png`}
+              height={40}
+              alt="flag"
+              style={{
+                border: ".8px solid",
+                borderRadius: "5px",
+                width: "max-content",
+                maxWidth: "70px",
+              }}
+            />
             <TextField
               id="outlined-number"
               type="number"
@@ -89,7 +88,7 @@ export const Match = (data) => {
               required={true}
               disabled={disabled}
               style={{ padding: "0" }}
-              sx={{ width: "100px" }}
+              sx={{ width: "77px" }}
               onChange={(e) => onAddPredictions(e, matchId)}
               InputProps={{
                 inputProps: {
@@ -111,15 +110,14 @@ export const Match = (data) => {
         <div
           style={{
             display: "flex",
-            gap: "10px",
-            width: "30%",
-            alignItems: "end",
             textAlign: "center",
+            flexDirection: "column",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <div style={{ display: "grid", justifyItems: "center" }}>
-            <h4 style={{ margin: "0px" }}>{awayName}</h4>
+          <h4 style={{ margin: "0px" }}>{awayName}</h4>
+          <div style={{ display: "flex", justifyItems: "center", gap: "8px" }}>
             <TextField
               id="outlined-number"
               type="number"
@@ -127,7 +125,7 @@ export const Match = (data) => {
               required={true}
               disabled={disabled}
               style={{ padding: "0" }}
-              sx={{ width: "100px" }}
+              sx={{ width: "77px" }}
               onChange={(e) => onAddPredictions(e, matchId)}
               InputProps={{
                 inputProps: {
@@ -143,20 +141,20 @@ export const Match = (data) => {
                 },
               }}
             />
+            <img
+              src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
+                awayName
+              )}.png`}
+              height={40}
+              alt="flag"
+              style={{
+                border: ".8px solid",
+                borderRadius: "5px",
+                width: "max-content",
+                maxWidth: "70px",
+              }}
+            />
           </div>
-          <img
-            src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
-              awayName
-            )}.png`}
-            height={40}
-            alt="flag"
-            style={{
-              border: ".8px solid",
-              borderRadius: "5px",
-              width: "max-content",
-              maxWidth: "70px",
-            }}
-          />
         </div>
       </Box>
     </Box>

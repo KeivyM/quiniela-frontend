@@ -2,7 +2,7 @@ import * as yup from "yup";
 import YupPassword from "yup-password";
 YupPassword(yup);
 
-const requireField = () => yup.string().required("La contraseña es requerida.");
+const requireField = () => yup.string().required("Este campo es requerido.");
 
 export const schemaRegister = yup
   .object({

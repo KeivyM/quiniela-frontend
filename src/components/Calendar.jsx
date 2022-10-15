@@ -5,12 +5,14 @@ const style = {
   color: "black",
   textAlign: "center",
   margin: "0 auto",
+  marginBottom: "20px",
+  padding: "20px 0px 0px",
 };
 
 export const Calendar = ({ matches, title }) => {
   return (
     <div style={style}>
-      <h2>{title}</h2>
+      <h2 style={{ margin: "10px 0px" }}>{title}</h2>
       <div>
         {matches?.map((match, index) => {
           return <CalendarMatch key={index} {...match} />;
