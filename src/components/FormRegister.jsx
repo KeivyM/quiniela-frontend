@@ -55,8 +55,7 @@ export const FormRegister = () => {
         throw new Error(nameKey);
       }
 
-      const token = JSON.stringify(data.token);
-      localStorage.setItem("user_Auth", token);
+      localStorage.setItem("user_Auth", data.token);
 
       setUsername(data._doc.username);
       setUserAuth(data.token);

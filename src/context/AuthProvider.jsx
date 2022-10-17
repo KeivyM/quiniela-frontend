@@ -7,17 +7,20 @@ export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState("");
   const [points, setPoints] = useState(null);
   const [userAuth, setUserAuth] = useState(() =>
-    JSON.parse(localStorage.getItem("user_Auth"))
+    localStorage.getItem("user_Auth")
   ); // debe tener el JWT del usuario autenticado
 
   let navigate = useNavigate();
 
   const refreshToken = useCallback(async () => {
     try {
-      const { data } = await AxiosConfig.get("auth/check-status", {
-        headers: { Authorization: `Bearer ${userAuth}` },
-      });
-      localStorage.setItem("user_Auth", JSON.stringify(data.token));
+      const { data } = await AxiosConfig.get(
+        "auth/check-status"
+        // {
+        //   headers: { Authorization: `Bearer ${userAuth}` },
+        // }
+      );
+      localStorage.setItem("user_Auth", data.token);
       setUserAuth(data.token);
       setUsername(data._doc.username);
       setPoints(data._doc.points);
@@ -25,10 +28,12 @@ export const AuthProvider = ({ children }) => {
       console.info(error.code, error.message);
       navigate("/");
     }
-  }, [userAuth, navigate]);
+  }, [navigate]);
 
   useEffect(() => {
-    refreshToken();
+    if (userAuth) {
+      refreshToken();
+    }
   }, [refreshToken, userAuth]);
 
   return (

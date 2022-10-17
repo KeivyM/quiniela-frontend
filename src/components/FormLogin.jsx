@@ -41,8 +41,9 @@ export const FormLogin = () => {
 
       if (typeof data === "string") throw new Error(data);
 
-      const TOKEN = JSON.stringify(data.token);
-      localStorage.setItem("user_Auth", TOKEN);
+      console.log(data.token);
+
+      localStorage.setItem("user_Auth", data.token);
 
       setUsername(data._doc.username);
       setUserAuth(data.token);
