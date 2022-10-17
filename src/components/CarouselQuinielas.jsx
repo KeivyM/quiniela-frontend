@@ -1,4 +1,3 @@
-/* eslint no-use-before-define: 0 */
 import { useEffect, useState } from "react";
 import { Quiniela, QuinielaPlayer } from "./";
 import {
@@ -14,12 +13,15 @@ import {
   KeyboardArrowRight,
   SportsSoccer as SportsSoccerIcon,
 } from "@mui/icons-material";
-import axios from "axios";
+// import axios from "axios";
 
 export function CarouselQuinielas() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
-  const [match, setMatches] = useState([]);
+  const [
+    match,
+    // setMatches
+  ] = useState([]);
 
   const predefinedData = {
     octavos: [
