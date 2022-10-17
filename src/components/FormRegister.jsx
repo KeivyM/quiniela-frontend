@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegister } from "../utils/schemas";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 import {

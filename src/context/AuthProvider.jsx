@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AxiosConfig } from "../utils/AxiosConfig";
 import { AuthContext } from "./AuthContext";
 
@@ -8,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [userAuth, setUserAuth] = useState(() =>
     JSON.parse(localStorage.getItem("user_Auth"))
   ); // debe tener el JWT del usuario autenticado
+  let navigate = useNavigate();
 
   const refreshToken = useCallback(async () => {
     try {
@@ -20,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       setPoints(data._doc.points);
     } catch (error) {
       console.info(error.code, error.message);
+      navigate("/");
     }
   }, [userAuth]);
 
