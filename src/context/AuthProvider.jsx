@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       console.info(error.code, error.message);
       navigate("/");
     }
-  }, [userAuth]);
+  }, [userAuth, navigate]);
 
   useEffect(() => {
     refreshToken();
