@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [userAuth, setUserAuth] = useState(() =>
     JSON.parse(localStorage.getItem("user_Auth"))
   ); // debe tener el JWT del usuario autenticado
+
   let navigate = useNavigate();
 
   const refreshToken = useCallback(async () => {
