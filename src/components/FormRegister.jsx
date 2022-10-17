@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Swal from "sweetalert2";
+import { AxiosConfig } from "../utils";
 
 export const FormRegister = () => {
   const { setUserAuth, setUsername } = useContext(AuthContext);
@@ -45,10 +46,7 @@ export const FormRegister = () => {
     delete value.passwordRepeat;
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:3000/auth/register",
-        value
-      );
+      const { data } = await AxiosConfig.post("auth/register", value);
 
       if (data.code) {
         let nameKey =
