@@ -8,7 +8,7 @@
   box-sizing: border-box;
   position: relative;
   min-width: 230px;
-  width: 23%;
+  width: 40%;
 }
 
 .sidebar-container::before {

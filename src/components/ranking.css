@@ -9,9 +9,9 @@
 }
 
 .ranking-small {
-  background: rgba(204, 221, 170, 0.358);
+  background: #083358b5;
   width: 100%;
-  color: black;
+  color: white;
   text-align: center;
   position: relative;
   margin: 0 auto;

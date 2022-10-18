@@ -14,27 +14,37 @@ export const AuthProvider = ({ children }) => {
 
   const refreshToken = useCallback(async () => {
     try {
+      AxiosConfig.defaults.headers.common["Authorization"] =
+        `Bearer ${userAuth}` || "";
+
       const { data } = await AxiosConfig.get("auth/check-status");
       localStorage.setItem("user_Auth", data.token);
       setUserAuth(data.token);
-      setUsername(data._doc.username);
-      setPoints(data._doc.points);
+      setUsername(data.username);
+      setPoints(data.points);
     } catch (error) {
       console.info(error.code, error.message);
       navigate("/");
     }
-  }, [navigate]);
+  }, [navigate, userAuth]);
 
   useEffect(() => {
-    if (userAuth) {
+    if (!!userAuth) {
       refreshToken();
-    }
+    } else return;
   }, [refreshToken, userAuth]);
 
   return (
     <>
       <AuthContext.Provider
-        value={{ userAuth, setUserAuth, setUsername, username, points }}
+        value={{
+          userAuth,
+          setUserAuth,
+          setUsername,
+          setPoints,
+          username,
+          points,
+        }}
       >
         {children}
       </AuthContext.Provider>

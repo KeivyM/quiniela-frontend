@@ -7,12 +7,15 @@ import { Ranking } from "./Ranking";
 import "./sidebar.css";
 
 export const Sidebar = () => {
-  const { setUserAuth, username, points } = useContext(AuthContext);
+  const { setUserAuth, username, points, setPoints, setUsername } =
+    useContext(AuthContext);
   let navigate = useNavigate();
 
   const Logout = () => {
-    localStorage.removeItem("user_Auth");
+    setPoints("");
+    setUsername("");
     setUserAuth(false);
+    localStorage.removeItem("user_Auth");
     navigate("/home");
   };
 
@@ -23,7 +26,7 @@ export const Sidebar = () => {
 
       <Box
         sx={{
-          height: "45%",
+          height: "70%",
           marginBottom: "15px",
         }}
       >

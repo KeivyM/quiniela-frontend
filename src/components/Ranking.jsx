@@ -18,10 +18,19 @@ export const Ranking = ({ size = "big" }) => {
 
   return (
     <div className={size === "big" ? "ranking-big" : "ranking-small"}>
-      <h2>{size === "big" ? "Ranking de Participantes" : "Participantes"}</h2>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <h3>Nombre</h3>
-        <h3>Puntos</h3>
+      <h2 style={{ textShadow: "0 0 10px black" }}>
+        {size === "big" ? "Ranking de Participantes" : "Participantes"}
+      </h2>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          textShadow: "0 0 10px black",
+          padding: "10px 15px 0",
+        }}
+      >
+        <h3 style={{ width: "75%", textAlign: "left" }}>Nombre</h3>
+        <h3 style={{ width: "25%" }}>Puntos</h3>
       </div>
       {users.map((user, i) => {
         return <Participant size="small" key={i} user={user} />;

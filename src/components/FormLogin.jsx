@@ -24,7 +24,7 @@ export const FormLogin = () => {
     email: "",
     showPassword: false,
   });
-  const { setUserAuth, setUsername } = useContext(AuthContext);
+  const { setUserAuth, setUsername, setPoints } = useContext(AuthContext);
   let navigate = useNavigate();
 
   const {
@@ -38,13 +38,15 @@ export const FormLogin = () => {
   const validateUser = async (userData) => {
     try {
       const { data } = await AxiosConfig.post("auth/login", userData);
+      AxiosConfig.defaults.headers.common["Authorization"] =
+        `Bearer ${data.token}` || "";
 
       if (typeof data === "string") throw new Error(data);
 
       localStorage.setItem("user_Auth", data.token);
-
-      setUsername(data._doc.username);
+      setUsername(data.username);
       setUserAuth(data.token);
+      setPoints(data.points);
       navigate("/");
     } catch (error) {
       if (error.code === "ECONNABORTED") {
