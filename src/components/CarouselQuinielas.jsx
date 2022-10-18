@@ -218,21 +218,18 @@ export function CarouselQuinielas() {
     //     "Content-Type": "application/x-www-form-urlencoded",
     //   },
     // };
-    // await axios //cambiar apiKey
+    // await axios
     //   .get(
     //     "http://api.isportsapi.com/sport/football/schedule?api_key=nqt7nbnv0VyRFjJf&leagueId=1572"
     //   )
     //   .then((res) => setMatches(res.data.data));
-    //
+    // ////cambiar apiKey
     //
     ///para hacer pruebas con champions league //eliminar
     await axios
-      .get(
-        "http://api.isportsapi.com/sport/football/schedule?api_key=nqt7nbnv0VyRFjJf&leagueId=13014"
-        // { headers: { "Referrer-Policy": "no-referrer" } }
-      )
+      .get("https://quiniela-crazy-imagine.herokuapp.com/prediction")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         return setMatches(res.data.data);
       });
   };
