@@ -129,7 +129,7 @@ export const QuinielaPlayer = () => {
     //Cambiar Api Y leagueId
     try {
       const results = await axios.get(
-        `http://api.isportsapi.com/sport/football/topscorer?api_key=nqt7nbnv0VyRFjJf&leagueId=13014`
+        "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
       );
       setData(results.data.data);
     } catch (error) {

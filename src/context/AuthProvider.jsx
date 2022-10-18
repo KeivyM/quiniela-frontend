@@ -14,12 +14,7 @@ export const AuthProvider = ({ children }) => {
 
   const refreshToken = useCallback(async () => {
     try {
-      const { data } = await AxiosConfig.get(
-        "auth/check-status"
-        // {
-        //   headers: { Authorization: `Bearer ${userAuth}` },
-        // }
-      );
+      const { data } = await AxiosConfig.get("auth/check-status");
       localStorage.setItem("user_Auth", data.token);
       setUserAuth(data.token);
       setUsername(data._doc.username);

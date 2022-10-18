@@ -210,28 +210,11 @@ export function CarouselQuinielas() {
   const maxSteps = steps.length;
 
   const getMatches = async () => {
-    // const options = {
-    //   mode: "cors",
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Referrer-Policy": "no-referrer",
-    //     "Content-Type": "application/x-www-form-urlencoded",
-    //   },
-    // };
-    // await axios
-    //   .get(
-    //     "http://api.isportsapi.com/sport/football/schedule?api_key=nqt7nbnv0VyRFjJf&leagueId=1572"
-    //   )
-    //   .then((res) => setMatches(res.data.data));
-    // ////cambiar apiKey
-    //
-    ///para hacer pruebas con champions league //eliminar
     await axios
-      .get("https://quiniela-crazy-imagine.herokuapp.com/prediction")
-      .then((res) => {
-        // console.log(res);
-        return setMatches(res.data.data);
-      });
+      .get(
+        "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
+      )
+      .then((res) => setMatches(res.data.data));
   };
 
   useEffect(() => {
