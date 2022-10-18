@@ -214,7 +214,7 @@ export function CarouselQuinielas() {
     //   mode: "cors",
     //   headers: {
     //     "Access-Control-Allow-Origin": "*",
-    //     // "Content-Type": "application/json",
+    //     "Referrer-Policy": "no-referrer",
     //     "Content-Type": "application/x-www-form-urlencoded",
     //   },
     // };
@@ -229,7 +229,7 @@ export function CarouselQuinielas() {
     await axios
       .get(
         "http://api.isportsapi.com/sport/football/schedule?api_key=nqt7nbnv0VyRFjJf&leagueId=13014"
-        // options
+        // { headers: { "Referrer-Policy": "no-referrer" } }
       )
       .then((res) => {
         console.log(res);
