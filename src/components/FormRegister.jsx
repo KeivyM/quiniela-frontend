@@ -69,27 +69,6 @@ export const FormRegister = () => {
         confirmButtonText: "Ok",
       });
     }
-
-    // if (data.code) {
-    //   let nameKey =
-    //     Object.keys(data.keyPattern)[0] === "username"
-    //       ? "nombre de usuario"
-    //       : "correo";
-    //   return setOpen([
-    //     true,
-    //     {
-    //       msgTitle: "Verifica los datos.",
-    //       msgError: `Ya existe un usuario con ese ${nameKey}`,
-    //     },
-    //   ]);
-    // }
-
-    // const token = JSON.stringify(data.token);
-    // localStorage.setItem("user_Auth", token);
-
-    // setUsername(data._doc.username);
-    // setUserAuth(data.token);
-    // navigate("/");
   };
 
   const handleChange = (prop) => (event) => {
@@ -115,7 +94,6 @@ export const FormRegister = () => {
   };
 
   return (
-    // <form onSubmit={handleSubmit(validar)}>
     <Box
       component="form"
       onSubmit={handleSubmit(validar)}

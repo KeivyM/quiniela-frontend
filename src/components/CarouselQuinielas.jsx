@@ -13,15 +13,12 @@ import {
   KeyboardArrowRight,
   SportsSoccer as SportsSoccerIcon,
 } from "@mui/icons-material";
-// import axios from "axios";
+import axios from "axios";
 
 export function CarouselQuinielas() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
-  const [
-    match,
-    // setMatches
-  ] = useState([]);
+  const [match, setMatches] = useState([]);
 
   const predefinedData = {
     octavos: [
@@ -213,6 +210,14 @@ export function CarouselQuinielas() {
   const maxSteps = steps.length;
 
   const getMatches = async () => {
+    // const options = {
+    //   mode: "cors",
+    //   headers: {
+    //     "Access-Control-Allow-Origin": "*",
+    //     // "Content-Type": "application/json",
+    //     "Content-Type": "application/x-www-form-urlencoded",
+    //   },
+    // };
     // await axios //cambiar apiKey
     //   .get(
     //     "http://api.isportsapi.com/sport/football/schedule?api_key=nqt7nbnv0VyRFjJf&leagueId=1572"
@@ -221,13 +226,15 @@ export function CarouselQuinielas() {
     //
     //
     ///para hacer pruebas con champions league //eliminar
-    // axios
-    //   .get(
-    //     "http://api.isportsapi.com/sport/football/schedule?api_key=nqt7nbnv0VyRFjJf&leagueId=13014"
-    //   )
-    //   .then((res) => {
-    //     return setMatches(res.data.data);
-    //   });
+    await axios
+      .get(
+        "http://api.isportsapi.com/sport/football/schedule?api_key=nqt7nbnv0VyRFjJf&leagueId=13014"
+        // options
+      )
+      .then((res) => {
+        console.log(res);
+        return setMatches(res.data.data);
+      });
   };
 
   useEffect(() => {
