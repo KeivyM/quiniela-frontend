@@ -348,26 +348,26 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
         confirmButtonText: "Ok",
       });
 
-    if (arrayDePartidos?.length !== predictions?.length)
-      return Swal.fire({
-        title: "Hay campos vacios!",
-        text: "Toda la quiniela debe estar llena",
-        icon: "info",
-        confirmButtonText: "Ok",
-      });
+    // if (arrayDePartidos?.length !== predictions?.length)
+    //   return Swal.fire({
+    //     title: "Hay campos vacios!",
+    //     text: "Toda la quiniela debe estar llena",
+    //     icon: "info",
+    //     confirmButtonText: "Ok",
+    //   });
 
-    for (const prediction of predictions) {
-      if (
-        !!prediction?.results.awayScore === false ||
-        !!prediction?.results.homeScore === false
-      )
-        return Swal.fire({
-          title: "Hay campos vacios!",
-          text: "Toda la quiniela debe estar llena",
-          icon: "info",
-          confirmButtonText: "Ok",
-        });
-    }
+    // for (const prediction of predictions) {
+    //   if (
+    //     !!prediction?.results.awayScore === false ||
+    //     !!prediction?.results.homeScore === false
+    //   )
+    //     return Swal.fire({
+    //       title: "Hay campos vacios!",
+    //       text: "Toda la quiniela debe estar llena",
+    //       icon: "info",
+    //       confirmButtonText: "Ok",
+    //     });
+    // }
 
     const body = {
       phase,
