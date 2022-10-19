@@ -24,7 +24,8 @@ export const FormLogin = () => {
     email: "",
     showPassword: false,
   });
-  const { setUserAuth, setUsername, setPoints } = useContext(AuthContext);
+  const { setUserAuth, setUsername, setPoints, setLoading } =
+    useContext(AuthContext);
   let navigate = useNavigate();
 
   const {
@@ -37,6 +38,7 @@ export const FormLogin = () => {
 
   const validateUser = async (userData) => {
     try {
+      setLoading(true);
       const { data } = await AxiosConfig.post("auth/login", userData);
       AxiosConfig.defaults.headers.common["Authorization"] =
         `Bearer ${data.token}` || "";
@@ -49,6 +51,7 @@ export const FormLogin = () => {
       setPoints(data.points);
       navigate("/");
     } catch (error) {
+      setLoading(false);
       if (error.code === "ECONNABORTED") {
         return Swal.fire({
           title: "Problemas con el servidor!",

@@ -422,8 +422,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       icon: "warning",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        console.log("borrar quiniela");
-
         const response = await AxiosConfig.get("auth/private", {
           headers: {
             Authorization: `Bearer ${userAuth}`,

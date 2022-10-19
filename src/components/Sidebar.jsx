@@ -7,11 +7,12 @@ import { Ranking } from "./Ranking";
 import "./sidebar.css";
 
 export const Sidebar = () => {
-  const { setUserAuth, username, points, setPoints, setUsername } =
+  const { setUserAuth, username, points, setPoints, setUsername, setLoading } =
     useContext(AuthContext);
   let navigate = useNavigate();
 
   const Logout = () => {
+    setLoading(true);
     setPoints("");
     setUsername("");
     setUserAuth(false);
@@ -20,27 +21,29 @@ export const Sidebar = () => {
   };
 
   return (
-    <Box className="sidebar-container">
-      <h2 className="username-title">{username}</h2>
-      <h3 className="points">{points} pts.</h3>
+    <>
+      <Box className="sidebar-container">
+        <h2 className="username-title">{username}</h2>
+        <h3 className="points">{points} pts.</h3>
 
-      <Box
-        sx={{
-          height: "70%",
-          marginBottom: "15px",
-        }}
-      >
-        <Ranking size="small" />
+        <Box
+          sx={{
+            height: "70%",
+            marginBottom: "15px",
+          }}
+        >
+          <Ranking size="small" />
+        </Box>
+
+        <Button
+          variant="contained"
+          color="secondary"
+          startIcon={<ExitToAppIcon />}
+          onClick={Logout}
+        >
+          Cerrar sesion
+        </Button>
       </Box>
-
-      <Button
-        variant="contained"
-        color="secondary"
-        startIcon={<ExitToAppIcon />}
-        onClick={Logout}
-      >
-        Cerrar sesion
-      </Button>
-    </Box>
+    </>
   );
 };

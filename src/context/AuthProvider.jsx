@@ -6,6 +6,7 @@ import { AuthContext } from "./AuthContext";
 export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState("");
   const [points, setPoints] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [userAuth, setUserAuth] = useState(() =>
     localStorage.getItem("user_Auth")
   ); // debe tener el JWT del usuario autenticado
@@ -13,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   let navigate = useNavigate();
 
   const refreshToken = useCallback(async () => {
+    setLoading(true);
     try {
       AxiosConfig.defaults.headers.common["Authorization"] =
         `Bearer ${userAuth}` || "";
@@ -22,7 +24,10 @@ export const AuthProvider = ({ children }) => {
       setUserAuth(data.token);
       setUsername(data.username);
       setPoints(data.points);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
+
       console.info(error.code, error.message);
       navigate("/");
     }
@@ -44,6 +49,8 @@ export const AuthProvider = ({ children }) => {
           setPoints,
           username,
           points,
+          loading,
+          setLoading,
         }}
       >
         {children}

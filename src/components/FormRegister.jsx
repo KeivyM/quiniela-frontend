@@ -19,7 +19,8 @@ import Swal from "sweetalert2";
 import { AxiosConfig } from "../utils";
 
 export const FormRegister = () => {
-  const { setUserAuth, setUsername, setPoints } = useContext(AuthContext);
+  const { setUserAuth, setUsername, setPoints, setLoading } =
+    useContext(AuthContext);
   let navigate = useNavigate();
 
   const [values, setValues] = useState({
@@ -43,11 +44,13 @@ export const FormRegister = () => {
 
   const validar = async (value) => {
     delete value.passwordRepeat;
+    setLoading(true);
 
     try {
       const { data } = await AxiosConfig.post("auth/register", value);
 
       if (data.code) {
+        setLoading(false);
         let nameKey =
           Object.keys(data.keyPattern)[0] === "username"
             ? "Un usuario ya existe con ese nombre de usuario"
@@ -62,6 +65,7 @@ export const FormRegister = () => {
       setPoints(data.points);
       navigate("/");
     } catch (error) {
+      setLoading(false);
       console.log(error);
       Swal.fire({
         title: "Verifica tus datos!",
