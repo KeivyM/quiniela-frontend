@@ -8,3 +8,7 @@ input[type="number"] {
   -webkit-appearance: none;
   appearance: none;
 }
+
+#outlined-number::placeholder {
+  font-weight: 400;
+}

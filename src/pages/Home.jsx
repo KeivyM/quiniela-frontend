@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Calendar, Header, Ranking } from "../components";
@@ -216,19 +217,32 @@ export const Home = () => {
       <Header />
       <div className="div-text-landing-page">
         <h1>FIFA World Cup</h1>
-        <h2>Lorem </h2>
+        {/* <h2>Lorem </h2>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita
           aperiam corporis quisquam cumque id quasi necessitatibus debitis
           veritatis totam voluptatem vero, neque harum esse molestias magnam
           provident
-        </p>
+        </p> */}
       </div>
 
-      <div className="div-calendar-landing-page" style={{ paddingTop: "50px" }}>
-        <Calendar title="Jornada 1" matches={jornada1} />
-        <Calendar title="Jornada 2" matches={jornada2} />
-        <Calendar title="Jornada 3" matches={jornada3} />
+      <div
+        className="div-calendar-landing-page"
+        style={{ padding: "80px 10px ", marginBottom: "200px" }}
+      >
+        <Box
+          style={{
+            height: "500px",
+            width: "max-content",
+            overflow: "auto",
+            margin: "0 auto",
+            marginBottom: "50px",
+          }}
+        >
+          <Calendar title="Jornada 1" matches={jornada1} />
+          <Calendar title="Jornada 2" matches={jornada2} />
+          <Calendar title="Jornada 3" matches={jornada3} />
+        </Box>
 
         <Ranking />
         {/* <div className="container-mascota"></div> */}

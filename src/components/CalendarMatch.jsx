@@ -46,14 +46,12 @@ export const CalendarMatch = (data) => {
             src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
               homeName
             )}.png`}
-            // width={40}
-            height={40}
+            width={65}
+            height={43}
             alt="flag"
             style={{
               border: ".8px solid",
               borderRadius: "5px",
-              // margin: "0 auto",
-              maxWidth: "70px",
             }}
           />
           <h4>{homeName}</h4>
@@ -81,15 +79,12 @@ export const CalendarMatch = (data) => {
             src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
               awayName
             )}.png`}
-            width={40}
-            height={40}
+            width={65}
+            height={43}
             alt="flag"
             style={{
               border: ".8px solid",
               borderRadius: "5px",
-              // margin: "0 auto",
-              width: "max-content",
-              maxWidth: "70px",
             }}
           />
         </div>

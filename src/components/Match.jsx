@@ -30,7 +30,7 @@ export const Match = (data) => {
           alignItems: "center",
           justifyContent: "end",
           gap: "6px",
-          color: "white",
+          color: "rgb(245, 222, 179)",
           paddingRight: "20px",
         }}
       >
@@ -72,20 +72,22 @@ export const Match = (data) => {
               src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
                 homeName
               )}.png`}
+              width={60}
               height={40}
               alt="flag"
               style={{
                 border: ".8px solid",
                 borderRadius: "5px",
-                width: "max-content",
-                maxWidth: "70px",
+                // width: "max-content",
+                // maxWidth: "70px",
               }}
             />
             <TextField
               id="outlined-number"
               type="number"
               name="homeScore"
-              required={true}
+              placeholder="Goles"
+              // required={true}
               disabled={disabled}
               style={{ padding: "0" }}
               sx={{ width: "77px" }}
@@ -122,7 +124,8 @@ export const Match = (data) => {
               id="outlined-number"
               type="number"
               name="awayScore"
-              required={true}
+              // required={true}
+              placeholder="Goles"
               disabled={disabled}
               style={{ padding: "0" }}
               sx={{ width: "77px" }}
@@ -146,12 +149,13 @@ export const Match = (data) => {
                 awayName
               )}.png`}
               height={40}
+              width={60}
               alt="flag"
               style={{
                 border: ".8px solid",
                 borderRadius: "5px",
-                width: "max-content",
-                maxWidth: "70px",
+                // width: "max-content",
+                // maxWidth: "70px",
               }}
             />
           </div>
