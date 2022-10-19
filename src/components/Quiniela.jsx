@@ -1,6 +1,10 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Box, Button, Tooltip, Typography } from "@mui/material";
-import { Save, Info as InfoIcon } from "@mui/icons-material";
+import {
+  Save,
+  Info as InfoIcon,
+  Backspace as BackspaceIcon,
+} from "@mui/icons-material";
 import { AuthContext } from "../context";
 import { AxiosConfig } from "../utils";
 import { Match, MatchNothing } from "./";
@@ -303,10 +307,10 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   const onAddPredictions = (target, matchId) => {
     const { name, value } = target.target;
 
-    if (predictions.length === 0) {
-      setPredictions([{ matchId: matchId, results: { [name]: value } }]);
-      return;
-    }
+    // if (predictions.length === 0) {
+    //   setPredictions([{ matchId: matchId, results: { [name]: value } }]);
+    //   return;
+    // }
 
     const result = predictions.find(
       (prediction) => prediction.matchId === matchId
@@ -317,6 +321,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
         ...predictions,
         { matchId: matchId, results: { [name]: value } },
       ];
+
       setPredictions(newArray);
       return;
     }
@@ -348,26 +353,18 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
         confirmButtonText: "Ok",
       });
 
-    // if (arrayDePartidos?.length !== predictions?.length)
-    //   return Swal.fire({
-    //     title: "Hay campos vacios!",
-    //     text: "Toda la quiniela debe estar llena",
-    //     icon: "info",
-    //     confirmButtonText: "Ok",
-    //   });
-
-    // for (const prediction of predictions) {
-    //   if (
-    //     !!prediction?.results.awayScore === false ||
-    //     !!prediction?.results.homeScore === false
-    //   )
-    //     return Swal.fire({
-    //       title: "Hay campos vacios!",
-    //       text: "Toda la quiniela debe estar llena",
-    //       icon: "info",
-    //       confirmButtonText: "Ok",
-    //     });
-    // }
+    for (const prediction of predictions) {
+      if (!!prediction?.results?.homeScore) {
+        if (prediction?.results?.homeScore < 0) {
+          return Swal.fire({
+            title: "Verifica los goles que quieres acertar!",
+            text: "Los goles deben ser números positivos",
+            icon: "info",
+            confirmButtonText: "Ok",
+          });
+        }
+      }
+    }
 
     const body = {
       phase,
@@ -413,6 +410,35 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
         confirmButtonText: "Ok",
       });
     }
+  };
+
+  const deleteQuiniela = async () => {
+    await Swal.fire({
+      title: "¡Esta acción no se puede deshacer!",
+      text: "Se borrarán tus predicciones de esta quiniela.",
+      showCancelButton: true,
+      confirmButtonText: "Limpiar",
+      cancelButtonText: "Cancelar",
+      icon: "warning",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        console.log("borrar quiniela");
+
+        const response = await AxiosConfig.get("auth/private", {
+          headers: {
+            Authorization: `Bearer ${userAuth}`,
+          },
+        });
+        const userId = response.data.user._id;
+        const values = {
+          userId: userId,
+          phase: phase,
+        };
+
+        await AxiosConfig.post("quiniela/delete", values);
+        setPredictions([]);
+      } else if (result.isDenied) return;
+    });
   };
 
   useEffect(() => {
@@ -563,22 +589,40 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
             </div>
           );
         })}
-        <Button
-          variant="contained"
-          type="submit"
-          color="secondary"
-          disabled={disabled}
-          onClick={addQuiniela}
-          startIcon={<Save />}
+        <Box
           sx={{
-            width: "120px",
             position: "sticky",
             bottom: "10px",
-            left: "100%",
+            left: "64%",
+            flexDirection: "row",
+            display: "flex",
+            width: "max-content",
+            gap: "9px",
+            margin: "20px",
           }}
         >
-          Guardar
-        </Button>
+          <Button
+            variant="contained"
+            type="submit"
+            color="secondary"
+            disabled={disabled}
+            onClick={deleteQuiniela}
+            startIcon={<BackspaceIcon />}
+          >
+            Limpiar
+          </Button>
+
+          <Button
+            variant="contained"
+            type="submit"
+            color="secondary"
+            disabled={disabled}
+            onClick={addQuiniela}
+            startIcon={<Save />}
+          >
+            Guardar
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
