@@ -28,18 +28,6 @@
   background-color: #fff;
 }
 
-.container-mascota {
-  background-image: url("../assets/mascotaB.png");
-  /* background-color: red; */
-  width: 14rem;
-  height: 14rem;
-  position: absolute;
-  top: 53%;
-  right: 7px;
-  background-position: center;
-  background-size: cover;
-}
-
 .container-calendars::-webkit-scrollbar {
   width: 10px;
 }

@@ -215,9 +215,10 @@ export function CarouselQuinielas() {
         "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
       )
       .then((res) => setMatches(res.data.data));
+    //
     // await axios
     //   .get("http://localhost:3000/prediction/getMatchesFromApi")
-    //   .then((res) => setMatches(res.data.data));
+    //   .then((res) => setMatches(res.data.data));//local
   };
 
   useEffect(() => {

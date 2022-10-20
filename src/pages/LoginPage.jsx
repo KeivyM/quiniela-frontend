@@ -22,7 +22,6 @@ export const LoginPage = () => {
           backgroundRepeat: "no-repeat",
         }}
         sx={{
-          // bgcolor: "aqua",
           width: "100%",
           height: "100vh",
           margin: 0,
@@ -40,7 +39,6 @@ export const LoginPage = () => {
             justifyContent: "center",
             flexDirection: "column",
             alignItems: "center",
-            // width: "40%",
             padding: "40px",
             minWidth: "400px",
             maxWidth: "450px",

@@ -79,8 +79,6 @@ export const Match = (data) => {
               style={{
                 border: ".8px solid",
                 borderRadius: "5px",
-                // width: "max-content",
-                // maxWidth: "70px",
               }}
             />
             <TextField
@@ -88,7 +86,6 @@ export const Match = (data) => {
               type="number"
               name="homeScore"
               placeholder="Goles"
-              // required={true}
               disabled={disabled}
               style={{ padding: "0" }}
               sx={{ width: "77px" }}
@@ -125,7 +122,6 @@ export const Match = (data) => {
               id="outlined-number"
               type="number"
               name="awayScore"
-              // required={true}
               placeholder="Goles"
               disabled={disabled}
               style={{ padding: "0" }}
@@ -155,8 +151,6 @@ export const Match = (data) => {
               style={{
                 border: ".8px solid",
                 borderRadius: "5px",
-                // width: "max-content",
-                // maxWidth: "70px",
               }}
             />
           </div>

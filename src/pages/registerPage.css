@@ -1,12 +1,3 @@
-.page-register::before {
-  content: "";
-  width: 100%;
-  position: absolute;
-  height: 100vh;
-  background: linear-gradient(65deg, #8d1b3d, transparent);
-  margin-left: -50px;
-}
-
 .icon-arrowBack {
   position: absolute;
   top: 23px;

@@ -37,6 +37,10 @@ export const Home = () => {
         "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
       )
       .then((res) => setMatches(res.data.data));
+    //
+    // await axios
+    //   .get("http://localhost:3000/prediction/getMatchesFromApi")
+    //   .then((res) => setMatches(res.data.data));//local
   };
 
   useEffect(() => {
@@ -50,15 +54,7 @@ export const Home = () => {
       <div className="home-page">
         <Header />
         <div className="div-text-landing-page">
-          <div className="container-mascota"></div>
           <h1 style={{ fontFamily: "Merriweather" }}>FIFA WORLD CUP</h1>
-          {/* <h2>Lorem </h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita
-          aperiam corporis quisquam cumque id quasi necessitatibus debitis
-          veritatis totam voluptatem vero, neque harum esse molestias magnam
-          provident
-        </p> */}
         </div>
 
         <div

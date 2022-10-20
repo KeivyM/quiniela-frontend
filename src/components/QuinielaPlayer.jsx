@@ -22,7 +22,7 @@ export const QuinielaPlayer = () => {
   const [disabled, setDisabled] = useState(true);
 
   const addPlayer = async () => {
-    if (disabled) return console.log("No ha terminado la fase anterior");
+    // if (disabled) return console.log("No ha terminado la fase anterior");
 
     if (!!player?.playerName < 1 || !!player?.goals < 1)
       return Swal.fire({
@@ -128,9 +128,14 @@ export const QuinielaPlayer = () => {
   const getPlayersFromApi = async () => {
     try {
       const results = await axios.get(
-        "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
+        "https://quiniela-crazy-imagine.herokuapp.com/prediction/getPlayersFromApi"
       );
       setData(results.data.data);
+      //
+      // const results = await axios.get(
+      //   "http://localhost:3000/prediction/getPlayersFromApi"
+      // );
+      // setData(results.data.data);//local
     } catch (error) {
       console.log(error);
     }
@@ -164,7 +169,6 @@ export const QuinielaPlayer = () => {
         bgcolor: "secondary.light",
         boxSizing: "border-box",
         overflow: "auto",
-        // height: "calc( 100vh - 116px )",
         height: "100%",
       }}
       id="cambiarScroll"
@@ -178,7 +182,6 @@ export const QuinielaPlayer = () => {
       {disabled && (
         <Box
           style={{
-            // background: "#ddd5",
             width: "100%",
             height: "100%",
             position: "sticky",
@@ -206,7 +209,6 @@ export const QuinielaPlayer = () => {
             }}
           >
             <Typography>Esta quiniela no está disponible</Typography>
-            {/* <InfoIcon /> */}
           </Box>
         </Box>
       )}
@@ -249,7 +251,6 @@ export const QuinielaPlayer = () => {
               margin: "6px 0px",
             }}
           >
-            {/* <AccessTimeIcon /> */}
             <Typography style={{ padding: 0, margin: 0, fontSize: "1rem" }}>
               Elige el goleador del Mundial
             </Typography>
@@ -288,7 +289,7 @@ export const QuinielaPlayer = () => {
                 <TextField
                   type="text"
                   name="playerName"
-                  required={true}
+                  // required={true}
                   {...params}
                   label="Goleador del Mundial"
                 />
@@ -301,7 +302,7 @@ export const QuinielaPlayer = () => {
               type="number"
               sx={{ width: "20%" }}
               onChange={(e) => onAddPlayer(e.target.value, "goals")}
-              required={true}
+              // required={true}
               disabled={disabled}
               InputProps={{
                 inputProps: { min: 1, value: player?.goals || "" },

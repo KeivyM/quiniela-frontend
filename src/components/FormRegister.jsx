@@ -42,7 +42,7 @@ export const FormRegister = () => {
     resolver: yupResolver(schemaRegister),
   });
 
-  const validar = async (value) => {
+  const validateRegister = async (value) => {
     delete value.passwordRepeat;
     setLoading(true);
 
@@ -101,7 +101,7 @@ export const FormRegister = () => {
   return (
     <Box
       component="form"
-      onSubmit={handleSubmit(validar)}
+      onSubmit={handleSubmit(validateRegister)}
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <Box

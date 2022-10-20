@@ -25,9 +25,17 @@
   border-radius: 50px;
   transition: all 0.2s;
   font-size: 1.2rem;
+  display: block;
 }
 
 .btns-auth:hover {
   background-color: rgba(204, 204, 204, 0.146);
-  /* color: antiquewhite; */
+}
+
+.container-mascota {
+  background-image: url("../assets/mascotaB.png");
+  background-position: center;
+  background-size: cover;
+  width: 6rem;
+  height: 6rem;
 }

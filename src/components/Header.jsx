@@ -10,17 +10,20 @@ export const Header = () => {
         <img src={logo1} alt="logo" width={40} />
         <img src={logo2} alt="logo" height={55} />
       </div>
-      <div className="container-btns">
-        <h3>
-          <Link className="btns-auth" to="/login">
-            Iniciar Sesion
-          </Link>
-        </h3>
-        <h3>
-          <Link className="btns-auth" to="/register">
-            Registrarse
-          </Link>
-        </h3>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <div className="container-btns">
+          <h3>
+            <Link className="btns-auth" to="/login">
+              Iniciar Sesion
+            </Link>
+          </h3>
+          <h3>
+            <Link className="btns-auth" to="/register">
+              Registrarse
+            </Link>
+          </h3>
+        </div>
+        <div className="container-mascota"></div>
       </div>
     </div>
   );

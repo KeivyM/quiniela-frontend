@@ -18,13 +18,12 @@ export const RegisterPage = () => {
       <Box
         className="page-register"
         style={{
-          backgroundImage: `url(${image})`,
+          backgroundImage: `linear-gradient(65deg, #8d1b3d, transparent) , url(${image})`,
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
         sx={{
-          // bgcolor: "aqua",
           width: "100%",
           height: "100vh",
           margin: 0,

@@ -96,14 +96,12 @@ export const MatchNothing = (data) => {
               style={{
                 border: ".8px solid",
                 borderRadius: "5px",
-                // maxWidth: "70px",
               }}
             />
             <TextField
               id="outlined-number"
               type="number"
               name="homeScore"
-              // required={true}
               disabled={disabled}
               style={{ padding: "0" }}
               sx={{ width: "77px" }}
@@ -128,7 +126,6 @@ export const MatchNothing = (data) => {
         <div
           style={{
             display: "flex",
-            // width: "30%",
             alignItems: "center",
             textAlign: "center",
             flexDirection: "column",
@@ -141,7 +138,6 @@ export const MatchNothing = (data) => {
               id="outlined-number"
               type="number"
               name="awayScore"
-              // required={true}
               disabled={disabled}
               style={{ padding: "0" }}
               sx={{ width: "77px" }}
@@ -174,8 +170,6 @@ export const MatchNothing = (data) => {
               style={{
                 border: ".8px solid",
                 borderRadius: "5px",
-                // width: "max-content",
-                // maxWidth: "70px",
               }}
             />
           </div>
