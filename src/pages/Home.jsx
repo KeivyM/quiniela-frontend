@@ -50,8 +50,8 @@ export const Home = () => {
       <div className="home-page">
         <Header />
         <div className="div-text-landing-page">
-          {/* <div className="container-mascota"></div> */}
-          <h1>FIFA World Cup</h1>
+          <div className="container-mascota"></div>
+          <h1 style={{ fontFamily: "Merriweather" }}>FIFA WORLD CUP</h1>
           {/* <h2>Lorem </h2>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita

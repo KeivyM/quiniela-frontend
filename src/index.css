@@ -8,6 +8,8 @@ body,
 html {
   /* font-family: "Roboto"; */
   /* font-family: "Domine", serif; */
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
+  font-family: "Signika";
+  font-weight: 100;
   /* background-image: url("./vienna-reyes-qCrKTET_09o-unsplas.jpg"); */
 }

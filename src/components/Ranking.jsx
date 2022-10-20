@@ -29,7 +29,7 @@ export const Ranking = ({ size = "big" }) => {
           textShadow: "0 0 5px black",
           fontWeight: 200,
           color: "white",
-          margin: "14px 0 -2px;",
+          margin: "14px 0 -2px",
         }}
       >
         {size === "big" ? "Ranking de Participantes" : "Participantes"}
