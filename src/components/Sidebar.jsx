@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -21,29 +21,45 @@ export const Sidebar = () => {
   };
 
   return (
-    <>
-      <Box className="sidebar-container">
-        <h2 className="username-title">{username}</h2>
-        <h3 className="points">{points} pts.</h3>
+    <Box className="sidebar-container">
+      <Typography
+        sx={{ color: "#000d", fontWeight: "600", fontSize: "2rem" }}
+        className="username-title"
+      >
+        {username}
+      </Typography>
+      <Typography
+        sx={{
+          bgcolor: "primary.main",
+          fontSize: "1.1rem",
+          marginBottom: "10px",
+          fontWeight: "500",
+        }}
+        className="points"
+      >
+        {points} pts.
+      </Typography>
 
-        <Box
-          sx={{
-            height: "70%",
-            marginBottom: "15px",
-          }}
-        >
-          <Ranking size="small" />
-        </Box>
-
-        <Button
-          variant="contained"
-          color="secondary"
-          startIcon={<ExitToAppIcon />}
-          onClick={Logout}
-        >
-          Cerrar sesion
-        </Button>
+      <Box
+        sx={{
+          height: "70%",
+          marginBottom: "15px",
+        }}
+      >
+        <Ranking size="small" />
       </Box>
-    </>
+
+      <Button
+        variant="contained"
+        sx={{
+          color: "primary.text",
+          bgcolor: "primary.main",
+        }}
+        startIcon={<ExitToAppIcon />}
+        onClick={Logout}
+      >
+        Cerrar sesion
+      </Button>
+    </Box>
   );
 };

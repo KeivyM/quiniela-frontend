@@ -32,7 +32,7 @@ export const MatchNothing = (data) => {
       sx={{
         marginBottom: "2px",
         justifyContent: "center",
-        bgcolor: "#8D1B3D",
+        bgcolor: "secondary.main",
         border: "1px solid",
         borderRadius: "15px",
       }}
@@ -43,12 +43,13 @@ export const MatchNothing = (data) => {
           alignItems: "center",
           justifyContent: "end",
           gap: "6px",
-          color: "white",
+          color: "#000",
           paddingRight: "20px",
+          margin: "6px 0px",
         }}
       >
-        <AccessTimeIcon />
-        <Typography variant="h6" style={{ padding: 0, margin: 0 }}>
+        <AccessTimeIcon sx={{ fontSize: "1rem" }} />
+        <Typography style={{ padding: 0, margin: 0, fontSize: "1rem" }}>
           {date}.
         </Typography>
       </Box>
@@ -56,14 +57,15 @@ export const MatchNothing = (data) => {
       <Box
         style={{
           display: "flex",
-          justifyContent: "space-around",
+          justifyContent: "space-evenly",
           width: "100%",
           height: "85px",
           alignItems: "center",
           borderRadius: "15px",
+          gap: "10px",
         }}
         sx={{
-          bgcolor: "#40929d",
+          bgcolor: "primary.main",
           boxShadow: "0px -4px 2px #0005",
           padding: "0px 75px",
           boxSizing: "border-box",
@@ -72,11 +74,10 @@ export const MatchNothing = (data) => {
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-            width: "30%",
             justifyItems: "center",
+            flexDirection: "column",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <h4 style={{ margin: "0" }}>{homeName}</h4>
@@ -89,20 +90,20 @@ export const MatchNothing = (data) => {
                       homeName
                     )}.png`
               }
-              width={90}
+              width={60}
               height={40}
               alt="flag"
               style={{
                 border: ".8px solid",
                 borderRadius: "5px",
-                maxWidth: "70px",
+                // maxWidth: "70px",
               }}
             />
             <TextField
               id="outlined-number"
               type="number"
               name="homeScore"
-              required={true}
+              // required={true}
               disabled={disabled}
               style={{ padding: "0" }}
               sx={{ width: "77px" }}
@@ -127,7 +128,7 @@ export const MatchNothing = (data) => {
         <div
           style={{
             display: "flex",
-            width: "30%",
+            // width: "30%",
             alignItems: "center",
             textAlign: "center",
             flexDirection: "column",
@@ -140,7 +141,7 @@ export const MatchNothing = (data) => {
               id="outlined-number"
               type="number"
               name="awayScore"
-              required={true}
+              // required={true}
               disabled={disabled}
               style={{ padding: "0" }}
               sx={{ width: "77px" }}
@@ -167,14 +168,14 @@ export const MatchNothing = (data) => {
                       awayName
                     )}.png`
               }
-              width={90}
+              width={60}
               height={40}
               alt="flag"
               style={{
                 border: ".8px solid",
                 borderRadius: "5px",
-                width: "max-content",
-                maxWidth: "70px",
+                // width: "max-content",
+                // maxWidth: "70px",
               }}
             />
           </div>

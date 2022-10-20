@@ -10,11 +10,11 @@ export const Dashboard = () => {
   return (
     <>
       {loading && <Loading />}
-      <Box style={{ display: "flex" }} sx={{ bgcolor: "custom.light" }}>
+      <Box style={{ display: "flex" }} sx={{ bgcolor: "#99c3E1" }}>
         <Sidebar />
         <Box
           sx={{
-            bgcolor: "#0F4471",
+            bgcolor: "#99c3E1",
             width: "100%",
             height: "100vh",
             padding: "50px",

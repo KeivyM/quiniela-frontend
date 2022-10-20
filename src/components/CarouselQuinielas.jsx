@@ -252,14 +252,15 @@ export function CarouselQuinielas() {
           display: "flex",
           alignItems: "center",
           height: 50,
-          bgcolor: "#083358",
+          borderRadius: "5px 5px 0 0",
+          bgcolor: "secondary.light",
         }}
       >
         <Typography
           style={{
             fontSize: "29px",
             margin: "0 auto",
-            color: "#cad",
+            color: "#fdfdfd",
           }}
         >
           {steps[activeStep].label}
@@ -270,11 +271,12 @@ export function CarouselQuinielas() {
       <MobileStepper
         sx={{
           // bgcolor: "custom.light",
-          bgcolor: "white",
+          bgcolor: "secondary.light",
           border: "1px solid",
           display: "flex",
           justifyContent: "space-between",
           borderRadius: "5px",
+          color: "#ccc",
         }}
         variant="text"
         steps={maxSteps}

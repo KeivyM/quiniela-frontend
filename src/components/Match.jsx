@@ -19,7 +19,7 @@ export const Match = (data) => {
       sx={{
         marginBottom: "2px",
         justifyContent: "center",
-        bgcolor: "#8D1B3D",
+        bgcolor: "secondary.main",
         border: "1px solid",
         borderRadius: "15px",
       }}
@@ -30,12 +30,13 @@ export const Match = (data) => {
           alignItems: "center",
           justifyContent: "end",
           gap: "6px",
-          color: "rgb(245, 222, 179)",
+          color: "#000",
           paddingRight: "20px",
+          margin: "6px 0px",
         }}
       >
-        <AccessTimeIcon />
-        <Typography variant="h6" style={{ padding: 0, margin: 0 }}>
+        <AccessTimeIcon sx={{ fontSize: "1rem" }} />
+        <Typography style={{ padding: 0, margin: 0, fontSize: "1rem" }}>
           {date}.
         </Typography>
       </Box>
@@ -51,7 +52,7 @@ export const Match = (data) => {
           gap: "10px",
         }}
         sx={{
-          bgcolor: "#40929d",
+          bgcolor: "primary.main",
           boxShadow: "0px -4px 2px #0005",
           padding: "0px 75px",
           boxSizing: "border-box",

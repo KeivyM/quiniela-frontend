@@ -6,7 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Save, Info as InfoIcon } from "@mui/icons-material";
+import { Save } from "@mui/icons-material";
 import { AuthContext } from "../context";
 import { AxiosConfig } from "../utils";
 import moment from "moment";
@@ -126,7 +126,6 @@ export const QuinielaPlayer = () => {
   }, [userAuth]);
 
   const getPlayersFromApi = async () => {
-    //Cambiar Api Y leagueId
     try {
       const results = await axios.get(
         "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
@@ -162,8 +161,7 @@ export const QuinielaPlayer = () => {
   return (
     <Box
       sx={{
-        // bgcolor: "custom.light",
-        bgcolor: "#083358",
+        bgcolor: "secondary.light",
         boxSizing: "border-box",
         overflow: "auto",
         // height: "calc( 100vh - 116px )",
@@ -180,15 +178,16 @@ export const QuinielaPlayer = () => {
       {disabled && (
         <Box
           style={{
-            background: "#ddd5",
+            // background: "#ddd5",
             width: "100%",
             height: "100%",
             position: "sticky",
             top: 0,
             zIndex: 1000,
             display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "end",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "rgb(102 102 102 / 45%)",
             padding: "4px 9px",
             boxSizing: "border-box",
           }}
@@ -207,7 +206,7 @@ export const QuinielaPlayer = () => {
             }}
           >
             <Typography>Esta quiniela no está disponible</Typography>
-            <InfoIcon />
+            {/* <InfoIcon /> */}
           </Box>
         </Box>
       )}
@@ -218,9 +217,10 @@ export const QuinielaPlayer = () => {
           position: "absolute",
           width: "100%",
           display: "flex",
+          minHeight: "100%",
           flexDirection: "column",
           gap: "10px",
-          bgcolor: "#083358",
+          bgcolor: "custom.flagCatar",
           padding: "0px 40px 10px",
           boxSizing: "border-box",
         }}
@@ -232,10 +232,10 @@ export const QuinielaPlayer = () => {
           sx={{
             marginBottom: "2px",
             justifyContent: "center",
-            bgcolor: "#8D1B3D",
+            bgcolor: "secondary.main",
             border: "1px solid",
             borderRadius: "15px",
-            marginTop: "56px",
+            marginTop: "50px",
           }}
         >
           <Box
@@ -244,12 +244,13 @@ export const QuinielaPlayer = () => {
               alignItems: "center",
               justifyContent: "end",
               gap: "6px",
-              color: "white",
+              color: "#000",
               paddingRight: "20px",
+              margin: "6px 0px",
             }}
           >
             {/* <AccessTimeIcon /> */}
-            <Typography variant="h6" style={{ padding: 0, margin: 0 }}>
+            <Typography style={{ padding: 0, margin: 0, fontSize: "1rem" }}>
               Elige el goleador del Mundial
             </Typography>
           </Box>
@@ -258,12 +259,14 @@ export const QuinielaPlayer = () => {
               display: "flex",
               justifyContent: "space-evenly",
               width: "100%",
+
               height: "85px",
               alignItems: "center",
               borderRadius: "15px",
+              gap: "10px",
             }}
             sx={{
-              bgcolor: "#40929d",
+              bgcolor: "primary.main",
               boxShadow: "0px -4px 2px #0005",
               padding: "0px 75px",
               boxSizing: "border-box",
@@ -273,7 +276,7 @@ export const QuinielaPlayer = () => {
               disablePortal
               id="combo-box-demo"
               options={data}
-              sx={{ width: 300 }}
+              sx={{ width: " 70%" }}
               value={playerName || null}
               disabled={disabled}
               getOptionLabel={(option) => option.playerName}
@@ -296,6 +299,7 @@ export const QuinielaPlayer = () => {
               label="Goles"
               name="goals"
               type="number"
+              sx={{ width: "20%" }}
               onChange={(e) => onAddPlayer(e.target.value, "goals")}
               required={true}
               disabled={disabled}

@@ -3,8 +3,15 @@
   background: #a86;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   color: black;
   font-size: 18px;
+  padding: 0 50px;
+  height: 46px;
+}
+
+.participant-big {
+  padding: 0px 100px;
 }
 
 .participant-small {

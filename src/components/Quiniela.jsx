@@ -1,10 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { Box, Button, Tooltip, Typography } from "@mui/material";
-import {
-  Save,
-  Info as InfoIcon,
-  Backspace as BackspaceIcon,
-} from "@mui/icons-material";
+import { Box, Button, Typography } from "@mui/material";
+import { Save, Backspace as BackspaceIcon } from "@mui/icons-material";
 import { AuthContext } from "../context";
 import { AxiosConfig } from "../utils";
 import { Match, MatchNothing } from "./";
@@ -493,10 +489,17 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
     <Box
       id="scrollTop"
       className="container-quiniela custom-scrollbar"
-      sx={{ bgcolor: "#083358" }}
+      sx={{ bgcolor: "secondary.light" }}
     >
       {disabled && (
-        <Box className="container-blocked-quiniela" sx={{ bgcolor: "#ddd5" }}>
+        <Box
+          className="container-blocked-quiniela"
+          sx={{
+            alignItems: "center",
+            justifyContent: "center",
+            background: "rgb(102 102 102 / 45%)",
+          }}
+        >
           <Box
             className="container-message"
             sx={{
@@ -504,7 +507,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
             }}
           >
             <Typography>Esta quiniela no está disponible</Typography>
-            <Tooltip
+            {/* <Tooltip
               title={
                 <h3>
                   La fase anterior no ha terminado <br />o ésta fase ya comenzó
@@ -513,7 +516,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
               arrow
             >
               <InfoIcon />
-            </Tooltip>
+            </Tooltip> */}
           </Box>
         </Box>
       )}
@@ -521,7 +524,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       <Box
         component="form"
         className="form-quiniela"
-        sx={{ bgcolor: "#083358" }}
+        sx={{ bgcolor: "custom.flagCatar", minHeight: "100%" }}
         onSubmit={(e) => {
           e.preventDefault();
         }}
@@ -545,8 +548,11 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
                 <>
                   {showDay && (
                     <Typography
-                      variant="h5"
-                      sx={{ margin: "20px 24px 4px", color: "white" }}
+                      sx={{
+                        margin: "15px 7px 0px",
+                        color: "custom.text",
+                        fontWeight: "100",
+                      }}
                     >
                       {dayMoment}
                     </Typography>
@@ -566,8 +572,11 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
                 <>
                   {showDay && (
                     <Typography
-                      variant="h5"
-                      sx={{ margin: "20px 24px 4px", color: "white" }}
+                      sx={{
+                        margin: "15px 7px 0px",
+                        color: "custom.text",
+                        fontWeight: "100",
+                      }}
                     >
                       {dayMoment}
                     </Typography>
