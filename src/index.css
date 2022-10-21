@@ -11,5 +11,8 @@ html {
   /* font-family: "Poppins", sans-serif; */
   font-family: "Signika";
   font-weight: 100;
-  /* background-image: url("./vienna-reyes-qCrKTET_09o-unsplas.jpg"); */
+}
+
+#root {
+  background-color: #99c3e1;
 }

@@ -27,7 +27,7 @@ export const QuinielaPlayer = () => {
     if (!!player?.playerName < 1 || !!player?.goals < 1)
       return Swal.fire({
         title: "Hay campos vacios!",
-        text: "Toda la quiniela debe estar llena",
+        text: "Los campos deben estar llenos",
         icon: "info",
         confirmButtonText: "Ok",
       });
@@ -130,12 +130,18 @@ export const QuinielaPlayer = () => {
       const results = await axios.get(
         "https://quiniela-crazy-imagine.herokuapp.com/prediction/getPlayersFromApi"
       );
-      setData(results.data.data);
+      const playersSort = results.data.data.sort((a, b) =>
+        a.playerName.localeCompare(b.playerName)
+      );
+      setData(playersSort);
       //
       // const results = await axios.get(
       //   "http://localhost:3000/prediction/getPlayersFromApi"
       // );
-      // setData(results.data.data);//local
+      // const playersSort = results.data.sort((a, b) =>
+      //   a.playerName.localeCompare(b.playerName)
+      // );
+      // setData(playersSort); //local
     } catch (error) {
       console.log(error);
     }
@@ -289,7 +295,7 @@ export const QuinielaPlayer = () => {
                 <TextField
                   type="text"
                   name="playerName"
-                  // required={true}
+                  required={true}
                   {...params}
                   label="Goleador del Mundial"
                 />
@@ -302,7 +308,7 @@ export const QuinielaPlayer = () => {
               type="number"
               sx={{ width: "20%" }}
               onChange={(e) => onAddPlayer(e.target.value, "goals")}
-              // required={true}
+              required={true}
               disabled={disabled}
               InputProps={{
                 inputProps: { min: 1, value: player?.goals || "" },

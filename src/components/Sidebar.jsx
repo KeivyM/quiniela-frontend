@@ -6,7 +6,7 @@ import { AuthContext } from "../context";
 import { Ranking } from "./Ranking";
 import "./sidebar.css";
 
-export const Sidebar = () => {
+export const Sidebar = ({ showUsers }) => {
   const { setUserAuth, username, points, setPoints, setUsername, setLoading } =
     useContext(AuthContext);
   let navigate = useNavigate();
@@ -21,7 +21,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <Box className="sidebar-container">
+    <Box className={`sidebar-container show ${showUsers ? "hidden" : ""}`}>
       <Typography
         sx={{ color: "#000d", fontWeight: "600", fontSize: "2rem" }}
         className="username-title"
