@@ -17,32 +17,14 @@ export const LoginPage = () => {
         className="page-login"
         style={{
           backgroundImage: `linear-gradient(65deg, #8d1b3d, transparent) , url(${image})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
         }}
-        sx={{
-          width: "100%",
-          height: "100vh",
-          margin: 0,
-          display: "flex",
-          alignItems: "center",
-          padding: "50px",
-          boxSizing: "border-box",
-        }}
+        sx={{ width: "100%", height: "100vh" }}
       >
         <Box
+          className="container-form-login"
           style={{ backdropFilter: "blur(3px)", borderRadius: "20px" }}
           sx={{
             bgcolor: "#ccdddde0",
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: "40px",
-            minWidth: "400px",
-            maxWidth: "450px",
-            marginLeft: "50px",
           }}
         >
           <Link style={{ color: "#000" }} to="/home">
@@ -58,8 +40,8 @@ export const LoginPage = () => {
               alignItems: "center",
             }}
           >
-            <Typography sx={{ fontSize: "30px" }}>Iniciar sesión</Typography>
-            <Typography sx={{ fontSize: "12px" }}>
+            <Typography className="title-login">Iniciar sesión</Typography>
+            <Typography className="text-login">
               Coloca tus credenciales para acceder a tu cuenta
             </Typography>
           </Box>

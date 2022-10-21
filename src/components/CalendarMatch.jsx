@@ -1,20 +1,10 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import moment from "moment";
 import "moment-timezone";
 import { useEffect, useState } from "react";
 import { getFlag } from "../utils";
+import "./calendarMatch.css";
 
-const style = {
-  width: "100%",
-  // background: "#a869",
-  display: "flex",
-  justifyContent: "space-between",
-  color: "black",
-  fontSize: "18px",
-  alignItems: "center",
-  padding: "9px 20px",
-  borderRadius: "5px",
-};
 export const CalendarMatch = (data) => {
   const { matchTime, homeName, awayName, awayScore, homeScore } = data;
   const dateMoment = moment(matchTime * 1000).format("L");
@@ -34,20 +24,10 @@ export const CalendarMatch = (data) => {
   return (
     <>
       <Box
-        sx={{
-          bgcolor: "primary.light",
-        }}
-        style={style}
+        sx={{ bgcolor: "primary.light" }}
+        className="container-calendar-match"
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            width: "30%",
-            marginLeft: "15px",
-          }}
-        >
+        <Box className="content-home-country">
           <img
             src={
               !getFlag(homeName)
@@ -56,35 +36,21 @@ export const CalendarMatch = (data) => {
                     homeName
                   )}.png`
             }
-            width={65}
-            height={43}
+            className="img-flag"
             alt="flag"
-            style={{
-              border: ".8px solid",
-              borderRadius: "5px",
-            }}
           />
-          <h4>{homeName}</h4>
-        </div>
-        <div>
-          <p style={{ margin: "0" }}>{dateMoment}</p>
-          <p style={{ margin: "0", background: "white" }}>
+          <Typography className="nameCountry">{homeName}</Typography>
+        </Box>
+        <Box>
+          <Typography className="date-calendar-match">{dateMoment}</Typography>
+          <Typography className="container-points">
             {scores != null && (
-              <strong>{`${scores.home} - ${scores.away}`}</strong>
+              <strong>{`${scores.home}0 - 8${scores.away}`}</strong>
             )}
-          </p>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            width: "30%",
-            justifyContent: "right",
-            marginRight: "15px",
-          }}
-        >
-          <h4>{awayName}</h4>
+          </Typography>
+        </Box>
+        <Box className="content-away-country">
+          <Typography className="nameCountry">{awayName}</Typography>
           <img
             src={
               !getFlag(awayName)
@@ -93,15 +59,10 @@ export const CalendarMatch = (data) => {
                     awayName
                   )}.png`
             }
-            width={65}
-            height={43}
             alt="flag"
-            style={{
-              border: ".8px solid",
-              borderRadius: "5px",
-            }}
+            className="img-flag"
           />
-        </div>
+        </Box>
       </Box>
       <hr style={{ margin: "0" }} />
     </>

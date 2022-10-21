@@ -31,3 +31,14 @@
   margin: 10px;
   font-weight: 100;
 }
+
+@media screen and (max-width: 768px) {
+  .participant-big {
+    padding: 0px 35px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .participant-big {
+    padding: 0px 10px;
+  }
+}

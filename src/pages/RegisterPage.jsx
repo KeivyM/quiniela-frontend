@@ -19,31 +19,32 @@ export const RegisterPage = () => {
         className="page-register"
         style={{
           backgroundImage: `linear-gradient(65deg, #8d1b3d, transparent) , url(${image})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
+          // backgroundPosition: "center",
+          // backgroundSize: "cover",
+          // backgroundRepeat: "no-repeat",
         }}
         sx={{
           width: "100%",
           height: "100vh",
-          margin: 0,
-          display: "flex",
-          alignItems: "center",
-          padding: "50px",
-          boxSizing: "border-box",
+          // margin: 0,
+          // display: "flex",
+          // alignItems: "center",
+          // padding: "50px",
+          // boxSizing: "border-box",
         }}
       >
         <Box
+          className="container-form-register"
           style={{ backdropFilter: "blur(3px)", borderRadius: "20px" }}
           sx={{
             bgcolor: "#ccdddde0",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: "40px",
-            minWidth: "370px",
-            maxWidth: "620px",
-            marginLeft: "50px",
+            // display: "flex",
+            // flexDirection: "column",
+            // alignItems: "center",
+            // padding: "40px",
+            // minWidth: "370px",
+            // maxWidth: "620px",
+            // marginLeft: "50px",
           }}
         >
           <Link style={{ color: "#000" }} to="/home">
@@ -52,7 +53,9 @@ export const RegisterPage = () => {
               className="icon-arrowBack"
             />
           </Link>
-          <Typography sx={{ fontSize: "30px" }}>Registrarse</Typography>
+          <Typography className="title-register" sx={{ fontSize: "30px" }}>
+            Registrarse
+          </Typography>
           <FormRegister />
         </Box>
       </Box>

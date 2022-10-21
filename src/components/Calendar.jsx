@@ -1,19 +1,27 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { CalendarMatch } from "./CalendarMatch";
-const style = {
-  // background: "#cda9",
-  width: "700px",
-  color: "black",
-  textAlign: "center",
-  margin: "0 auto",
-  marginBottom: "60px",
-  padding: "1px 0px 0px",
-};
+import "./calendar.css";
 
 export const Calendar = ({ matches, title }) => {
   return (
-    <Box style={style} sx={{ bgcolor: "secondary.light" }}>
-      <h2 style={{ margin: "10px 0px", color: "white" }}>{title}</h2>
+    <Box
+      className="container-calendar"
+      sx={{
+        width: "100%",
+        textAlign: "center",
+        marginBottom: "60px",
+        paddingTop: "1px",
+        bgcolor: "secondary.light",
+      }}
+    >
+      <Typography
+        // variant="h5"
+        className="title-calendar"
+        sx={{ color: "#ecf2ec" }}
+        // style={{ color: "white" }}
+      >
+        {title}
+      </Typography>
       <div>
         {matches?.map((match, index) => {
           return <CalendarMatch key={index} {...match} />;

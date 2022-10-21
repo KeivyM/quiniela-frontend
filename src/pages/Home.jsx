@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Calendar, Header, Ranking } from "../components";
@@ -33,14 +33,14 @@ export const Home = () => {
 
   const getMatches = async () => {
     await axios
-      .get(
-        "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
-      )
-      .then((res) => setMatches(res.data.data));
+    .get(
+      "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
+    )
+    .then((res) => setMatches(res.data.data));
     //
     // await axios
     //   .get("http://localhost:3000/prediction/getMatchesFromApi")
-    //   .then((res) => setMatches(res.data.data));//local
+    //   .then((res) => setMatches(res.data.data)); //local
   };
 
   useEffect(() => {
@@ -51,30 +51,22 @@ export const Home = () => {
   return (
     <>
       {loading && <Loading />}
-      <div className="home-page">
+      <Box className="home-page">
         <Header />
-        <div className="div-text-landing-page">
-          <h1 style={{ fontFamily: "Merriweather" }}>FIFA WORLD CUP</h1>
-        </div>
+        <Box className="div-text-landing-page">
+          <Typography variant="h1" sx={{ fontFamily: "Merriweather" }}>
+            FIFA WORLD CUP
+          </Typography>
+        </Box>
 
-        <div
+        <Box
           className="div-calendar-landing-page"
           style={{
-            padding: "80px 10px ",
-            marginBottom: "200px",
             background: "#dbdbdbd1",
           }}
         >
           <Box
             className="container-calendars"
-            style={{
-              height: "500px",
-              width: "max-content",
-              overflow: "auto",
-              margin: "0 auto",
-              marginBottom: "50px",
-              borderRadius: "5px",
-            }}
             sx={{
               bgcolor: "primary.main",
             }}
@@ -89,8 +81,8 @@ export const Home = () => {
           </Box>
 
           <Ranking size="big" />
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   );
 };

@@ -1,0 +1,101 @@
+.container-calendar-match {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  align-items: center;
+  padding: 9px 20px;
+  border-radius: 5px;
+  min-width: 260px;
+}
+
+.content-home-country {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 30%;
+  margin-left: 15px;
+}
+.content-away-country {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 30%;
+  justify-content: right;
+  margin-right: 15px;
+}
+
+.date-calendar-match {
+  font-size: 1rem;
+}
+.container-points {
+  background-color: #e8e8e2;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 5px;
+}
+
+.img-flag {
+  width: 65px;
+  height: 43px;
+  border: 0.8px solid;
+  border-radius: 5px;
+}
+
+.nameCountry {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 660px) {
+  .content-home-country {
+    flex-direction: column-reverse;
+    gap: 3px;
+  }
+  .content-away-country {
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .date-calendar-match {
+    font-size: 0.9rem;
+  }
+
+  .img-flag {
+    width: 62px;
+    height: 40px;
+  }
+
+  .nameCountry {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container-calendar-match {
+    padding: 4px;
+  }
+  .content-home-country {
+    flex-direction: column-reverse;
+    gap: 2px;
+  }
+  .content-away-country {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .date-calendar-match {
+    font-size: 0.75rem;
+  }
+  .container-points {
+    font-size: 0.8rem;
+  }
+
+  .img-flag {
+    width: 55px;
+    height: 33px;
+  }
+
+  .nameCountry {
+    font-size: 0.8rem;
+  }
+}

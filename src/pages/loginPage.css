@@ -1,3 +1,12 @@
+.page-login {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 50px;
+}
+
 .icon-arrowBack {
   position: absolute;
   top: 23px;
@@ -12,4 +21,53 @@
 }
 .icon-arrowBack:active {
   background: #8d1b3d2f;
+}
+
+.container-form-login {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  min-width: 400px;
+  max-width: 450px;
+  margin-left: 50px;
+}
+
+.title-login {
+  font-size: 2rem !important;
+}
+
+.text-login {
+  font-size: 0.8rem !important;
+}
+
+@media screen and (max-width: 768px) {
+  .page-login {
+    padding: 0px;
+  }
+  .container-form-login {
+    margin: 0px auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container-form-login {
+    padding: 30px;
+    min-width: 280px;
+    margin: 0px auto;
+    width: 90%;
+  }
+
+  .title-login {
+    font-size: 1.4rem !important;
+  }
+
+  .text-login {
+    font-size: 0.6rem !important;
+  }
+
+  .input-number-custom {
+    height: 40px;
+  }
 }

@@ -1,6 +1,6 @@
 .ranking-big {
   background: #cda9;
-  width: 700px;
+  max-width: 750px;
   color: black;
   text-align: center;
   position: relative;
@@ -12,10 +12,18 @@
 
 .ranking-big > .container-name-points {
   padding: 10px 100px 0px !important;
+  display: flex;
+}
+
+.ranking-big > .title-ranking {
+  text-shadow: 0 0 5px black;
+  font-weight: 200;
+  color: white;
+  margin: 14px 0 -2px;
+  font-size: 1.3rem;
 }
 
 .ranking-small {
-  /* background: #2a7bc1b5; */
   width: 100%;
   color: white;
   text-align: center;
@@ -23,16 +31,19 @@
   margin: 0 auto;
   font-size: 13px;
   height: 100%;
-  /* height: 60%; */
   margin-bottom: 10px;
   border-radius: 5px;
   box-shadow: 0px 0px 2px #000;
   overflow: auto;
   scrollbar-width: none;
-  /* padding: 0 30px; */
 }
 
-.ranking-small > h2 {
+.ranking-small > .container-name-points {
+  display: flex;
+  padding: 10px 15px 0;
+}
+
+.ranking-small > .title-ranking {
   font-weight: 600;
   font-size: 18px;
   padding-top: 5px;
@@ -41,11 +52,6 @@
   font-weight: 100;
   margin: 0;
 }
-/* 
-.list-participants {
-  height: 100%;
-  overflow: auto;
-} */
 
 .ranking-scrollbar::-webkit-scrollbar {
   width: 10px;
@@ -68,4 +74,27 @@
 .ranking-small::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .ranking-big {
+    margin: 20px;
+  }
+
+  .ranking-big > .container-name-points {
+    padding: 10px 40px 0px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .ranking-big {
+    margin: 0px;
+  }
+
+  .ranking-big > .container-name-points {
+    padding: 7px 20px 0px !important;
+  }
+  .ranking-big > .title-ranking {
+    font-size: 1.1rem;
+  }
 }
