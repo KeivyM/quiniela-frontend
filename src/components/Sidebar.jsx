@@ -41,8 +41,8 @@ export const Sidebar = ({ showUsers }) => {
       </Typography>
 
       <Box
+        className="container-ranking"
         sx={{
-          height: "70%",
           marginBottom: "15px",
         }}
       >

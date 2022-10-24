@@ -1,13 +1,12 @@
 .carousel-quinielas {
   max-width: 100%;
-  min-width: 300px;
   min-height: 100%;
   height: 100%;
   flex-grow: 1;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  min-width: 375px;
+  min-width: 300px;
 }
 
 .paper-custom {

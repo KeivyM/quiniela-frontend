@@ -46,7 +46,7 @@ input[type="number"] {
   justify-content: center;
   border: 1px solid;
   border-radius: 15px;
-  min-width: 335px;
+  min-width: 300px;
 }
 
 .container-date-match {
@@ -108,6 +108,6 @@ input[type="number"] {
 @media screen and (max-width: 480px) {
   .MuiInputBase-input {
     padding: 5px !important;
-    width: 50px !important;
+    width: 45px !important;
   }
 }
