@@ -7,17 +7,18 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  min-width: 375px;
 }
 
 .paper-custom {
   display: flex;
   align-items: center;
-  height: 50;
+  height: 50px;
   border-radius: 5px 5px 0 0;
 }
 
 .phase-title {
-  font-size: 29px !important;
+  font-size: 1.8rem !important;
   margin: 0 auto !important;
   color: #fdfdfd;
 }
@@ -28,4 +29,22 @@
   justify-content: space-between;
   border-radius: 5px;
   color: #ccc;
+}
+
+@media screen and (max-width: 800px) {
+  .phase-title {
+    font-size: 1.6rem !important;
+  }
+  .paper-custom {
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .phase-title {
+    font-size: 1.3rem !important;
+  }
+  .paper-custom {
+    height: 35px;
+  }
 }

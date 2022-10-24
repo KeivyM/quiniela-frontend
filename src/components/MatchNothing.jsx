@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, TextField, Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { getFlag } from "../utils";
+// import "./matchNothing.css";
 
 export const MatchNothing = (data) => {
   const {
@@ -29,23 +30,25 @@ export const MatchNothing = (data) => {
 
   return (
     <Box
+      className="container-big-match"
       sx={{
-        marginBottom: "2px",
-        justifyContent: "center",
         bgcolor: "secondary.main",
-        border: "1px solid",
-        borderRadius: "15px",
+        //   marginBottom: "2px",
+        //   justifyContent: "center",
+        //   border: "1px solid",
+        //   borderRadius: "15px",
       }}
     >
       <Box
+        className="container-date-match"
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "end",
-          gap: "6px",
+          // display: "flex",
+          // alignItems: "center",
+          // justifyContent: "end",
+          // gap: "6px",
           color: "#000",
-          paddingRight: "20px",
-          margin: "6px 0px",
+          // paddingRight: "20px",
+          // margin: "6px 0px",
         }}
       >
         <AccessTimeIcon sx={{ fontSize: "1rem" }} />
@@ -55,20 +58,21 @@ export const MatchNothing = (data) => {
       </Box>
 
       <Box
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          width: "100%",
-          height: "85px",
-          alignItems: "center",
-          borderRadius: "15px",
-          gap: "10px",
-        }}
+        className="container-match"
+        // style={{
+        //   display: "flex",
+        //   justifyContent: "space-evenly",
+        //   width: "100%",
+        //   height: "85px",
+        //   alignItems: "center",
+        //   borderRadius: "15px",
+        //   gap: "10px",
+        // }}
         sx={{
           bgcolor: "primary.main",
-          boxShadow: "0px -4px 2px #0005",
-          padding: "0px 75px",
-          boxSizing: "border-box",
+          // boxShadow: "0px -4px 2px #0005",
+          // padding: "0px 75px",
+          // boxSizing: "border-box",
         }}
       >
         <div
@@ -90,32 +94,34 @@ export const MatchNothing = (data) => {
                       homeName
                     )}.png`
               }
-              width={60}
-              height={40}
+              // width={60}
+              // height={40}
               alt="flag"
-              style={{
-                border: ".8px solid",
-                borderRadius: "5px",
-              }}
+              // style={{
+              //   border: ".8px solid",
+              //   borderRadius: "5px",
+              // }}
+              className="img-flag-phases"
             />
             <TextField
               id="outlined-number"
               type="number"
               name="homeScore"
               disabled={disabled}
+              placeholder="Goles"
               style={{ padding: "0" }}
-              sx={{ width: "77px" }}
+              // sx={{ width: "77px" }}
               onChange={(e) => onAddPredictions(e, matchId)}
               InputProps={{
                 inputProps: {
                   min: 0,
                   value: homeScore || "",
                   style: {
-                    padding: "8px",
+                    // padding: "8px",
                     textAlign: "center",
-                    background: "#fff",
+                    // background: "#fff",
                     borderRadius: 5,
-                    fontWeight: 800,
+                    // fontWeight: 800,
                   },
                 },
               }}
@@ -139,19 +145,20 @@ export const MatchNothing = (data) => {
               type="number"
               name="awayScore"
               disabled={disabled}
+              placeholder="Goles"
               style={{ padding: "0" }}
-              sx={{ width: "77px" }}
+              // sx={{ width: "77px" }}
               onChange={(e) => onAddPredictions(e, matchId)}
               InputProps={{
                 inputProps: {
                   min: 0,
                   value: awayScore || "",
                   style: {
-                    padding: "8px",
+                    // padding: "8px",
                     textAlign: "center",
-                    background: "#fff",
+                    // background: "#fff",
                     borderRadius: 5,
-                    fontWeight: 800,
+                    // fontWeight: 800,
                   },
                 },
               }}
@@ -164,13 +171,14 @@ export const MatchNothing = (data) => {
                       awayName
                     )}.png`
               }
-              width={60}
-              height={40}
+              // width={60}
+              // height={40}
               alt="flag"
-              style={{
-                border: ".8px solid",
-                borderRadius: "5px",
-              }}
+              // style={{
+              //   border: ".8px solid",
+              //   borderRadius: "5px",
+              // }}
+              className="img-flag-phases"
             />
           </div>
         </div>

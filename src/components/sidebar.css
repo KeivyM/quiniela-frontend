@@ -9,7 +9,7 @@
   position: relative;
   min-width: 230px;
   width: 40%;
-  transition: left 0.7s ease-in-out;
+  transition: left 0.7s ease;
 }
 
 .username-title {
@@ -43,6 +43,11 @@
     left: 0;
   }
   .hidden {
-    left: -400px;
+    left: -380px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .username-title {
+    padding: 17px 0 15px;
   }
 }

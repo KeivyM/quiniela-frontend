@@ -1,22 +1,49 @@
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-.MuiInputBase-input::-webkit-outer-spin-button,
-.MuiInputBase-input::-webkit-inner-spin-button {
-  margin: 0;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-#outlined-number::placeholder {
-  font-weight: 400;
-}
-
-.container-match {
+/* .container-big-match {
   margin-bottom: 2px;
   justify-content: center;
   border: 1px solid;
   border-radius: 15px;
-  min-width: 340px;
+  min-width: 335px;
 }
+
+.container-date-match {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding-right: 20px;
+  margin: 6px 0px;
+}
+
+.container-match {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 85px;
+  align-items: center;
+  border-radius: 15px;
+  gap: 10px;
+  box-shadow: 0px -4px 2px #0005;
+  padding: 0px 75px;
+}
+
+.img-flag-phases {
+  width: 60px;
+  height: 40px;
+  border: 0.8px solid;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 480px) {
+  .container-date-match {
+    padding-right: 15px;
+    margin: 4px 0px;
+  }
+  .container-match {
+    height: 80px;
+  }
+  .img-flag-phases {
+    width: 52px;
+    height: 33px;
+  }
+} */
