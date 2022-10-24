@@ -12,3 +12,11 @@ input[type="number"] {
 #outlined-number::placeholder {
   font-weight: 400;
 }
+
+.container-match {
+  margin-bottom: 2px;
+  justify-content: center;
+  border: 1px solid;
+  border-radius: 15px;
+  min-width: 340px;
+}

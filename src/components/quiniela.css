@@ -59,3 +59,13 @@
   padding: 0px 40px 10px;
   box-sizing: border-box;
 }
+
+@media screen and (max-width: 480px) {
+  .form-quiniela {
+    padding: 0px 5px 10px;
+  }
+  .container-quiniela::-webkit-scrollbar {
+    width: 0px;
+    height: 0;
+  }
+}

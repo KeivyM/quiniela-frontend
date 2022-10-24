@@ -11,10 +11,6 @@
   width: 40%;
   transition: left 0.7s ease-in-out;
 }
-#icon-participants {
-  display: none;
-  z-index: 999999999999999999;
-}
 
 .username-title {
   position: relative;
@@ -40,10 +36,6 @@
     z-index: 1000000;
     min-width: 230px;
     left: -100px;
-    display: block;
-  }
-
-  #icon-participants {
     display: block;
   }
 

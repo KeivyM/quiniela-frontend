@@ -16,12 +16,13 @@ export const Match = (data) => {
 
   return (
     <Box
+      className="container-match"
       sx={{
-        marginBottom: "2px",
-        justifyContent: "center",
+        // marginBottom: "2px",
+        // justifyContent: "center",
+        // border: "1px solid",
+        // borderRadius: "15px",
         bgcolor: "secondary.main",
-        border: "1px solid",
-        borderRadius: "15px",
       }}
     >
       <Box
