@@ -1,13 +1,19 @@
 .page-register {
+  background-image: linear-gradient(65deg, #8d1b3d, transparent),
+    url(../assets/imgBackground2.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
   padding: 50px;
+  width: 100%;
+  height: 100vh;
 }
 
 .container-form-register {
+  backdrop-filter: blur(3px);
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   flex-direction: column;

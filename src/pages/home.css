@@ -1,7 +1,7 @@
 .home-page {
   width: 100vw;
   height: 100vh;
-  background-image: url("../assets/fondo2.jpg");
+  background-image: url("../assets/imgBackground1.jpg");
   color: white;
   background-size: cover;
   background-position: center;
@@ -34,7 +34,6 @@
 .container-calendars {
   height: 500px;
   width: 750px;
-  /* width: max-content; */
   overflow: auto;
   margin: 0 auto;
   margin-bottom: 50px;

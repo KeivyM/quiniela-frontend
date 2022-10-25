@@ -30,12 +30,21 @@
   color: #ccc;
 }
 
+.icon-ball-title {
+  font-size: 1.37rem;
+  margin-top: 3px;
+}
+
 @media screen and (max-width: 800px) {
   .phase-title {
     font-size: 1.6rem !important;
   }
   .paper-custom {
     height: 40px;
+  }
+  .icon-ball-title {
+    font-size: 1.2rem;
+    margin-top: 2px;
   }
 }
 
@@ -45,5 +54,9 @@
   }
   .paper-custom {
     height: 35px;
+  }
+  .icon-ball-title {
+    font-size: 1rem;
+    margin-top: 1.9px;
   }
 }

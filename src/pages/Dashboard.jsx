@@ -3,7 +3,8 @@ import { useContext, useState } from "react";
 import { CarouselQuinielas, Sidebar } from "../components";
 import { Loading } from "../components/Loading";
 import { AuthContext } from "../context";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import "./dashboard.css";
 
 export const Dashboard = () => {
@@ -13,26 +14,26 @@ export const Dashboard = () => {
   return (
     <>
       {loading && <Loading />}
-      <Box
-        className="container-dashboard"
-        // style={{ display: "flex", maxWidth: "2000px" }}
-        sx={{ bgcolor: "#99c3E1" }}
-      >
-        <PeopleAltIcon
-          className="icon-participants"
-          onClick={() => setShowUsers(!showUsers)}
-        />
+      <Box className="container-dashboard" sx={{ bgcolor: "#99c3E1" }}>
+        <Box className={`icon-participants`}>
+          {showUsers ? (
+            <MenuRoundedIcon
+              className={`icon-participants ${
+                showUsers ? "hiddenIcon" : "showIcon"
+              }`}
+              onClick={() => setShowUsers(!showUsers)}
+            />
+          ) : (
+            <ClearRoundedIcon
+              className={`icon-participants ${
+                showUsers ? "hiddenIcon" : "showIcon"
+              }`}
+              onClick={() => setShowUsers(!showUsers)}
+            />
+          )}
+        </Box>
         <Sidebar showUsers={showUsers} />
-        <Box
-          className="container-carousel"
-          sx={{
-            bgcolor: "#99c3E1",
-            // width: "100%",
-            // height: "100vh",
-            // padding: "50px",
-            // boxSizing: "border-box",
-          }}
-        >
+        <Box className="container-carousel" sx={{ bgcolor: "#99c3E1" }}>
           <CarouselQuinielas />
         </Box>
       </Box>

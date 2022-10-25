@@ -19,8 +19,7 @@ import Swal from "sweetalert2";
 import { AxiosConfig } from "../utils";
 
 export const FormRegister = () => {
-  const { setUserAuth, setUsername, setPoints, setLoading } =
-    useContext(AuthContext);
+  const { setUserAuth, setLoading } = useContext(AuthContext);
   let navigate = useNavigate();
 
   const [values, setValues] = useState({
@@ -60,9 +59,7 @@ export const FormRegister = () => {
 
       localStorage.setItem("user_Auth", data.token);
 
-      setUsername(data.username);
       setUserAuth(data.token);
-      setPoints(data.points);
       navigate("/");
     } catch (error) {
       setLoading(false);

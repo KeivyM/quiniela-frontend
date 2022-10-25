@@ -1,4 +1,3 @@
-// import "./App.css";
 import { AppRoutes } from "./router/AppRoutes";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./theme/Theme";

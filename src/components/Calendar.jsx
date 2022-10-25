@@ -14,12 +14,7 @@ export const Calendar = ({ matches, title }) => {
         bgcolor: "secondary.light",
       }}
     >
-      <Typography
-        // variant="h5"
-        className="title-calendar"
-        sx={{ color: "#ecf2ec" }}
-        // style={{ color: "white" }}
-      >
+      <Typography className="title-calendar" sx={{ color: "#ecf2ec" }}>
         {title}
       </Typography>
       <div>

@@ -1,7 +1,6 @@
 import { TextField, Typography, Box } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { getFlag } from "../utils";
-// import "./match.css";
 
 export const Match = (data) => {
   const {
@@ -26,7 +25,7 @@ export const Match = (data) => {
       <Box className="container-match" sx={{ bgcolor: "primary.main" }}>
         <Box className="container-team">
           <h4 style={{ margin: "0px" }}>{homeName}</h4>
-          <div className="homeTeam">
+          <Box className="homeTeam">
             <img
               src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
                 homeName
@@ -36,7 +35,6 @@ export const Match = (data) => {
             />
             <TextField
               id="outlined-number"
-              // className="inputs-goals"
               color="secondary"
               className="outlined-number-custom"
               type="number"
@@ -57,7 +55,7 @@ export const Match = (data) => {
                 },
               }}
             />
-          </div>
+          </Box>
         </Box>
         <h3>VS</h3>
         <Box className="container-team">
@@ -89,10 +87,6 @@ export const Match = (data) => {
                 awayName
               )}.png`}
               alt="flag"
-              style={{
-                border: ".8px solid",
-                borderRadius: "5px",
-              }}
               className="img-flag-phases"
             />
           </Box>

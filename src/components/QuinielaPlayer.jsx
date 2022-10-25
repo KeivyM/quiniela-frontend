@@ -23,7 +23,6 @@ export const QuinielaPlayer = () => {
   const [disabled, setDisabled] = useState(true);
 
   const addPlayer = async () => {
-    // if (disabled) return console.log("No ha terminado la fase anterior");
 
     if (!!player?.playerName < 1 || !!player?.goals < 1)
       return Swal.fire({
@@ -185,36 +184,9 @@ export const QuinielaPlayer = () => {
         position: "relative",
       }}
     >
-      {/* cambiar false por disabled*/}
       {disabled && (
-        <Box
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "sticky",
-            top: 0,
-            zIndex: 1000,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "rgb(102 102 102 / 45%)",
-            padding: "4px 9px",
-            boxSizing: "border-box",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              gap: "7px",
-              padding: "10px",
-              backdropFilter: "blur(2px)",
-              background: "#ffffff94",
-              border: "0.1px solid",
-              borderRadius: "10px",
-            }}
-          >
+        <Box className="container-blocked-quiniela">
+          <Box className="container-blocked-message">
             <Typography>Esta quiniela no está disponible</Typography>
           </Box>
         </Box>
@@ -223,69 +195,21 @@ export const QuinielaPlayer = () => {
       <Box
         className="form-quiniela-player"
         component="form"
-        sx={{
-          // position: "absolute",
-          // width: "100%",
-          // display: "flex",
-          // minHeight: "100%",
-          // flexDirection: "column",
-          // gap: "10px",
-          // padding: "0px 40px 10px",
-          bgcolor: "custom.flagCatar",
-        }}
+        sx={{ bgcolor: "custom.flagCatar" }}
         onSubmit={(e) => {
           e.preventDefault();
         }}
       >
         <Box
           className="container-big-quiniela-player"
-          sx={{
-            bgcolor: "secondary.main",
-            // marginBottom: "2px",
-            // justifyContent: "center",
-            // border: "1px solid",
-            // borderRadius: "15px",
-            // marginTop: "50px",
-          }}
+          sx={{ bgcolor: "secondary.main" }}
         >
-          <Box
-            className="container-quiniela-player"
-            sx={
-              {
-                // display: "flex",
-                // alignItems: "center",
-                // justifyContent: "end",
-                // gap: "6px",
-                // color: "#000",
-                // paddingRight: "20px",
-                // margin: "6px 0px",
-              }
-            }
-          >
+          <Box className="container-quiniela-player">
             <Typography style={{ padding: 0, margin: 0, fontSize: "1rem" }}>
               Elige el goleador del Mundial
             </Typography>
           </Box>
-          <Box
-            className="container-inputs"
-            style={
-              {
-                // display: "flex",
-                // justifyContent: "space-evenly",
-                // width: "100%",
-                // height: "85px",
-                // alignItems: "center",
-                // borderRadius: "15px",
-                // gap: "10px",
-              }
-            }
-            sx={{
-              bgcolor: "primary.main",
-              // boxShadow: "0px -4px 2px #0005",
-              // padding: "0px 75px",
-              // boxSizing: "border-box",
-            }}
-          >
+          <Box className="container-inputs" sx={{ bgcolor: "primary.main" }}>
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -316,7 +240,6 @@ export const QuinielaPlayer = () => {
               name="goals"
               type="number"
               color="secondary"
-              // sx={{ minWidth: "95px" }}
               onChange={(e) => onAddPlayer(e.target.value, "goals")}
               required={true}
               disabled={disabled}

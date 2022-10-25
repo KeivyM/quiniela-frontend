@@ -24,8 +24,7 @@ export const FormLogin = () => {
     email: "",
     showPassword: false,
   });
-  const { setUserAuth, setUsername, setPoints, setLoading } =
-    useContext(AuthContext);
+  const { setUserAuth, setLoading } = useContext(AuthContext);
   let navigate = useNavigate();
 
   const {
@@ -46,9 +45,7 @@ export const FormLogin = () => {
       if (typeof data === "string") throw new Error(data);
 
       localStorage.setItem("user_Auth", data.token);
-      setUsername(data.username);
       setUserAuth(data.token);
-      setPoints(data.points);
       navigate("/");
     } catch (error) {
       setLoading(false);

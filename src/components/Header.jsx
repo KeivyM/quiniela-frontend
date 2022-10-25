@@ -2,7 +2,7 @@ import { Image } from "mui-image";
 import { Link, useNavigate } from "react-router-dom";
 import logo1 from "../assets/logo1.png";
 import logo2 from "../assets/logo2.png";
-import petImg from "../assets/mascotaB.png";
+import petImg from "../assets/imgPet.png";
 import { Box, Button, Menu, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./header.css";

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Box, TextField, Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { getFlag } from "../utils";
-// import "./matchNothing.css";
 
 export const MatchNothing = (data) => {
   const {

@@ -92,6 +92,32 @@ input[type="number"] {
   border-radius: 5px;
 }
 
+/* estilos para el contenedor de quiniela no disponible */
+.container-blocked-quiniela {
+  width: 100%;
+  height: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(102 102 102 / 45%);
+  padding: 4px 9px;
+}
+
+.container-blocked-message {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+  padding: 10px;
+  backdrop-filter: blur(2px);
+  background: #ffffff94;
+  border: 0.1px solid;
+  border-radius: 10px;
+}
+
 @media screen and (max-width: 480px) {
   .container-date-match {
     padding-right: 15px;

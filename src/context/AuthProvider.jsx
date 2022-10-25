@@ -34,6 +34,15 @@ export const AuthProvider = ({ children }) => {
     }
   }, [navigate, userAuth]);
 
+  const Logout = () => {
+    setLoading(true);
+    setPoints("");
+    setUsername("");
+    setUserAuth(false);
+    localStorage.removeItem("user_Auth");
+    navigate("/home");
+  };
+
   useEffect(() => {
     if (!!userAuth) {
       refreshToken();
@@ -45,13 +54,12 @@ export const AuthProvider = ({ children }) => {
       <AuthContext.Provider
         value={{
           userAuth,
-          setUserAuth,
-          setUsername,
-          setPoints,
           username,
           points,
           loading,
+          setUserAuth,
           setLoading,
+          Logout,
         }}
       >
         {children}

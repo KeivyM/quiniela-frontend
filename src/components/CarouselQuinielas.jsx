@@ -189,7 +189,7 @@ export function CarouselQuinielas() {
     {
       label: (
         <span style={{ display: "flex", alignItems: "center" }}>
-          G<SportsSoccerIcon style={{ fontSize: "21px", marginTop: "3px" }} />
+          G<SportsSoccerIcon className="icon-ball-title" />
           leador del Mundial
         </span>
       ),

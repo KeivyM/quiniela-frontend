@@ -1,24 +1,12 @@
 import { Box, Button, Typography } from "@mui/material";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 import { Ranking } from "./Ranking";
 import "./sidebar.css";
 
 export const Sidebar = ({ showUsers }) => {
-  const { setUserAuth, username, points, setPoints, setUsername, setLoading } =
-    useContext(AuthContext);
-  let navigate = useNavigate();
-
-  const Logout = () => {
-    setLoading(true);
-    setPoints("");
-    setUsername("");
-    setUserAuth(false);
-    localStorage.removeItem("user_Auth");
-    navigate("/home");
-  };
+  const { username, points, Logout } = useContext(AuthContext);
 
   return (
     <Box className={`sidebar-container show ${showUsers ? "hidden" : ""}`}>

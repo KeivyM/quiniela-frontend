@@ -86,11 +86,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   const onAddPredictions = (target, matchId) => {
     const { name, value } = target.target;
 
-    // if (predictions.length === 0) {
-    //   setPredictions([{ matchId: matchId, results: { [name]: value } }]);
-    //   return;
-    // }
-
     const result = predictions.find(
       (prediction) => prediction.matchId === matchId
     );
@@ -275,20 +270,8 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       sx={{ bgcolor: "secondary.light" }}
     >
       {disabled && (
-        <Box
-          className="container-blocked-quiniela"
-          sx={{
-            alignItems: "center",
-            justifyContent: "center",
-            background: "rgb(102 102 102 / 45%)",
-          }}
-        >
-          <Box
-            className="container-message"
-            sx={{
-              bgcolor: "#ffffff94",
-            }}
-          >
+        <Box className="container-blocked-quiniela">
+          <Box className="container-blocked-message">
             <Typography>Esta quiniela no está disponible</Typography>
           </Box>
         </Box>

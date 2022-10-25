@@ -24,19 +24,10 @@ export const Ranking = ({ size = "big" }) => {
         size === "big" ? "ranking-big" : "ranking-small"
       }`}
     >
-      <Typography
-        className="title-ranking"
-        style={
-          {
-            // textShadow: "0 0 5px black",
-            // fontWeight: 200,
-            // color: "white",
-            // margin: "14px 0 -2px",
-          }
-        }
-      >
+      <Typography className="title-ranking">
         {size === "big" ? "Ranking de Participantes" : "Participantes"}
       </Typography>
+
       <Box className="container-name-points">
         <Typography
           className="ranking-subtitles subtitle-name"
@@ -51,11 +42,12 @@ export const Ranking = ({ size = "big" }) => {
           Puntos
         </Typography>
       </Box>
-      <div className="list-participants">
+
+      <Box>
         {users.map((user, i) => {
           return <Participant size={size} key={i} user={user} />;
         })}
-      </div>
+      </Box>
     </Box>
   );
 };
