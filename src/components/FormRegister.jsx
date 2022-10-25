@@ -118,6 +118,7 @@ export const FormRegister = () => {
             label="Nombre"
             type="text"
             name="name"
+            color="secondary"
             {...register("name", { required: true })}
             onChange={handleChange("name")}
             value={values.name}
@@ -132,6 +133,7 @@ export const FormRegister = () => {
             label="Apellido"
             type="text"
             name="lastName"
+            color="secondary"
             {...register("lastName", { required: true })}
             onChange={handleChange("lastName")}
             value={values.lastName}
@@ -146,6 +148,7 @@ export const FormRegister = () => {
             label="Nombre de usuario"
             type="text"
             name="username"
+            color="secondary"
             {...register("username", { required: true })}
             onChange={handleChange("username")}
             value={values.username}
@@ -160,6 +163,7 @@ export const FormRegister = () => {
             label="Correo"
             type="email"
             name="email"
+            color="secondary"
             {...register("email", { required: true })}
             onChange={handleChange("email")}
             value={values.email}
@@ -168,7 +172,11 @@ export const FormRegister = () => {
           {errors.email?.message}
         </FormControl>
 
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+        <FormControl
+          sx={{ m: 1, width: "25ch" }}
+          color="secondary"
+          variant="outlined"
+        >
           <InputLabel htmlFor="outlined-adornment-password">
             Contraseña
           </InputLabel>
@@ -177,6 +185,7 @@ export const FormRegister = () => {
             type={values.showPassword ? "text" : "password"}
             value={values.password}
             name="password"
+            color="secondary"
             {...register("password", { required: true })}
             onChange={handleChange("password")}
             endAdornment={
@@ -196,7 +205,11 @@ export const FormRegister = () => {
           {errors.password?.message}
         </FormControl>
 
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+        <FormControl
+          sx={{ m: 1, width: "25ch" }}
+          color="secondary"
+          variant="outlined"
+        >
           <InputLabel htmlFor="outlined-adornment-password-repeat">
             Repite la Contraseña
           </InputLabel>
@@ -205,6 +218,7 @@ export const FormRegister = () => {
             type={values.showPasswordRepeat ? "text" : "password"}
             value={values.passwordRepeat}
             name="passwordRepeat"
+            color="secondary"
             {...register("passwordRepeat", { required: true })}
             onChange={handleChange("passwordRepeat")}
             endAdornment={

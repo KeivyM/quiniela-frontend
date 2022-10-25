@@ -385,6 +385,10 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
             variant="contained"
             type="submit"
             color="secondary"
+            sx={{
+              color: "#f4f4f4",
+              bgcolor: "#0e588d",
+            }}
             disabled={disabled}
             onClick={deleteQuiniela}
             startIcon={<BackspaceIcon />}
@@ -396,6 +400,10 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
             variant="contained"
             type="submit"
             color="secondary"
+            sx={{
+              color: "#f4f4f4",
+              bgcolor: "#0e588d",
+            }}
             disabled={disabled}
             onClick={addQuiniela}
             startIcon={<Save />}

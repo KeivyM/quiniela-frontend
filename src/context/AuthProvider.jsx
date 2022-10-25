@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
 
       console.info(error.code, error.message);
+      localStorage.removeItem("user_Auth");
       navigate("/");
     }
   }, [navigate, userAuth]);

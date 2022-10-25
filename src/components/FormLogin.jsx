@@ -118,6 +118,7 @@ export const FormLogin = () => {
             label="Correo"
             type="email"
             name="email"
+            color="secondary"
             {...register("email", { required: true })}
             onChange={handleChange("email")}
             value={values.email}
@@ -126,7 +127,11 @@ export const FormLogin = () => {
           {errors.email?.message}
         </FormControl>
 
-        <FormControl sx={{ m: 1, width: "30ch" }} variant="outlined">
+        <FormControl
+          sx={{ m: 1, width: "30ch" }}
+          color="secondary"
+          variant="outlined"
+        >
           <InputLabel htmlFor="outlined-adornment-password">
             Contraseña
           </InputLabel>

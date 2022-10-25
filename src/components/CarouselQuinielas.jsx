@@ -235,43 +235,16 @@ export function CarouselQuinielas() {
   };
 
   return (
-    <Box
-      className="carousel-quinielas"
-      sx={
-        {
-          // maxWidth: "100%",
-          // minWidth: "480px",
-          // minHeight: "100%",
-          // height: "100%",
-          // flexGrow: 1,
-          // borderRadius: "5px",
-          // display: "flex",
-          // flexDirection: "column",
-        }
-      }
-    >
+    <Box className="carousel-quinielas">
       <Paper
         className="paper-custom"
         square
         elevation={0}
         sx={{
-          // display: "flex",
-          // alignItems: "center",
-          // height: 50,
-          // borderRadius: "5px 5px 0 0",
           bgcolor: "secondary.light",
         }}
       >
-        <Typography
-          className="phase-title"
-          // style={
-          //   {
-          //   fontSize: "29px",
-          //   margin: "0 auto",
-          //   color: "#fdfdfd",
-          //   }
-          // }
-        >
+        <Typography className="phase-title">
           {steps[activeStep].label}
         </Typography>
       </Paper>

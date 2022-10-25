@@ -13,6 +13,7 @@ import moment from "moment";
 import "moment-timezone";
 import Swal from "sweetalert2";
 import axios from "axios";
+import "./quinielaPlayer.css";
 
 export const QuinielaPlayer = () => {
   const { userAuth } = useContext(AuthContext);
@@ -173,7 +174,6 @@ export const QuinielaPlayer = () => {
     <Box
       sx={{
         bgcolor: "secondary.light",
-        boxSizing: "border-box",
         overflow: "auto",
         height: "100%",
       }}
@@ -185,6 +185,7 @@ export const QuinielaPlayer = () => {
         position: "relative",
       }}
     >
+      {/* cambiar false por disabled*/}
       {disabled && (
         <Box
           style={{
@@ -220,72 +221,79 @@ export const QuinielaPlayer = () => {
       )}
 
       <Box
+        className="form-quiniela-player"
         component="form"
         sx={{
-          position: "absolute",
-          width: "100%",
-          display: "flex",
-          minHeight: "100%",
-          flexDirection: "column",
-          gap: "10px",
+          // position: "absolute",
+          // width: "100%",
+          // display: "flex",
+          // minHeight: "100%",
+          // flexDirection: "column",
+          // gap: "10px",
+          // padding: "0px 40px 10px",
           bgcolor: "custom.flagCatar",
-          padding: "0px 40px 10px",
-          boxSizing: "border-box",
         }}
         onSubmit={(e) => {
           e.preventDefault();
         }}
       >
         <Box
+          className="container-big-quiniela-player"
           sx={{
-            marginBottom: "2px",
-            justifyContent: "center",
             bgcolor: "secondary.main",
-            border: "1px solid",
-            borderRadius: "15px",
-            marginTop: "50px",
+            // marginBottom: "2px",
+            // justifyContent: "center",
+            // border: "1px solid",
+            // borderRadius: "15px",
+            // marginTop: "50px",
           }}
         >
           <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "end",
-              gap: "6px",
-              color: "#000",
-              paddingRight: "20px",
-              margin: "6px 0px",
-            }}
+            className="container-quiniela-player"
+            sx={
+              {
+                // display: "flex",
+                // alignItems: "center",
+                // justifyContent: "end",
+                // gap: "6px",
+                // color: "#000",
+                // paddingRight: "20px",
+                // margin: "6px 0px",
+              }
+            }
           >
             <Typography style={{ padding: 0, margin: 0, fontSize: "1rem" }}>
               Elige el goleador del Mundial
             </Typography>
           </Box>
           <Box
-            style={{
-              display: "flex",
-              justifyContent: "space-evenly",
-              width: "100%",
-
-              height: "85px",
-              alignItems: "center",
-              borderRadius: "15px",
-              gap: "10px",
-            }}
+            className="container-inputs"
+            style={
+              {
+                // display: "flex",
+                // justifyContent: "space-evenly",
+                // width: "100%",
+                // height: "85px",
+                // alignItems: "center",
+                // borderRadius: "15px",
+                // gap: "10px",
+              }
+            }
             sx={{
               bgcolor: "primary.main",
-              boxShadow: "0px -4px 2px #0005",
-              padding: "0px 75px",
-              boxSizing: "border-box",
+              // boxShadow: "0px -4px 2px #0005",
+              // padding: "0px 75px",
+              // boxSizing: "border-box",
             }}
           >
             <Autocomplete
               disablePortal
               id="combo-box-demo"
               options={data}
-              sx={{ width: " 70%" }}
+              sx={{ width: "70%", minWidth: "230px" }}
               value={playerName || null}
               disabled={disabled}
+              color="secondary"
               getOptionLabel={(option) => option.playerName}
               onInputChange={(e, value) => onAddPlayer(value, "playerName")}
               isOptionEqualToValue={(option, value) =>
@@ -296,6 +304,7 @@ export const QuinielaPlayer = () => {
                   type="text"
                   name="playerName"
                   required={true}
+                  color="secondary"
                   {...params}
                   label="Goleador del Mundial"
                 />
@@ -306,7 +315,8 @@ export const QuinielaPlayer = () => {
               label="Goles"
               name="goals"
               type="number"
-              sx={{ width: "20%" }}
+              color="secondary"
+              // sx={{ minWidth: "95px" }}
               onChange={(e) => onAddPlayer(e.target.value, "goals")}
               required={true}
               disabled={disabled}
@@ -319,6 +329,7 @@ export const QuinielaPlayer = () => {
         <Button
           variant="contained"
           type="submit"
+          color="secondary"
           disabled={disabled}
           onClick={addPlayer}
           startIcon={<Save />}
@@ -327,6 +338,8 @@ export const QuinielaPlayer = () => {
             position: "sticky",
             bottom: "10px",
             left: "100%",
+            color: "#f4f4f4",
+            bgcolor: "#0e588d",
           }}
         >
           Guardar

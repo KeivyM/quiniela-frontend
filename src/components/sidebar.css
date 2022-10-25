@@ -5,11 +5,10 @@
   background-size: cover;
   padding: 10px;
   text-align: center;
-  /* box-sizing: border-box; */
   position: relative;
   min-width: 230px;
   width: 40%;
-  transition: left 1s ease-out;
+  transition: left 0.8s ease-out;
 }
 
 .username-title {
@@ -32,8 +31,8 @@
 @media screen and (max-width: 800px) {
   .sidebar-container {
     height: 100vh;
-    width: 90vw;
-    max-width: 300px;
+    width: 100vw;
+    max-width: 480px;
     padding: 10px;
     text-align: center;
     position: absolute;
@@ -50,14 +49,27 @@
     left: 0;
   }
   .hidden {
-    left: -380px;
+    left: -480px;
   }
 }
 @media screen and (max-width: 480px) {
+  .sidebar-container {
+    max-width: 100vw;
+    height: 100vh;
+    width: 100vw;
+  }
+
   .username-title {
     padding: 0px;
   }
   .container-ranking {
     height: 60%;
+  }
+
+  .show {
+    left: 0;
+  }
+  .hidden {
+    left: -500px;
   }
 }

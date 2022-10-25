@@ -21,6 +21,7 @@ html {
 /* estilos para inputs number */
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .MuiInputBase-input::-webkit-outer-spin-button,
@@ -30,10 +31,10 @@ input[type="number"] {
   appearance: none;
 }
 
-#outlined-number::placeholder {
+.container-match .outlined-number-custom::placeholder {
   font-weight: 400;
 }
-.MuiInputBase-input {
+.container-match #outlined-number {
   padding: 8px !important;
   font-weight: 800 !important;
   width: 60px !important;
@@ -106,7 +107,7 @@ input[type="number"] {
 }
 
 @media screen and (max-width: 480px) {
-  .MuiInputBase-input {
+  .container-match #outlined-number {
     padding: 5px !important;
     width: 45px !important;
   }

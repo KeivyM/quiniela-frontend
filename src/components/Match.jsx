@@ -15,101 +15,44 @@ export const Match = (data) => {
   } = data;
 
   return (
-    <Box
-      className="container-big-match"
-      sx={{
-        // marginBottom: "2px",
-        // justifyContent: "center",
-        // border: "1px solid",
-        // borderRadius: "15px",
-        bgcolor: "secondary.main",
-      }}
-    >
-      <Box
-        className="container-date-match"
-        sx={{
-          // display: "flex",
-          // alignItems: "center",
-          // justifyContent: "end",
-          // gap: "6px",
-          // paddingRight: "20px",
-          // margin: "6px 0px",
-          color: "#000",
-        }}
-      >
+    <Box className="container-big-match" sx={{ bgcolor: "secondary.main" }}>
+      <Box className="container-date-match" sx={{ color: "#000" }}>
         <AccessTimeIcon sx={{ fontSize: "1rem" }} />
         <Typography style={{ padding: 0, margin: 0, fontSize: "1rem" }}>
           {date}.
         </Typography>
       </Box>
 
-      <Box
-        className="container-match"
-        style={
-          {
-            // display: "flex",
-            // justifyContent: "space-evenly",
-            // width: "100%",
-            // height: "85px",
-            // alignItems: "center",
-            // borderRadius: "15px",
-            // gap: "10px",
-          }
-        }
-        sx={{
-          bgcolor: "primary.main",
-          // boxShadow: "0px -4px 2px #0005",
-          // padding: "0px 75px",
-        }}
-      >
-        <Box
-          className="container-team"
-          // style={{
-          //   display: "flex",
-          //   justifyItems: "center",
-          //   flexDirection: "column",
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          // }}
-        >
+      <Box className="container-match" sx={{ bgcolor: "primary.main" }}>
+        <Box className="container-team">
           <h4 style={{ margin: "0px" }}>{homeName}</h4>
-          <div
-            className="homeTeam"
-            // style={{ display: "flex", justifyItems: "center", gap: "8px" }}
-          >
+          <div className="homeTeam">
             <img
               src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
                 homeName
               )}.png`}
-              // width={60}
-              // height={40}
               alt="flag"
-              // style={{
-              //   border: ".8px solid",
-              //   borderRadius: "5px",
-              // }}
               className="img-flag-phases"
             />
             <TextField
               id="outlined-number"
-              className="inputs-goals"
+              // className="inputs-goals"
+              color="secondary"
+              className="outlined-number-custom"
               type="number"
               name="homeScore"
               placeholder="Goles"
               disabled={disabled}
               style={{ padding: "0" }}
-              // sx={{ width: "77px" }}
               onChange={(e) => onAddPredictions(e, matchId)}
               InputProps={{
                 inputProps: {
                   min: 0,
                   value: prediction?.results?.homeScore || "",
                   style: {
-                    // padding: "5px",
                     borderRadius: 5,
                     textAlign: "center",
                     background: "#fff",
-                    // fontWeight: 800,
                   },
                 },
               }}
@@ -117,38 +60,22 @@ export const Match = (data) => {
           </div>
         </Box>
         <h3>VS</h3>
-        <Box
-          className="container-team"
-          style={
-            {
-              // display: "flex",
-              // textAlign: "center",
-              // flexDirection: "column",
-              // justifyContent: "center",
-              // alignItems: "center",
-            }
-          }
-        >
+        <Box className="container-team">
           <h4 style={{ margin: "0px" }}>{awayName}</h4>
-          <Box
-            className="awayTeam"
-            // style={{ display: "flex", justifyItems: "center", gap: "8px" }}
-          >
+          <Box className="awayTeam">
             <TextField
               id="outlined-number"
               type="number"
               name="awayScore"
+              color="secondary"
               placeholder="Goles"
               disabled={disabled}
-              // style={{ padding: "0" }}
-              // sx={{ width: "77px" }}
               onChange={(e) => onAddPredictions(e, matchId)}
               InputProps={{
                 inputProps: {
                   min: 0,
                   value: prediction?.results?.awayScore || "",
                   style: {
-                    // padding: "8px",
                     textAlign: "center",
                     background: "#fff",
                     borderRadius: 5,
@@ -161,8 +88,6 @@ export const Match = (data) => {
               src={`https://cdn.sportmonks.com/images/countries/png/short/${getFlag(
                 awayName
               )}.png`}
-              // height={40}
-              // width={60}
               alt="flag"
               style={{
                 border: ".8px solid",
