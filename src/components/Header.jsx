@@ -21,9 +21,9 @@ export const Header = () => {
 
   return (
     <Box className="Header">
-      <Box style={{ display: "flex ", alignItems: "flex-end" }}>
-        <Image src={logo1} width={40} alt="logo" />
-        <Image src={logo2} width={170} alt="logo" />
+      <Box className="container-imgs">
+        <Image src={logo1} width="auto" height="85%" alt="logo" />
+        <Image src={logo2} width="auto" height="70%" alt="logo" />
       </Box>
       <Box className="btns-menu-desktop" style={{ alignItems: "center" }}>
         <Box className="container-btns">
@@ -38,7 +38,7 @@ export const Header = () => {
             </Link>
           </h3>
         </Box>
-        <Image src={petImg} width={100} alt="logo" />
+        <Image src={petImg} width={87} alt="logo" />
       </Box>
       <Box className="btns-menu-movil">
         <Button

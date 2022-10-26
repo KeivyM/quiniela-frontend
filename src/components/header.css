@@ -16,6 +16,12 @@
   top: 0;
 }
 
+.Header .container-imgs {
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+}
+
 .btns-auth {
   color: rgb(210, 208, 208);
   padding: 20px;
@@ -41,10 +47,12 @@
 @media screen and (max-width: 768px) {
   .Header {
     justify-content: space-between;
+    height: 100px;
+    padding: 0 10px;
   }
 
-  .imgs-header {
-    width: 200px;
+  .Header .container-imgs {
+    height: 70px;
   }
 
   .container-btns {
@@ -52,15 +60,19 @@
   }
 
   .btns-auth {
-    font-size: 1rem;
-    padding: 10px;
+    font-size: 0.95rem;
+    padding: 9px;
   }
 }
+
 @media screen and (max-width: 480px) {
   .Header {
     justify-content: space-between;
     padding: 0 10px;
-    height: 95px;
+    height: 69px;
+  }
+  .Header .container-imgs {
+    height: 60px;
   }
   .btns-menu-movil {
     display: block;
