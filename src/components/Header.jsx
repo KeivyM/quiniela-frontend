@@ -38,7 +38,12 @@ export const Header = () => {
             </Link>
           </h3>
         </Box>
-        <Image src={petImg} width={87} alt="logo" />
+        <Image
+          src={petImg}
+          width={87}
+          style={{ filter: "drop-shadow(0px 0px 1px white)" }}
+          alt="logo"
+        />
       </Box>
       <Box className="btns-menu-movil">
         <Button
