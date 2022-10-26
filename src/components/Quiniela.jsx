@@ -27,11 +27,11 @@ moment.updateLocale("es", {
 });
 
 const phases = {
-  Grupos: { timeStart: 1668949200, timeEnd: 1670014800 }, //timeStart es a las 9 am y el primer partido es a las 12 pm  // timeEnd es a las 5pm y el ultimo partido a las 3pm
-  Octavos: { timeStart: 1670072400, timeEnd: 1670360400 }, //timeStart: 9am primer partido 11am // timeEnd 5pm
-  Cuartos: { timeStart: 1670590800, timeEnd: 1670706000 }, //timeStart: 9am primer partido 11am // timeEnd 5pm
-  Semifinales: { timeStart: 1670950800, timeEnd: 1671051600 }, //timeStart: 1pm primer partido 3pm // timeEnd 5pm
-  Final: { timeStart: 1671282000, timeEnd: 1671382800 }, //timeStart: 9am primer partido 11am // timeEnd 1pm
+  Grupos: { timeStart: 1668958200, timeEnd: 1670014800 }, //timeStart: 11:30am primer partido 12 pm // timeEnd 5pm
+  Octavos: { timeStart: 1670077800, timeEnd: 1670360400 }, //timeStart: 10:30am primer partido 11am // timeEnd 5pm
+  Cuartos: { timeStart: 1670596200, timeEnd: 1670706000 }, //timeStart: 10:30am primer partido 11am // timeEnd 5pm
+  Semifinales: { timeStart: 1670956200, timeEnd: 1671051600 }, //timeStart: 2:30pm primer partido 3pm // timeEnd 5pm
+  Final: { timeStart: 1671287400, timeEnd: 1671382800 }, //timeStart: 10:30am primer partido 11am // timeEnd 1pm
 };
 
 // const phases = {
@@ -117,8 +117,6 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   };
 
   const addQuiniela = async () => {
-    if (disabled) return console.log("No ha terminado la fase anterior");
-
     if (arrayDePartidos?.length < 1)
       return Swal.fire({
         title: "Tienes Problemas?",
