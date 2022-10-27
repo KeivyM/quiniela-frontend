@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [userAuth, setUserAuth] = useState(() =>
     localStorage.getItem("user_Auth")
-  ); // debe tener el JWT del usuario autenticado
+  );
 
   let navigate = useNavigate();
 
@@ -24,11 +24,7 @@ export const AuthProvider = ({ children }) => {
       setUserAuth(data.token);
       setUsername(data.username);
       setPoints(data.points);
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
-
-      console.info(error.code, error.message);
       localStorage.removeItem("user_Auth");
       navigate("/");
     }

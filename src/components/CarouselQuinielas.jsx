@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Quiniela, QuinielaPlayer } from "./";
+import { AuthContext } from "../context";
 import {
   Box,
   Button,
@@ -19,9 +20,10 @@ import "react-toastify/dist/ReactToastify.css";
 import "./carouselQuinielas.css";
 
 export function CarouselQuinielas() {
-  const theme = useTheme();
+  const { setLoading } = useContext(AuthContext);
   const [activeStep, setActiveStep] = useState(0);
   const [matches, setMatches] = useState([]);
+  const theme = useTheme();
 
   const notify = () =>
     toast.error("No se pudo obtener los partidos, Intenta más tarde!", {
@@ -239,15 +241,18 @@ export function CarouselQuinielas() {
     } catch (error) {
       notify();
     }
+    setLoading(false);
+
     //
     // await axios
     //   .get("http://localhost:3000/prediction/getMatchesFromApi")
     //   .then((res) => setMatches(res.data.data)); //local
-  }, []);
+  }, [setLoading]);
 
   useEffect(() => {
+    setLoading(true);
     getMatches();
-  }, [getMatches]);
+  }, [getMatches, setLoading]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
