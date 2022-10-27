@@ -13,6 +13,8 @@ import moment from "moment";
 import "moment-timezone";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./quinielaPlayer.css";
 
 export const QuinielaPlayer = () => {
@@ -22,65 +24,84 @@ export const QuinielaPlayer = () => {
   const [playerName, setPlayerName] = useState("");
   const [disabled, setDisabled] = useState(true);
 
-  const addPlayer = async () => {
-    if (!!player?.playerName < 1 || !!player?.goals < 1)
-      return Swal.fire({
-        title: "Hay campos vacios!",
-        text: "Los campos deben estar llenos",
-        icon: "info",
-        confirmButtonText: "Ok",
-      });
-
-    const TOKEN = userAuth;
-
-    const res = await AxiosConfig.get("auth/private", {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
+  const notify = (message) =>
+    toast.error(message, {
+      position: "top-center",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      icon: false,
+      theme: "light",
     });
-    const userId = res.data.user._id;
 
-    const { data } = await AxiosConfig.get(`player/findOneByUserId/${userId}`);
+  const addPlayer = async () => {
+    try {
+      if (!!player?.playerName < 1 || !!player?.goals < 1)
+        return Swal.fire({
+          title: "Hay campos vacios!",
+          text: "Los campos deben estar llenos",
+          icon: "info",
+          confirmButtonText: "Ok",
+        });
 
-    if (!!data) {
-      // actualizar player
-      const goals = Number(player.goals);
-      const playerName = player.playerName;
+      const TOKEN = userAuth;
 
-      const body = {
-        playerName,
-        goals,
-      };
-
-      await AxiosConfig.put(`player/${data._id}`, body, {
-        headers: { Authorization: `Bearer ${TOKEN}` },
+      const res = await AxiosConfig.get("auth/private", {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
       });
+      const userId = res.data.user._id;
 
-      Swal.fire({
-        title: "Listo!",
-        text: "Tu predicción se ha actualizado correctamente.",
-        icon: "success",
-        confirmButtonText: "Ok",
-      });
-    } else {
-      const goals = Number(player.goals);
-      const playerName = player.playerName;
+      const { data } = await AxiosConfig.get(
+        `player/findOneByUserId/${userId}`
+      );
 
-      const body = {
-        playerName,
-        goals,
-      };
+      if (!!data) {
+        // actualizar player
+        const goals = Number(player.goals);
+        const playerName = player.playerName;
 
-      await AxiosConfig.post("player/create", body, {
-        headers: { Authorization: `Bearer ${TOKEN}` },
-      });
+        const body = {
+          playerName,
+          goals,
+        };
 
-      Swal.fire({
-        title: "Listo!",
-        text: "Tu predicción se ha creado correctamente.",
-        icon: "success",
-        confirmButtonText: "Ok",
-      });
+        await AxiosConfig.put(`player/${data._id}`, body, {
+          headers: { Authorization: `Bearer ${TOKEN}` },
+        });
+
+        Swal.fire({
+          title: "Listo!",
+          text: "Tu predicción se ha actualizado correctamente.",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      } else {
+        const goals = Number(player.goals);
+        const playerName = player.playerName;
+
+        const body = {
+          playerName,
+          goals,
+        };
+
+        await AxiosConfig.post("player/create", body, {
+          headers: { Authorization: `Bearer ${TOKEN}` },
+        });
+
+        Swal.fire({
+          title: "Listo!",
+          text: "Tu predicción se ha creado correctamente.",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      }
+    } catch (error) {
+      notify("No se pudo agregar tu predicción!");
     }
   };
 
@@ -106,25 +127,31 @@ export const QuinielaPlayer = () => {
   };
 
   const getPlayer = useCallback(async () => {
-    const TOKEN = userAuth;
+    try {
+      const TOKEN = userAuth;
 
-    const response = await AxiosConfig.get("auth/private", {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-    });
-    const userId = response.data.user._id;
+      const response = await AxiosConfig.get("auth/private", {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+      const userId = response.data.user._id;
 
-    const { data } = await AxiosConfig.get(`player/findOneByUserId/${userId}`);
-    if (!!data === false) return;
-    delete data.userId;
-    delete data.__v;
-    delete data._id;
+      const { data } = await AxiosConfig.get(
+        `player/findOneByUserId/${userId}`
+      );
+      if (!!data === false) return;
+      delete data.userId;
+      delete data.__v;
+      delete data._id;
 
-    setPlayer(data);
+      setPlayer(data);
+    } catch (error) {
+      notify("No se pudo obtener tu predicción de la Base de Datos");
+    }
   }, [userAuth]);
 
-  const getPlayersFromApi = async () => {
+  const getPlayersFromApi = useCallback(async () => {
     try {
       const results = await axios.get(
         "https://quiniela-crazy-imagine.herokuapp.com/prediction/getPlayersFromApi"
@@ -142,14 +169,14 @@ export const QuinielaPlayer = () => {
       // );
       // setData(playersSort); //local
     } catch (error) {
-      console.log(error);
+      notify("No se pudo obtener los Jugadores, Intenta más tarde!");
     }
-  };
+  }, []);
 
   useEffect(() => {
     getPlayersFromApi();
     getPlayer();
-  }, [getPlayer]);
+  }, [getPlayer, getPlayersFromApi]);
 
   useEffect(() => {
     if (data?.length > 0) {

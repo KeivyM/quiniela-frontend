@@ -11,3 +11,4 @@ export * from "./CarouselQuinielas";
 export * from "./QuinielaPlayer";
 export * from "./MatchNothing";
 export * from "./Sidebar";
+export * from "./Loading";

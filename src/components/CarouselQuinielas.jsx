@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Quiniela, QuinielaPlayer } from "./";
 import {
   Box,
@@ -14,12 +14,27 @@ import {
   SportsSoccer as SportsSoccerIcon,
 } from "@mui/icons-material";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./carouselQuinielas.css";
 
 export function CarouselQuinielas() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
-  const [match, setMatches] = useState([]);
+  const [matches, setMatches] = useState([]);
+
+  const notify = () =>
+    toast.error("No se pudo obtener los partidos, Intenta más tarde!", {
+      position: "top-center",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      icon: false,
+      theme: "light",
+    });
 
   const predefinedData = {
     octavos: [
@@ -148,7 +163,7 @@ export function CarouselQuinielas() {
     {
       label: <span>Fase de Grupos</span>,
       description: (
-        <Quiniela phase="Grupos" arrayDePartidos={match?.slice(0, 48)} />
+        <Quiniela phase="Grupos" arrayDePartidos={matches?.slice(0, 48)} />
       ),
     },
     {
@@ -157,7 +172,9 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Octavos"
           arrayDePartidos={
-            match?.length > 48 ? match?.slice(48, 56) : predefinedData.octavos
+            matches?.length > 48
+              ? matches?.slice(48, 56)
+              : predefinedData.octavos
           }
         />
       ),
@@ -168,7 +185,9 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Cuartos"
           arrayDePartidos={
-            match?.length > 56 ? match?.slice(56, 60) : predefinedData.cuartos
+            matches?.length > 56
+              ? matches?.slice(56, 60)
+              : predefinedData.cuartos
           }
         />
       ),
@@ -179,8 +198,8 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Semifinales"
           arrayDePartidos={
-            match?.length > 60
-              ? match?.slice(60, 62)
+            matches?.length > 60
+              ? matches?.slice(60, 62)
               : predefinedData.semifinales
           }
         />
@@ -201,7 +220,7 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Final"
           arrayDePartidos={
-            match?.length > 62 ? match?.slice(62, 64) : predefinedData.final
+            matches?.length > 62 ? matches?.slice(62, 64) : predefinedData.final
           }
         />
       ),
@@ -210,21 +229,25 @@ export function CarouselQuinielas() {
 
   const maxSteps = steps.length;
 
-  const getMatches = async () => {
-    await axios
-      .get(
-        "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
-      )
-      .then((res) => setMatches(res.data.data));
+  const getMatches = useCallback(async () => {
+    try {
+      await axios
+        .get(
+          "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
+        )
+        .then((res) => setMatches(res.data.data));
+    } catch (error) {
+      notify();
+    }
     //
     // await axios
     //   .get("http://localhost:3000/prediction/getMatchesFromApi")
     //   .then((res) => setMatches(res.data.data)); //local
-  };
+  }, []);
 
   useEffect(() => {
     getMatches();
-  }, []);
+  }, [getMatches]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

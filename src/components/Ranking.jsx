@@ -1,21 +1,41 @@
 import { Box, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AxiosConfig } from "../utils";
 import { Participant } from "./Participant";
 import "./ranking.css";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const Ranking = ({ size = "big" }) => {
   const [users, setUsers] = useState([]);
 
-  const getUsers = async () => {
-    const { data } = await AxiosConfig.get("/auth");
-    data.sort((a, b) => b.points - a.points);
-    setUsers(data);
-  };
+  const notify = () =>
+    toast.error("No se pudo obtener los Participantes!", {
+      position: "top-center",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      icon: false,
+      theme: "light",
+    });
+
+  const getUsers = useCallback(async () => {
+    try {
+      const { data } = await AxiosConfig.get("/auth");
+      data.sort((a, b) => b.points - a.points);
+      setUsers(data);
+    } catch (error) {
+      notify();
+    }
+  }, []);
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [getUsers]);
 
   return (
     <Box

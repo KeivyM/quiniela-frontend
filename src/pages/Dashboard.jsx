@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import { useContext, useState } from "react";
-import { CarouselQuinielas, Sidebar } from "../components";
-import { Loading } from "../components/Loading";
+import { CarouselQuinielas, Sidebar, Loading } from "../components";
 import { AuthContext } from "../context";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";

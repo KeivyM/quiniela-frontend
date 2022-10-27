@@ -6,6 +6,8 @@ import { AxiosConfig } from "../utils";
 import { Match, MatchNothing } from "./";
 import Swal from "sweetalert2";
 import moment from "moment";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "moment-timezone";
 import "./quiniela.css";
 
@@ -48,37 +50,54 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   const [disabled, setDisabled] = useState(true);
   let dayMoment = "";
 
+  const notify = (message) =>
+    toast.error(message, {
+      position: "top-center",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      icon: false,
+      theme: "light",
+    });
+
   const getAllPredictions = useCallback(
     async (phase) => {
-      const TOKEN = userAuth;
+      try {
+        const TOKEN = userAuth;
 
-      const USER = await AxiosConfig.get("auth/private", {
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,
-        },
-      });
-      const userId = USER.data.user._id;
+        const USER = await AxiosConfig.get("auth/private", {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        });
+        const userId = USER.data.user._id;
 
-      const quiniela = await AxiosConfig.post("quiniela/find", {
-        userId,
-        phase,
-      });
+        const quiniela = await AxiosConfig.post("quiniela/find", {
+          userId,
+          phase,
+        });
 
-      if (!!quiniela === false) return;
+        if (!!quiniela === false) return;
 
-      const predictionsId = quiniela.data.prediction;
+        const predictionsId = quiniela.data.prediction;
 
-      const arrayPredictions = [];
-      if (!predictionsId) return;
+        const arrayPredictions = [];
+        if (!predictionsId) return;
 
-      for (const id of predictionsId) {
-        const PREDICTION = await AxiosConfig.get(`prediction/${id}`);
-        delete PREDICTION.data._id;
-        delete PREDICTION.data.__v;
-        delete PREDICTION.data.userId;
-        arrayPredictions.push(PREDICTION.data);
+        for (const id of predictionsId) {
+          const PREDICTION = await AxiosConfig.get(`prediction/${id}`);
+          delete PREDICTION.data._id;
+          delete PREDICTION.data.__v;
+          delete PREDICTION.data.userId;
+          arrayPredictions.push(PREDICTION.data);
+        }
+        setPredictions(arrayPredictions);
+      } catch (error) {
+        notify("No se pudo obtener tus predicciones de la Base de Datos");
       }
-      setPredictions(arrayPredictions);
     },
     [userAuth]
   );
@@ -117,70 +136,74 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   };
 
   const addQuiniela = async () => {
-    if (arrayDePartidos?.length < 1)
-      return Swal.fire({
-        title: "Tienes Problemas?",
-        text: "Espera 5 min o intenta mañana",
-        icon: "info",
-        confirmButtonText: "Ok",
-      });
+    try {
+      if (arrayDePartidos?.length < 1)
+        return Swal.fire({
+          title: "Tienes Problemas?",
+          text: "Espera 5 min o intenta mañana",
+          icon: "info",
+          confirmButtonText: "Ok",
+        });
 
-    for (const prediction of predictions) {
-      if (!!prediction?.results?.homeScore) {
-        if (prediction?.results?.homeScore < 0) {
-          return Swal.fire({
-            title: "Verifica los goles que quieres acertar!",
-            text: "Los goles deben ser números positivos",
-            icon: "info",
-            confirmButtonText: "Ok",
-          });
+      for (const prediction of predictions) {
+        if (!!prediction?.results?.homeScore) {
+          if (prediction?.results?.homeScore < 0) {
+            return Swal.fire({
+              title: "Verifica los goles que quieres acertar!",
+              text: "Los goles deben ser números positivos",
+              icon: "info",
+              confirmButtonText: "Ok",
+            });
+          }
         }
       }
-    }
 
-    const body = {
-      phase,
-      predictions,
-    };
+      const body = {
+        phase,
+        predictions,
+      };
 
-    const TOKEN = userAuth;
+      const TOKEN = userAuth;
 
-    const res = await AxiosConfig.get("auth/private", {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-    });
-    const userId = res.data.user._id;
-
-    const values = { userId, phase };
-
-    const { data } = await AxiosConfig.post("quiniela/find", values);
-
-    if (!!data) {
-      // actualizar quiniela
-      await AxiosConfig.put(`quiniela/${data._id}`, body, {
+      const res = await AxiosConfig.get("auth/private", {
         headers: {
           Authorization: `Bearer ${TOKEN}`,
         },
       });
-      Swal.fire({
-        title: "Listo!",
-        text: "Tu predicción se ha actualizado correctamente.",
-        icon: "success",
-        confirmButtonText: "Ok",
-      });
-    } else {
-      // crear quiniela:
-      await AxiosConfig.post("quiniela/create", body, {
-        headers: { Authorization: `Bearer ${TOKEN}` },
-      });
+      const userId = res.data.user._id;
 
-      Swal.fire({
-        title: "Listo!",
-        text: "Tu predicción se ha creado correctamente.",
-        icon: "success",
-        confirmButtonText: "Ok",
-      });
+      const values = { userId, phase };
+
+      const { data } = await AxiosConfig.post("quiniela/find", values);
+
+      if (!!data) {
+        // actualizar quiniela
+        await AxiosConfig.put(`quiniela/${data._id}`, body, {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        });
+        Swal.fire({
+          title: "Listo!",
+          text: "Tu predicción se ha actualizado correctamente.",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      } else {
+        // crear quiniela:
+        await AxiosConfig.post("quiniela/create", body, {
+          headers: { Authorization: `Bearer ${TOKEN}` },
+        });
+
+        Swal.fire({
+          title: "Listo!",
+          text: "Tu predicción se ha creado correctamente.",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      }
+    } catch (error) {
+      notify("No se pudo agregar tus predicciones. Intentalo de nuevo");
     }
   };
 
@@ -193,21 +216,25 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       cancelButtonText: "Cancelar",
       icon: "warning",
     }).then(async (result) => {
-      if (result.isConfirmed) {
-        const response = await AxiosConfig.get("auth/private", {
-          headers: {
-            Authorization: `Bearer ${userAuth}`,
-          },
-        });
-        const userId = response.data.user._id;
-        const values = {
-          userId: userId,
-          phase: phase,
-        };
+      try {
+        if (result.isConfirmed) {
+          const response = await AxiosConfig.get("auth/private", {
+            headers: {
+              Authorization: `Bearer ${userAuth}`,
+            },
+          });
+          const userId = response.data.user._id;
+          const values = {
+            userId: userId,
+            phase: phase,
+          };
 
-        await AxiosConfig.post("quiniela/delete", values);
-        setPredictions([]);
-      } else if (result.isDenied) return;
+          await AxiosConfig.post("quiniela/delete", values);
+          setPredictions([]);
+        } else if (result.isDenied) return;
+      } catch (error) {
+        notify("No se pudo eliminar tus predicciones. Intentalo de nuevo");
+      }
     });
   };
 

@@ -1,12 +1,26 @@
 import { Box, Typography } from "@mui/material";
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { Calendar, Header, Ranking } from "../components";
-import { Loading } from "../components/Loading";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { Calendar, Header, Ranking, Loading } from "../components";
 import { AuthContext } from "../context";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./home.css";
 
 export const Home = () => {
+  const notify = () =>
+    toast.error("No se pudo obtener los partidos!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      icon: false,
+      theme: "light",
+    });
+
   const { loading, setLoading } = useContext(AuthContext);
 
   const [matches, setMatches] = useState([]);
@@ -31,22 +45,26 @@ export const Home = () => {
     (match) => match.matchTime > 1671044400 && match.matchTime <= 1671375600
   );
 
-  const getMatches = async () => {
-    await axios
-    .get(
-      "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
-    )
-    .then((res) => setMatches(res.data.data));
+  const getMatches = useCallback(async () => {
+    try {
+      await axios
+        .get(
+          "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
+        )
+        .then((res) => setMatches(res.data.data));
+    } catch (error) {
+      notify("Los partidos no se pudieron cargar, intenta más tarde!");
+    }
     //
     // await axios
     //   .get("http://localhost:3000/prediction/getMatchesFromApi")
     //   .then((res) => setMatches(res.data.data)); //local
-  };
+  }, []);
 
   useEffect(() => {
     setLoading(false);
     getMatches();
-  }, [setLoading]);
+  }, [setLoading, getMatches]);
 
   return (
     <>
@@ -65,20 +83,22 @@ export const Home = () => {
             background: "#dbdbdbd1",
           }}
         >
-          <Box
-            className="container-calendars"
-            sx={{
-              bgcolor: "primary.main",
-            }}
-          >
-            <Calendar title="Jornada 1" matches={jornada1} />
-            <Calendar title="Jornada 2" matches={jornada2} />
-            <Calendar title="Jornada 3" matches={jornada3} />
-            <Calendar title="Octavos de final" matches={octavos} />
-            <Calendar title="Cuartos de final" matches={cuartos} />
-            <Calendar title="Semifinales" matches={semifinales} />
-            <Calendar title="Final" matches={final} />
-          </Box>
+          {matches.length > 0 && (
+            <Box
+              className="container-calendars"
+              sx={{
+                bgcolor: "primary.main",
+              }}
+            >
+              <Calendar title="Jornada 1" matches={jornada1} />
+              <Calendar title="Jornada 2" matches={jornada2} />
+              <Calendar title="Jornada 3" matches={jornada3} />
+              <Calendar title="Octavos de final" matches={octavos} />
+              <Calendar title="Cuartos de final" matches={cuartos} />
+              <Calendar title="Semifinales" matches={semifinales} />
+              <Calendar title="Final" matches={final} />
+            </Box>
+          )}
 
           <Ranking size="big" />
         </Box>
