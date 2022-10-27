@@ -6,7 +6,7 @@
   align-items: center;
   padding: 9px 20px;
   border-radius: 5px;
-  min-width: 260px;
+  min-width: 255px;
 }
 
 .content-home-country {
@@ -30,7 +30,7 @@
 }
 .container-points {
   background-color: #e8e8e2;
-  font-size: 1rem;
+  font-size: 1rem !important;
   line-height: 1.5;
   border-radius: 5px;
 }
@@ -43,10 +43,13 @@
 }
 
 .nameCountry {
-  font-size: 1rem;
+  font-size: 1rem !important;
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 768px) {
+  .container-calendar-match {
+    padding: 4px 15px;
+  }
   .content-home-country {
     flex-direction: column-reverse;
     gap: 3px;
@@ -57,7 +60,7 @@
   }
 
   .date-calendar-match {
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
   }
 
   .img-flag {
@@ -66,13 +69,13 @@
   }
 
   .nameCountry {
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
   }
 }
 
 @media screen and (max-width: 480px) {
   .container-calendar-match {
-    padding: 4px;
+    padding: 3px 0;
   }
   .content-home-country {
     flex-direction: column-reverse;
@@ -84,10 +87,11 @@
   }
 
   .date-calendar-match {
-    font-size: 0.75rem;
+    font-size: 0.75rem !important;
   }
   .container-points {
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
+    line-height: 1;
   }
 
   .img-flag {
@@ -96,6 +100,6 @@
   }
 
   .nameCountry {
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
   }
 }

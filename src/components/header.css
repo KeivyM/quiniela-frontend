@@ -34,7 +34,7 @@
 }
 
 .btns-auth:hover {
-  background-color: rgba(204, 204, 204, 0.146);
+  background-color: rgba(219, 219, 219, 0.82);
 }
 
 .btns-menu-movil {
@@ -42,6 +42,10 @@
 }
 .btns-menu-desktop {
   display: flex;
+}
+
+.basic-menu ul {
+  background-color: rgba(219, 219, 219, 0.82);
 }
 
 @media screen and (max-width: 768px) {

@@ -45,7 +45,7 @@ export const CalendarMatch = (data) => {
           <Typography className="date-calendar-match">{dateMoment}</Typography>
           <Typography className="container-points">
             {scores != null && (
-              <strong>{`${scores.home}0 - 8${scores.away}`}</strong>
+              <strong>{`${scores.home} - ${scores.away}`}</strong>
             )}
           </Typography>
         </Box>

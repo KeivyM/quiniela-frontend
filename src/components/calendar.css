@@ -1,6 +1,14 @@
+.container-calendar {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 60px;
+  padding-top: 1px;
+}
+
 .title-calendar {
   margin: 10px 0px;
   font-size: 1.3rem !important;
+  line-height: 2.3 !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -8,6 +16,11 @@
     font-weight: 300;
     font-size: 1.2rem !important;
     margin: 7px 0px;
+
+    line-height: 2 !important;
+  }
+  .container-calendar {
+    margin-bottom: 50px;
   }
 }
 
@@ -16,5 +29,10 @@
     font-weight: 300;
     font-size: 1rem !important;
     margin: 4px 0px;
+
+    line-height: 1.8 !important;
+  }
+  .container-calendar {
+    margin-bottom: 20px;
   }
 }

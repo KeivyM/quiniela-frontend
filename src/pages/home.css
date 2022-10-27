@@ -29,6 +29,7 @@
   text-align: center;
   position: relative;
   font-size: 4.5rem;
+  text-shadow: 1px 1px #000000, 2px 2px #00000061;
 }
 
 .div-calendar-landing-page {
@@ -44,6 +45,8 @@
   margin: 0 auto;
   margin-bottom: 50px;
   border-radius: 5px;
+  border: 1px solid black;
+  box-shadow: 1.5px 1.5px 8px 1px #15151542;
 }
 
 .container-calendars::-webkit-scrollbar {
@@ -71,20 +74,31 @@
   }
 
   .div-calendar-landing-page {
-    padding: 80px 0px;
+    padding: 80px 20px;
   }
 
   .container-calendars {
     width: 100%;
   }
+  .container-calendars::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
 @media screen and (max-width: 480px) {
+  .div-calendar-landing-page {
+    padding: 80px 15px;
+  }
   .div-text-landing-page h1 {
     font-size: 2rem;
   }
 
   .div-text-landing-page {
     height: 40%;
+  }
+  .container-calendars::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 }

@@ -8,6 +8,8 @@
   padding: 28px 0px 0px;
   height: 500px;
   overflow: auto;
+  border: 1px solid black;
+  box-shadow: 1.5px 1.5px 8px 1px #15151542;
 }
 
 .ranking-big > .container-name-points {
@@ -79,16 +81,22 @@
 @media screen and (max-width: 768px) {
   .ranking-big {
     margin: 20px;
+    padding: 20px 0px 0px;
   }
 
   .ranking-big > .container-name-points {
     padding: 10px 40px 0px !important;
+  }
+  .ranking-big::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 }
 
 @media screen and (max-width: 480px) {
   .ranking-big {
     margin: 0px;
+    padding: 5px 0px 0px;
   }
 
   .ranking-big > .container-name-points {
@@ -96,5 +104,9 @@
   }
   .ranking-big > .title-ranking {
     font-size: 1.1rem;
+  }
+  .ranking-big::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 }

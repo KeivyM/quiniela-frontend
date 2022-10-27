@@ -7,10 +7,10 @@ export const Calendar = ({ matches, title }) => {
     <Box
       className="container-calendar"
       sx={{
-        width: "100%",
-        textAlign: "center",
-        marginBottom: "60px",
-        paddingTop: "1px",
+        // width: "100%",
+        // textAlign: "center",
+        // marginBottom: "60px",
+        // paddingTop: "1px",
         bgcolor: "secondary.light",
       }}
     >

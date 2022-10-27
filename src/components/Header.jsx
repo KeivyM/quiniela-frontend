@@ -4,7 +4,7 @@ import logo1 from "../assets/logo1.png";
 import logo2 from "../assets/logo2.png";
 import petImg from "../assets/imgPet.png";
 import { Box, Button, Menu, MenuItem } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import "./header.css";
 import { useState } from "react";
 
@@ -41,7 +41,7 @@ export const Header = () => {
         <Image
           src={petImg}
           width={87}
-          style={{ filter: "drop-shadow(0px 0px 1px white)" }}
+          style={{ filter: "drop-shadow(0px 0px 1px #fff5)" }}
           alt="logo"
         />
       </Box>
@@ -53,10 +53,11 @@ export const Header = () => {
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
         >
-          <MenuIcon sx={{ fontSize: "35px" }} />
+          <MenuRoundedIcon sx={{ fontSize: "35px", color: "#fffd" }} />
         </Button>
         <Menu
           id="basic-menu"
+          className="basic-menu"
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
@@ -64,7 +65,10 @@ export const Header = () => {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={() => navigate("/login")}>Iniciar Sesion</MenuItem>
+          <MenuItem onClick={() => navigate("/login")}>
+            {" "}
+            Iniciar Sesion{" "}
+          </MenuItem>
           <MenuItem onClick={() => navigate("/register")}>Registrarse</MenuItem>
         </Menu>
       </Box>
