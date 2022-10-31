@@ -4,24 +4,15 @@ import "./calendar.css";
 
 export const Calendar = ({ matches, title }) => {
   return (
-    <Box
-      className="container-calendar"
-      sx={{
-        // width: "100%",
-        // textAlign: "center",
-        // marginBottom: "60px",
-        // paddingTop: "1px",
-        bgcolor: "secondary.light",
-      }}
-    >
+    <Box className="container-calendar" sx={{ bgcolor: "secondary.light" }}>
       <Typography className="title-calendar" sx={{ color: "#ecf2ec" }}>
         {title}
       </Typography>
-      <div>
+      <Box>
         {matches?.map((match, index) => {
           return <CalendarMatch key={index} {...match} />;
         })}
-      </div>
+      </Box>
     </Box>
   );
 };

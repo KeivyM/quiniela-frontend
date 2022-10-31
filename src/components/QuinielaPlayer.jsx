@@ -160,14 +160,6 @@ export const QuinielaPlayer = () => {
         a.playerName.localeCompare(b.playerName)
       );
       setData(playersSort);
-      //
-      // const results = await axios.get(
-      //   "http://localhost:3000/prediction/getPlayersFromApi"
-      // );
-      // const playersSort = results.data.sort((a, b) =>
-      //   a.playerName.localeCompare(b.playerName)
-      // );
-      // setData(playersSort); //local
     } catch (error) {
       notify("No se pudo obtener los Jugadores, Intenta más tarde!");
     }
@@ -270,7 +262,13 @@ export const QuinielaPlayer = () => {
               required={true}
               disabled={disabled}
               InputProps={{
-                inputProps: { min: 1, value: player?.goals || "" },
+                inputProps: {
+                  min: 1,
+                  onKeyDown: (e) =>
+                    ["e", "E", "+", "-", "."].includes(e.key) &&
+                    e.preventDefault(),
+                  value: player?.goals || "",
+                },
               }}
             />
           </Box>

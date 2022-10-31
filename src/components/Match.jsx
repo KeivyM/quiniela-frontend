@@ -46,6 +46,9 @@ export const Match = (data) => {
               InputProps={{
                 inputProps: {
                   min: 0,
+                  onKeyDown: (e) =>
+                    ["e", "E", "+", "-", "."].includes(e.key) &&
+                    e.preventDefault(),
                   value: prediction?.results?.homeScore || "",
                   style: {
                     borderRadius: 5,
@@ -72,6 +75,9 @@ export const Match = (data) => {
               InputProps={{
                 inputProps: {
                   min: 0,
+                  onKeyDown: (e) =>
+                    ["e", "E", "+", "-", "."].includes(e.key) &&
+                    e.preventDefault(),
                   value: prediction?.results?.awayScore || "",
                   style: {
                     textAlign: "center",

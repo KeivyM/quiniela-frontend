@@ -29,20 +29,12 @@ moment.updateLocale("es", {
 });
 
 const phases = {
-  Grupos: { timeStart: 1668958200, timeEnd: 1670014800 }, //timeStart: 11:30am primer partido 12 pm // timeEnd 5pm
-  Octavos: { timeStart: 1670077800, timeEnd: 1670360400 }, //timeStart: 10:30am primer partido 11am // timeEnd 5pm
-  Cuartos: { timeStart: 1670596200, timeEnd: 1670706000 }, //timeStart: 10:30am primer partido 11am // timeEnd 5pm
-  Semifinales: { timeStart: 1670956200, timeEnd: 1671051600 }, //timeStart: 2:30pm primer partido 3pm // timeEnd 5pm
-  Final: { timeStart: 1671287400, timeEnd: 1671382800 }, //timeStart: 10:30am primer partido 11am // timeEnd 1pm
+  Grupos: { timeStart: 1668958200, timeEnd: 1670014800 },
+  Octavos: { timeStart: 1670077800, timeEnd: 1670360400 },
+  Cuartos: { timeStart: 1670596200, timeEnd: 1670706000 },
+  Semifinales: { timeStart: 1670956200, timeEnd: 1671051600 },
+  Final: { timeStart: 1671287400, timeEnd: 1671382800 },
 };
-
-// const phases = {
-//   Grupos: { timeStart: 1765417004, timeEnd: 1987014800 },
-//   Octavos: { timeStart: 160072400, timeEnd: 160360400 },
-//   Cuartos: { timeStart: 160590800, timeEnd: 167076000 },
-//   Semifinales: { timeStart: 160950800, timeEnd: 167051600 },
-//   Final: { timeStart: 1671282000, timeEnd: 1671382800 },
-// };//local
 
 export const Quiniela = ({ arrayDePartidos, phase }) => {
   const { userAuth } = useContext(AuthContext);

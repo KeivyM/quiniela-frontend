@@ -6,13 +6,21 @@ Este proyecto esta creado en [React.js](https://es.reactjs.org/).
 
 Link: [Quiniela Catar 2022](https://flourishing-hummingbird-631a19.netlify.app/)
 
-## Instalación
+## 1 Instalación
 
 ```bash
 $ npm install
 ```
 
-## Correr en local
+## 2 Crear archivo .env
+
+Debes crear en la carpeta raíz del projecto un archivo llamado '.env', y colocar una variable 'PORT' con un puerto y una variable 'REACT_APP_API' con la url de tu backend. Ejemplo:
+
+`PORT=3002`
+
+`REACT_APP_API=http://direccionDelBackend.com`
+
+## 3 Correr en local
 
 ```bash
 $ npm start

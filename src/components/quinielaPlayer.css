@@ -39,33 +39,12 @@
   padding: 20px 10px;
 }
 
-/* .container-inputs #combo-box-demo {
-  background-color: red !important;
-} */
-
 .container-inputs .MuiAutocomplete-root {
   min-width: 210px;
 }
 
-/* .container-inputs .MuiFormControl-root {
-  display: block !important;
-} */
-
-/* .container-inputs .MuiAutocomplete-inputRoot {
-  background-color: rgb(255, 255, 255) !important;
-  max-width: 430px;
-  min-width: 220px;
-  padding: 5px 9px !important;
-} */
-
 .container-inputs #outlined-number {
   min-width: 180px;
-  /* padding: 12px !important;
-  text-align: center;
-  font-weight: 800 !important;
-  width: 10% !important;
-  background-color: #f4f4f4 !important;
-  border-radius: 5px; */
 }
 
 @media screen and (max-width: 800px) {
@@ -79,9 +58,6 @@
 }
 
 @media screen and (max-width: 380px) {
-  /* .container-inputs .MuiAutocomplete-root {
-    width: auto;
-  } */
   .form-quiniela-player {
     padding: 0px 10px 10px;
   }

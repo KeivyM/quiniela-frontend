@@ -242,11 +242,6 @@ export function CarouselQuinielas() {
       notify();
     }
     setLoading(false);
-
-    //
-    // await axios
-    //   .get("http://localhost:3000/prediction/getMatchesFromApi")
-    //   .then((res) => setMatches(res.data.data)); //local
   }, [setLoading]);
 
   useEffect(() => {

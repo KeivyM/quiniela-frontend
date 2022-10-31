@@ -71,6 +71,9 @@ export const MatchNothing = (data) => {
               InputProps={{
                 inputProps: {
                   min: 0,
+                  onKeyDown: (e) =>
+                    ["e", "E", "+", "-", "."].includes(e.key) &&
+                    e.preventDefault(),
                   value: homeScore || "",
                   style: {
                     textAlign: "center",
@@ -105,6 +108,9 @@ export const MatchNothing = (data) => {
               InputProps={{
                 inputProps: {
                   min: 0,
+                  onKeyDown: (e) =>
+                    ["e", "E", "+", "-", "."].includes(e.key) &&
+                    e.preventDefault(),
                   value: awayScore || "",
                   style: {
                     textAlign: "center",

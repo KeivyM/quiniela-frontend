@@ -56,10 +56,6 @@ export const Home = () => {
       notify("Los partidos no se pudieron cargar, intenta más tarde!");
     }
     setLoading(false);
-    //
-    // await axios
-    //   .get("http://localhost:3000/prediction/getMatchesFromApi")
-    //   .then((res) => setMatches(res.data.data)); //local
   }, [setLoading]);
 
   useEffect(() => {
