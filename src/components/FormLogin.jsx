@@ -44,7 +44,7 @@ export const FormLogin = () => {
 
       if (typeof data === "string") throw new Error(data);
 
-      localStorage.setItem("user_Auth", data.token);
+      sessionStorage.setItem("user_Auth", data.token);
       setUserAuth(data.token);
       navigate("/");
     } catch (error) {

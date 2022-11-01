@@ -57,7 +57,7 @@ export const FormRegister = () => {
         throw new Error(nameKey);
       }
 
-      localStorage.setItem("user_Auth", data.token);
+      sessionStorage.setItem("user_Auth", data.token);
 
       setUserAuth(data.token);
       navigate("/");

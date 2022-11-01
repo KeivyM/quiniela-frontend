@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [points, setPoints] = useState(null);
   const [loading, setLoading] = useState(false);
   const [userAuth, setUserAuth] = useState(() =>
-    localStorage.getItem("user_Auth")
+    sessionStorage.getItem("user_Auth")
   );
 
   let navigate = useNavigate();
@@ -20,12 +20,12 @@ export const AuthProvider = ({ children }) => {
         `Bearer ${userAuth}` || "";
 
       const { data } = await AxiosConfig.get("auth/check-status");
-      localStorage.setItem("user_Auth", data.token);
+      sessionStorage.setItem("user_Auth", data.token);
       setUserAuth(data.token);
       setUsername(data.username);
       setPoints(data.points);
     } catch (error) {
-      localStorage.removeItem("user_Auth");
+      sessionStorage.removeItem("user_Auth");
       navigate("/");
     }
   }, [navigate, userAuth]);
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
     setPoints("");
     setUsername("");
     setUserAuth(false);
-    localStorage.removeItem("user_Auth");
+    sessionStorage.removeItem("user_Auth");
     navigate("/home");
   };
 
