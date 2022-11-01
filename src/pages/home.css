@@ -19,8 +19,14 @@
 .div-text-landing-page {
   height: 70%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #00000069;
+}
+
+.div-text-landing-page .mui-image-wrapper {
+  background-color: #fff0 !important;
 }
 
 .div-text-landing-page h1 {
@@ -30,6 +36,11 @@
   position: relative;
   font-size: 4.5rem;
   text-shadow: 1px 1px #000000, 2px 2px #00000061;
+}
+
+.div-text-landing-page .text-quiniela {
+  color: #25a9e0;
+  font-size: 2rem !important;
 }
 
 .div-calendar-landing-page {
@@ -69,6 +80,10 @@
     font-size: 3rem;
   }
 
+  .div-text-landing-page .text-quiniela {
+    font-size: 1.5rem !important;
+  }
+
   .div-text-landing-page {
     height: 55%;
   }
@@ -92,6 +107,10 @@
   }
   .div-text-landing-page h1 {
     font-size: 2rem;
+  }
+
+  .div-text-landing-page .text-quiniela {
+    font-size: 1rem !important;
   }
 
   .div-text-landing-page {

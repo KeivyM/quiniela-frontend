@@ -1,10 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Calendar, Header, Ranking, Loading } from "../components";
+import LogoCrazyImagine from "../assets/logo-0.png";
 import { AuthContext } from "../context";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Image } from "mui-image";
 import "./home.css";
 
 export const Home = () => {
@@ -69,6 +71,18 @@ export const Home = () => {
       <Box className="home-page">
         <Header />
         <Box className="div-text-landing-page">
+          <Image
+            height="35%"
+            width="auto"
+            src={LogoCrazyImagine}
+            alt="Image Crazy Imagine"
+          />
+          <Typography
+            className="text-quiniela"
+            sx={{ fontFamily: "Merriweather" }}
+          >
+            Quiniela
+          </Typography>
           <Typography variant="h1" sx={{ fontFamily: "Merriweather" }}>
             FIFA WORLD CUP
           </Typography>
