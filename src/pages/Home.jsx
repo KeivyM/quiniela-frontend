@@ -94,7 +94,7 @@ export const Home = () => {
             background: "#dbdbdbd1",
           }}
         >
-          {matches.length > 0 && (
+          {matches?.length > 0 && (
             <Box
               className="container-calendars"
               sx={{
