@@ -20,8 +20,6 @@ import Swal from "sweetalert2";
 
 export const FormLogin = () => {
   const [values, setValues] = useState({
-    password: "",
-    email: "",
     showPassword: false,
   });
   const { setUserAuth, setLoading } = useContext(AuthContext);
@@ -32,6 +30,10 @@ export const FormLogin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      password: "",
+      email: "",
+    },
     resolver: yupResolver(schemaLogin),
   });
 
@@ -75,10 +77,6 @@ export const FormLogin = () => {
     }
   };
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
   const handleClickShowPassword = () => {
     setValues({
       ...values,
@@ -117,8 +115,6 @@ export const FormLogin = () => {
             name="email"
             color="secondary"
             {...register("email", { required: true })}
-            onChange={handleChange("email")}
-            value={values.email}
             variant="outlined"
           />
           {errors.email?.message}
@@ -135,10 +131,8 @@ export const FormLogin = () => {
           <OutlinedInput
             id="outlined-adornment-password"
             type={values.showPassword ? "text" : "password"}
-            value={values.password}
             name="email"
             {...register("password", { required: true })}
-            onChange={handleChange("password")}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton

@@ -23,12 +23,6 @@ export const FormRegister = () => {
   let navigate = useNavigate();
 
   const [values, setValues] = useState({
-    lastName: "",
-    name: "",
-    username: "",
-    email: "",
-    password: "",
-    passwordRepeat: "",
     showPassword: false,
     showPasswordRepeat: false,
   });
@@ -38,6 +32,14 @@ export const FormRegister = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      lastName: "",
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      passwordRepeat: "",
+    },
     resolver: yupResolver(schemaRegister),
   });
 
@@ -63,7 +65,6 @@ export const FormRegister = () => {
       navigate("/");
     } catch (error) {
       setLoading(false);
-      console.log(error);
       Swal.fire({
         title: "Verifica tus datos!",
         text: error.message,
@@ -71,10 +72,6 @@ export const FormRegister = () => {
         confirmButtonText: "Ok",
       });
     }
-  };
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
   };
 
   const handleClickShowPassword = () => {
@@ -117,8 +114,6 @@ export const FormRegister = () => {
             name="name"
             color="secondary"
             {...register("name", { required: true })}
-            onChange={handleChange("name")}
-            value={values.name}
             variant="outlined"
           />
           {errors.name?.message}
@@ -132,8 +127,6 @@ export const FormRegister = () => {
             name="lastName"
             color="secondary"
             {...register("lastName", { required: true })}
-            onChange={handleChange("lastName")}
-            value={values.lastName}
             variant="outlined"
           />
           {errors.lastName?.message}
@@ -147,8 +140,6 @@ export const FormRegister = () => {
             name="username"
             color="secondary"
             {...register("username", { required: true })}
-            onChange={handleChange("username")}
-            value={values.username}
             variant="outlined"
           />
           {errors.username?.message}
@@ -162,8 +153,6 @@ export const FormRegister = () => {
             name="email"
             color="secondary"
             {...register("email", { required: true })}
-            onChange={handleChange("email")}
-            value={values.email}
             variant="outlined"
           />
           {errors.email?.message}
@@ -180,11 +169,9 @@ export const FormRegister = () => {
           <OutlinedInput
             id="outlined-adornment-password"
             type={values.showPassword ? "text" : "password"}
-            value={values.password}
             name="password"
             color="secondary"
             {...register("password", { required: true })}
-            onChange={handleChange("password")}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -213,11 +200,9 @@ export const FormRegister = () => {
           <OutlinedInput
             id="outlined-adornment-password-repeat"
             type={values.showPasswordRepeat ? "text" : "password"}
-            value={values.passwordRepeat}
             name="passwordRepeat"
             color="secondary"
             {...register("passwordRepeat", { required: true })}
-            onChange={handleChange("passwordRepeat")}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
