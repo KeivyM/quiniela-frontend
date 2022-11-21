@@ -40,6 +40,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
   const { userAuth } = useContext(AuthContext);
   const [predictions, setPredictions] = useState([]);
   const [disabled, setDisabled] = useState(true);
+  const [disabledButton, setDisabledButton] = useState(true);
   let dayMoment = "";
 
   const notify = (message) =>
@@ -129,6 +130,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
 
   const addQuiniela = async () => {
     try {
+      setDisabledButton(true);
       if (arrayDePartidos?.length < 1)
         return Swal.fire({
           title: "Tienes Problemas?",
@@ -181,6 +183,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
           icon: "success",
           confirmButtonText: "Ok",
         });
+        setDisabledButton(false);
       } else {
         // crear quiniela:
         await AxiosConfig.post("quiniela/create", body, {
@@ -193,9 +196,11 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
           icon: "success",
           confirmButtonText: "Ok",
         });
+        setDisabledButton(false);
       }
     } catch (error) {
       notify("No se pudo agregar tus predicciones. Intentalo de nuevo");
+      setDisabledButton(false);
     }
   };
 
@@ -209,6 +214,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
       icon: "warning",
     }).then(async (result) => {
       try {
+        setDisabledButton(true);
         if (result.isConfirmed) {
           const response = await AxiosConfig.get("auth/private", {
             headers: {
@@ -223,9 +229,14 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
 
           await AxiosConfig.post("quiniela/delete", values);
           setPredictions([]);
-        } else if (result.isDenied) return;
+          setDisabledButton(false);
+        } else if (result.isDenied) {
+          return;
+        }
+        setDisabledButton(false);
       } catch (error) {
         notify("No se pudo eliminar tus predicciones. Intentalo de nuevo");
+        setDisabledButton(false);
       }
     });
   };
@@ -249,34 +260,42 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
         // boolean = timeNow >= phases.Grupos.timeStart;
         boolean = timeNow >= 1669087800;
         setDisabled(boolean);
+        setDisabledButton(boolean);
         break;
       case "Octavos":
         boolean =
           timeNow < phases.Grupos?.timeEnd ||
           timeNow > phases.Octavos?.timeStart;
         setDisabled(boolean);
+        setDisabledButton(boolean);
         break;
       case "Cuartos":
         boolean =
           timeNow < phases.Octavos?.timeEnd ||
           timeNow > phases.Cuartos?.timeStart;
         setDisabled(boolean);
+        setDisabledButton(boolean);
+
         break;
       case "Semifinales":
         boolean =
           timeNow < phases.Cuartos?.timeEnd ||
           timeNow > phases.Semifinales?.timeStart;
         setDisabled(boolean);
+        setDisabledButton(boolean);
+
         break;
       case "Final":
         boolean =
           timeNow < phases.Semifinales?.timeEnd ||
           timeNow > phases.Final?.timeStart;
         setDisabled(boolean);
+        setDisabledButton(boolean);
         break;
 
       default:
         setDisabled(true);
+        setDisabledButton(true);
         break;
     }
   }, [phase]);
@@ -390,7 +409,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
               color: "#f4f4f4",
               bgcolor: "#0e588d",
             }}
-            disabled={disabled}
+            disabled={disabledButton}
             onClick={deleteQuiniela}
             startIcon={<BackspaceIcon />}
           >
@@ -405,7 +424,7 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
               color: "#f4f4f4",
               bgcolor: "#0e588d",
             }}
-            disabled={disabled}
+            disabled={disabledButton}
             onClick={addQuiniela}
             startIcon={<Save />}
           >
