@@ -246,7 +246,8 @@ export const Quiniela = ({ arrayDePartidos, phase }) => {
 
     switch (phase) {
       case "Grupos":
-        boolean = timeNow >= phases.Grupos.timeStart;
+        // boolean = timeNow >= phases.Grupos.timeStart;
+        boolean = timeNow >= 1669087800;
         setDisabled(boolean);
         break;
       case "Octavos":

@@ -165,7 +165,7 @@ export function CarouselQuinielas() {
     {
       label: <span>Fase de Grupos</span>,
       description: (
-        <Quiniela phase="Grupos" arrayDePartidos={matches?.slice(0, 48)} />
+        <Quiniela phase="Grupos" arrayDePartidos={matches?.slice(4, 48)} />
       ),
     },
     {
