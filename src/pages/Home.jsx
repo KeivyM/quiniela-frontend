@@ -50,9 +50,7 @@ export const Home = () => {
   const getMatches = useCallback(async () => {
     try {
       await axios
-        .get(
-          "https://quiniela-crazy-imagine.herokuapp.com/prediction/getMatchesFromApi"
-        )
+        .get("https://quiniela-backend.vercel.app/prediction/getMatchesFromApi")
         .then((res) => setMatches(res.data.data));
     } catch (error) {
       notify("Los partidos no se pudieron cargar, intenta más tarde!");
