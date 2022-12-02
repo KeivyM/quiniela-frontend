@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Access-Control-Allow-Origin"] =
-  "https://quiniela-cis.netlify.app";
+  "https://quiniela-backend.vercel.app/*";
 
 axios.defaults.headers.patch["Access-Control-Allow-Origin"] =
   "https://quiniela-cis.netlify.app";
