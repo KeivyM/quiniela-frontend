@@ -162,12 +162,12 @@ export function CarouselQuinielas() {
   };
 
   const steps = [
-    {
-      label: <span>Fase de Grupos</span>,
-      description: (
-        <Quiniela phase="Grupos" arrayDePartidos={matches?.slice(0, 48)} />
-      ),
-    },
+    // {
+    //   label: <span>Fase de Grupos</span>,
+    //   description: (
+    //     <Quiniela phase="Grupos" arrayDePartidos={matches?.slice(0, 48)} />
+    //   ),
+    // },
     {
       label: <span>Octavos de final</span>,
       description: (
