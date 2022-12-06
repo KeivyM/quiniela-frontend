@@ -169,6 +169,15 @@ export function CarouselQuinielas() {
     //   ),
     // },
     {
+      label: (
+        <span style={{ display: "flex", alignItems: "center" }}>
+          G<SportsSoccerIcon className="icon-ball-title" />
+          leador del Mundial
+        </span>
+      ),
+      description: <QuinielaPlayer />,
+    },
+    {
       label: <span>Octavos de final</span>,
       description: (
         <Quiniela
@@ -206,15 +215,6 @@ export function CarouselQuinielas() {
           }
         />
       ),
-    },
-    {
-      label: (
-        <span style={{ display: "flex", alignItems: "center" }}>
-          G<SportsSoccerIcon className="icon-ball-title" />
-          leador del Mundial
-        </span>
-      ),
-      description: <QuinielaPlayer />,
     },
     {
       label: <span>Final</span>,

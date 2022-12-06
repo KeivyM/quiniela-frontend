@@ -182,7 +182,8 @@ export const QuinielaPlayer = () => {
       .tz(dateUtc, "YYYY-MM-DD h:mm a", "America/Caracas")
       .unix();
 
-    let boolean = timeNow < 1671051600 || timeNow > 1671282000;
+    // let boolean = timeNow < 1671051600 || timeNow > 1671282000;
+    let boolean = timeNow < 1670342557 || timeNow > 1670369400;
 
     setDisabled(boolean);
   }, []);
