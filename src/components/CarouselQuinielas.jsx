@@ -177,19 +177,19 @@ export function CarouselQuinielas() {
       ),
       description: <QuinielaPlayer />,
     },
-    {
-      label: <span>Octavos de final</span>,
-      description: (
-        <Quiniela
-          phase="Octavos"
-          arrayDePartidos={
-            matches?.length > 48
-              ? matches?.slice(48, 56)
-              : predefinedData.octavos
-          }
-        />
-      ),
-    },
+    // {
+    //   label: <span>Octavos de final</span>,
+    //   description: (
+    //     <Quiniela
+    //       phase="Octavos"
+    //       arrayDePartidos={
+    //         matches?.length > 48
+    //           ? matches?.slice(48, 56)
+    //           : predefinedData.octavos
+    //       }
+    //     />
+    //   ),
+    // },
     {
       label: <span>Cuartos de final</span>,
       description: (
