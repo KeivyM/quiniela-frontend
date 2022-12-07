@@ -168,15 +168,6 @@ export function CarouselQuinielas() {
     //     <Quiniela phase="Grupos" arrayDePartidos={matches?.slice(0, 48)} />
     //   ),
     // },
-    {
-      label: (
-        <span style={{ display: "flex", alignItems: "center" }}>
-          G<SportsSoccerIcon className="icon-ball-title" />
-          leador del Mundial
-        </span>
-      ),
-      description: <QuinielaPlayer />,
-    },
     // {
     //   label: <span>Octavos de final</span>,
     //   description: (
@@ -226,6 +217,15 @@ export function CarouselQuinielas() {
           }
         />
       ),
+    },
+    {
+      label: (
+        <span style={{ display: "flex", alignItems: "center" }}>
+          G<SportsSoccerIcon className="icon-ball-title" />
+          leador del Mundial
+        </span>
+      ),
+      description: <QuinielaPlayer />,
     },
   ];
 
