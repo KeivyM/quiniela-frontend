@@ -181,19 +181,19 @@ export function CarouselQuinielas() {
     //     />
     //   ),
     // },
-    {
-      label: <span>Cuartos de final</span>,
-      description: (
-        <Quiniela
-          phase="Cuartos"
-          arrayDePartidos={
-            matches?.length > 56
-              ? matches?.slice(56, 60)
-              : predefinedData.cuartos
-          }
-        />
-      ),
-    },
+    // {
+    //   label: <span>Cuartos de final</span>,
+    //   description: (
+    //     <Quiniela
+    //       phase="Cuartos"
+    //       arrayDePartidos={
+    //         matches?.length > 56
+    //           ? matches?.slice(56, 60)
+    //           : predefinedData.cuartos
+    //       }
+    //     />
+    //   ),
+    // },
     {
       label: <span>Semifinales</span>,
       description: (
