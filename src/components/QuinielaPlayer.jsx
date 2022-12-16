@@ -154,7 +154,7 @@ export const QuinielaPlayer = () => {
   const getPlayersFromApi = useCallback(async () => {
     try {
       const results = await axios.get(
-        "https://quiniela-backend.vercel.app/prediction/getPlayersFromApi"
+        "https://quiniela-backend-eb0s2xdsu-keivym.vercel.app/prediction/getPlayersFromApi"
       );
       const playersSort = results.data.data.sort((a, b) =>
         a.playerName.localeCompare(b.playerName)
