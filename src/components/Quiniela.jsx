@@ -33,7 +33,7 @@ const phases = {
   Octavos: { timeStart: 1670077800, timeEnd: 1670360400 },
   Cuartos: { timeStart: 1670596200, timeEnd: 1670706000 },
   Semifinales: { timeStart: 1670956200, timeEnd: 1671051600 },
-  Final: { timeStart: 1671287400, timeEnd: 1671382800 },
+  Final: { timeStart: 1671373800, timeEnd: 1671382800 },
 };
 
 export const Quiniela = ({ arrayDePartidos, phase }) => {

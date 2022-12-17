@@ -213,7 +213,7 @@ export function CarouselQuinielas() {
         <Quiniela
           phase="Final"
           arrayDePartidos={
-            matches?.length > 62 ? matches?.slice(62, 64) : predefinedData.final
+            matches?.length > 62 ? matches?.slice(63, 64) : predefinedData.final
           }
         />
       ),
